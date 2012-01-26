@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Yahoo! Inc.</string>
+	<key>CFBundleDisplayName</key>
+	<string>YSlow</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yahoo.yslow</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>{{YSLOW_VERSION}}</string>
+	<key>CFBundleVersion</key>
+	<string>{{YSLOW_VERSION}}</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Database Quota</key>
+		<real>5242880</real>
+		<key>Global Page</key>
+		<string>global.html</string>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string>yslow</string>
+				<key>Identifier</key>
+				<string>showButton</string>
+				<key>Image</key>
+				<string>16.png</string>
+				<key>Label</key>
+				<string>YSlow</string>
+				<key>Palette Label</key>
+				<string>YSlow</string>
+				<key>Tool Tip</key>
+				<string>YSlow</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict>
+			<key>End</key>
+			<array>
+				<string>injected.js</string>
+			</array>
+		</dict>
+	</dict>
+	<key>Description</key>
+	<string>YSlow analyzes web pages and suggests ways to improve their performance based on a set of rules for high performance web pages.</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+        <key>Update Manifest URL</key>
+        <string>http://d.yimg.com/jc/safari/update.plist</string>
+	<key>Website</key>
+	<string>http://getyslow.com/</string>
+</dict>
+</plist>

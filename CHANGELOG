@@ -1,0 +1,66 @@
+Version 3.0.9
+-------------
+* Firefox 9-11 compatible
+
+Version 3.0.8
+-------------
+* Mobile viewport bugfix, wider on mobile optimized pages
+* NodeJS releaase as NPM package
+
+Version 3.0.7
+-------------
+* NodeJS command line support
+* Mobile viewport bugfix, wider on mobile optimized pages
+
+Version 3.0.6
+-------------
+* Removing preferences initialization from injected JS to avoid localStorage polution
+
+Version 3.0.5
+-------------
+* Repackaging Chrome, missing options.html
+
+Version 3.0.4
+-------------
+* Fixed Firebug issues:
+    * FirebugContext removed from latest versions
+    * Broken "Run Test" button
+    * Custom CDN loading during initalization
+* Fixed empty page when clicking tools on FF5/Win
+* New feature: one-click-add-cdn to CDN custom list
+* Options/Preferences available on Chrome
+
+Version 3.0.3
+-------------
+
+* Added cdn checking from HTTP headers: Server and X-CDN (currently cloudflare)
+* Added Social support: Sharing YSlow results through Twitter and Facebook 
+* Like (Facebook) and Follow (Twitter) links on help menu
+
+
+Version 3.0.2
+-------------
+
+* YSlow version available on Help;
+* Presentation refactoring, using inline images.
+* Fixed Chrome open new window bug due to odd screen available height
+
+
+Version 3.0.1
+-------------
+
+* Warning on blocked pages where YSlow can't run, such as: about:config, chrome://extensions and Google Chrome Extensions pages (https://chrome.google.com/);
+* Wait until the page is fully loaded before analyzing it;
+* More accurate cookies size for all domains involved on the page;
+* Enhanced summary per domain on CDN and DNS lookup rules;
+* Fixed some minor bugs on some rules (favicon, image scale, 404, etc).
+
+
+Version 3.0.0 (beta release)
+----------------------------
+
+* Feel at home. We have kept the user experience consistent with YSlow for Firefox;
+* Added the ability to detect post onload components, including for pages that prevent itself from being embedded and/or iframed (experimental);
+* Support for 3 main rulesets: default YSlow V2, Classic V1 and Small Site or Blog and the ability to create new ones based on these 3;
+* Offenders in CDN rule are now listed as domains only;
+* Runs multiple YSlow instances (new windows). This feature is excellent for comparing YSlow results for different pages side-by-side as shown below.

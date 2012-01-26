@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+-->
+<?xml-stylesheet href="chrome://yslow/skin/yslow.css" type="text/css"?>
+
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+     <commandset id="mainCommandSet">
+         <command id="cmd_yslow_run" oncommand="YSLOW.firefox.run(false)"/>
+         <command id="cmd_yslow_close" oncommand="YSLOW.firefox.close()"/>
+     </commandset>
+
+     <vbox id="yslow-view" persist="height" flex="1">
+          <toolbox>
+              <toolbar id="yslow-TopBar" align="center" flex="0">
+                  <toolbarbutton id="yslow-TopBarButton-Peel" 
+                  label="Run YSlow" tooltiptext="Run Slow"
+                  command="cmd_yslow_run"/>
+                  <toolbarbutton id="yslow-TopBarButton-Close"
+                  label="Close" tooltiptext="Close"
+                  command="cmd_yslow_close" />
+              </toolbar>
+          </toolbox>
+
+          <hbox flex="1" style="overflow: auto;">
+            <browser id="yslow-Output" class="textbox_browser"
+            type="chrome" flex="1" wrap="false" multiline="true"/>
+          </hbox>
+     </vbox>
+
+</overlay>

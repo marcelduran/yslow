@@ -1,0 +1,15 @@
+/**
+ * Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+ * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+
+/* Panel */
+#yslow-content-splitter {
+    min-height: 4px;
+    max-height: 4px;
+}
+
+#yslow-content-box {
+    -moz-binding: url("chrome://yslow/content/bindings.xml#startup");
+}
+

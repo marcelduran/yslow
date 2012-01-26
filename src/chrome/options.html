@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+    <head>
+        <style type="text/css">
+            table, input, .in {width:99%;}
+            .undo input {background:#faffbd;}
+            .undo-btn {visibility:hidden;}
+            .undo .undo-btn {visibility:visible;}
+            .info {text-align:right; font-style:italic;}
+        </style>
+    </head>
+    <body>
+        <h1>YSlow Options</h1>
+        <div class="info">options are auto-saved once changed</div>
+        <div id="options"></div>
+        <script src="yslow-chrome.js"></script>
+        <script src="pref-init.js"></script>
+        <script>
+            (function () {
+                var item, name, inputs,
+                    doc = document,
+                    opts = doc.getElementById('options'),
+                    util = YSLOW.util,
+                    pref = util.Preference,
+                    list = pref.getPrefList(),
+                    html = '<table><tbody>',
+                    undo = {},
+                    
+                    change = function (e) {
+                        var last, oldValue,
+                            target = util.getCurrentTarget(e),
+                            id = target.getAttribute('id');
+
+                        oldValue = pref.getPref(id);
+                        last = undo[id];
+                        if (last) {
+                            last.push(oldValue);
+                        } else {
+                            undo[id] = [oldValue];
+                        }
+                        pref.setPref(id, target.value);
+                        doc.getElementById('item_' + id).className = 'undo';
+                    },
+                    
+                    undoChange = function (e) {
+                        var undos, value,
+                            target = util.getTarget(e),
+                            id = target.id.slice(8);
+
+                        if (target.className !== 'undo-btn') {
+                            return;
+                        }
+
+                        undos = undo[id];
+                        value = undos.pop();
+                        doc.getElementById(id).value = value;
+                        pref.setPref(id, value);
+                        if (undos.length === 0) {
+                            doc.getElementById('item_' + id).className = '';
+                        }
+                    };
+
+                if (list) {
+                    list.sort(function (a, b) {
+                        return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+                    });
+
+                    // preferences table
+                    for (i = 0, len = list.length; i < len; i += 1) {
+                        item = list[i];
+                        name = item.name;
+                        html += '<tr id="item_' + name + '"><td><label for="' + name + '">' +
+                            name + '</label></td><td class="in"><input type="text" id="' +
+                            name + '" value="' +
+                            item.value.replace(/[\r\n]+/g, '').replace(/"/g, '&quot;') +
+                            '"></td><td><button class="undo-btn" id="btnUndo_' + name +
+                            '">Undo</button></td></tr>';
+                    }
+                    html += '</tbody></table>';
+                    opts.innerHTML = html;
+
+                    // event listeners
+                    inputs = opts.getElementsByTagName('input');
+                    for (i = 0, len = inputs.length; i < len; i += 1) {
+                        util.addEventListener(inputs[i], 'change', change);
+                    }
+                    util.addEventListener(opts, 'click', undoChange);
+                }
+            }());
+        </script>
+    </body>
+</html>

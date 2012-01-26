@@ -1,0 +1,319 @@
+/**
+ * Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+ * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+
+body table tr td th div span img a ul li h1 h2 h3 h4 {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: Lucida Grande, Tahoma, sans-serif;
+    font-size: 10pt;
+}
+
+table {
+    empty-cells: show;
+}
+
+/* printable view */
+#printableDiv {
+    background: #fff;
+    padding: 0 10px;
+}
+
+#printableDiv #print-title {
+    font-size: 1.5em;
+    color: #E05000;
+    margin: 2px;
+}
+
+#printableDiv #print-title img {
+    padding-right: 5px;
+}
+
+#printableDiv .pageURL {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+#printableDiv  .pageURL span {
+    margin-left: 10px;
+}
+
+#printableDiv  #yslowDiv .section .title {
+    font-size: 1.5em;
+    margin-top: 10px;
+}
+
+#printableDiv  #yslowDiv .section .contentDiv {
+    width: auto;
+    height: auto;
+    position: relative;
+    margin-bottom: 20px;
+    border: 4px #F9F9F9 ridge;
+    padding-bottom: 10px;
+}
+
+#printableDiv .copyright {
+    text-align: center;
+    font-size: 10pt;
+    margin-top: 20px;
+}
+
+#yslowDiv {
+    width: 950px;
+    margin: 0px auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+#yslowDiv a {
+    color: #006CA2; /* blue */
+}
+
+#yslowDiv #summary {
+    display: inline;
+    white-space: nowrap;
+    color: #101010;
+}
+
+#yslowDiv #summary .view-title {
+    display: none;
+}
+
+#yslowDiv #summary .number,
+#yslowDiv .section-summary .number {
+    font-weight: bold;
+    color: #101010;
+}
+
+/* START stats */
+#statsDiv {
+    margin: 0 10px 10px 10px;
+    height: 275px;
+}
+
+#statsDiv .section-header {
+    font-size: 10pt;
+    color: #101010;
+    border-bottom: 1px solid #676767;
+    padding-top: 20px;
+}
+
+#statsDiv .stats-graph {
+    margin: 10px;
+    padding: 5px 0;
+}
+
+#statsDiv .stats-graph .canvas-title {
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+#statsDiv #primed-cache,
+#statsDiv #empty-cache {
+    margin-top: 10px;
+}
+
+#statsDiv #empty-cache {
+    margin-left: 15px;
+    float: left;
+    border-right: 1px solid #676767;
+    padding-left: 10px;
+}
+
+#statsDiv #primed-cache {
+    margin-right: 15px;
+}
+
+#statsDiv #stats-detail {
+    margin-left: 180px;
+}
+
+#statsDiv #stats-detail .summary-row, 
+#statsDiv #stats-detail .summary-row-2 {
+    font-weight: bold;
+    font-size: 10pt;
+    color: #101010;
+    padding: 5px 0;
+}
+
+#statsDiv #stats-detail #stats-table {
+    margin-right: 20px;
+    font-size: 9pt;
+    border-spacing: 0;
+}
+
+#statsDiv #stats-detail #stats-table tr {
+    height: 18px;
+    border-top: 1px solid #676767;
+}
+
+#statsDiv #stats-detail #stats-table tr {
+    border-top: 1px solid #676767;
+}
+
+#statsDiv #stats-detail #stats-table td {
+    height: 18px;
+    border-top: 1px solid #676767;
+    margin: 2px 2px;
+}
+
+#statsDiv #stats-detail #stats-table td.legend {
+    width: 22px;
+}
+
+#statsDiv #stats-detail #stats-table td .stats-legend {
+    width: 10px;
+    height: 10px;
+    margin: 6px 6px;
+}
+
+#statsDiv #stats-detail #stats-table td.count {
+    width: 28px;
+    text-align: right;
+}
+
+#statsDiv #stats-detail #stats-table td.type {
+    width: 100px;
+    padding-left: 5px;
+}
+
+#statsDiv #stats-detail #stats-table td.size {
+    width: 50px;
+    text-align: right;
+}
+
+
+/* END stats */
+
+/* BEGIN components */
+#componentsDiv #expand-all {
+    display: none;
+}
+
+#componentsDiv #components table {
+    margin: 10px 10px;
+    border: solid #676767;
+    border-width: 0 1px 1px 0;
+    border-spacing: 0;
+    font-size: 0.85em;
+}
+ 
+#componentsDiv #components th {
+    border: solid #676767;
+    border-width: 1px 0 0 1px;
+}
+
+#componentsDiv #components td {
+    border: solid #676767;
+    border-width: 1px 0 0 1px;
+    padding: 2px 5px;
+    height: 30px;
+    max-width: 350px;
+}
+
+#componentsDiv #components td.size,
+#componentsDiv #components td.gzip,
+#componentsDiv #components td.cookie,
+#componentsDiv #components td.set-cookie,
+#componentsDiv #components td.respTime {
+    text-align: right;
+}
+
+#componentsDiv #components td.components, 
+#componentsDiv #components td.headers {
+    text-align: center;
+}
+
+#componentsDiv #components tr.compError td {
+    color: #f00;
+}
+
+/* END components*/
+
+/* BEGIN Performance */
+
+#reportDiv table {
+    border-spacing: 0;
+    width: 100%;
+    font-size: 10pt;
+}
+
+#reportDiv tr.header {
+    font-weight: bold;
+    background: #dfdfdf;
+}
+
+#reportDiv tr.header td {
+    border: none;
+}
+
+#reportDiv td {
+    border: solid #676767;
+    padding: 5px 5px;
+}
+
+#reportDiv td.grade {
+    width: 30px;
+    border-width: 0 0 0 5px;
+    text-align: center;
+    vertical-align: top;
+    font-weight: bold;
+    border-bottom: 1px solid #676767;
+}
+
+#reportDiv td.desc {
+    border-width: 0 0 1px 1px;
+}
+
+#reportDiv td.desc div.message,
+#reportDiv td.desc ul {
+    color: #ff0000;
+}
+
+#reportDiv .grade-A {
+    border-color: #34a234;
+}
+
+#reportDiv .grade-B {
+    border-color: #a4cb58;
+}
+
+#reportDiv .grade-C {
+    border-color: #fadd3d;
+}
+
+#reportDiv .grade-D {
+    border-color: #f5a249;
+}
+
+#reportDiv .grade-E {
+    border-color: #e46648;
+}
+
+#reportDiv .grade-F {
+    border-color: #df4444;
+}
+
+
+/* END Performance */
+
+.floatRight {
+    float: right;
+}
+
+.floatLeft {
+    float: left;
+}
+
+tr.odd {
+    background: #ffffff;
+}
+
+tr.even {
+    background: #efefef;
+}

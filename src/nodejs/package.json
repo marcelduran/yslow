@@ -1,0 +1,16 @@
+{
+    "name": "yslow",
+    "version": "{{YSLOW_VERSION}}",
+    "description": "Commnad line version of YSlow web performance analysis tool from HAR files",
+    "keywords": ["yslow", "performance", "har", "yahoo", "wpo", "command", "line", "automation"],
+    "homepage": "http://getyslow.com",
+    "author": "Yahoo! Inc. <yslow@yahoo-inc.com> (http://getyslow.com)",
+    "main": "./lib/yslow",
+    "bin": {"yslow": "./bin/yslow"},
+    "repository": {"type": "", "url": ""},
+    "dependencies": {
+        "jsdom": ">=0.2.10",
+        "commander": ">=0.2.0"
+    },
+    "engines": { "node": ">= 0.4.1" }
+}
