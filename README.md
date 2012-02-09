@@ -1,4 +1,4 @@
-YSLOW
+YSlow
 =====
 
 YSlow analyzes web pages and suggests ways to improve their performance based on a set of [rules for high performance web pages](http://developer.yahoo.com/performance/rules.html).
@@ -20,7 +20,7 @@ Available flavors:
 * **bookmarklet**: Mobile/Any-browser bookmarklet
 * **opera**: Opera extension
 * **safari**: Apple Safari extension
-* **nodejs**: Command Line powered by Node.JS
+* **nodejs**: Command Line powered by Node.JS and NPM
 
 e.g.:
 
