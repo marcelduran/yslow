@@ -155,7 +155,7 @@ YSLOW.renderer = {
         for (field in comp.headers) {
             if (comp.headers.hasOwnProperty(field) && comp.headers[field]) {
                 sText += '<tr><td class="param-name">' +
-                    YSLOW.util.escapeHtml(field) +
+                    YSLOW.util.escapeHtml(YSLOW.util.formatHeaderName(field)) +
                     '</td><td class="param-value">' +
                     YSLOW.util.escapeHtml(comp.headers[field]) +
                     '</td></tr>';
@@ -168,7 +168,7 @@ YSLOW.renderer = {
                 if (comp.req_headers.hasOwnProperty(field) &&
                         comp.req_headers[field]) {
                     sText += '<tr><td class="param-name">' +
-                        YSLOW.util.escapeHtml(field) +
+                        YSLOW.util.escapeHtml(YSLOW.util.formatHeaderName(field)) +
                         '</td><td class="param-value"><p>' +
                         YSLOW.util.escapeHtml(comp.req_headers[field]) +
                         '</p></td></tr>';
