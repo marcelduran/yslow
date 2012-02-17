@@ -215,19 +215,26 @@ YUI().use(function (iY) {
                 // find and get comp from comps hash
                 var comp,
                     redir = v.redirect,
-                    headers = '';
+                    rawHeaders = '';
 
                 // check for redirect
                 if (redir) {
                     redir = [].concat(redir);
                     comp = hash[redir[0].url];
                     arrayEach(redir, function (red) {
+                        var headerName,
+                            headers = {};
+                        for (headerName in red.headers) {
+                            if (red.headers.hasOwnProperty(headerName)) {
+                                headers[headerName.toLowerCase()] = red.headers[headerName];
+                            }
+                        }
                         comps.push({
                             url: red.url,
                             href: red.url,
-                            rawHeaders: 'Location: ' + red.headers.Location + '\n',
+                            rawHeaders: 'Location: ' + headers.location + '\n',
                             status: red.status,
-                            headers: red.headers,
+                            headers: headers,
                             type: 'redirect'
                         });
                     });
@@ -238,9 +245,9 @@ YUI().use(function (iY) {
 
                 // build raw headers
                 Y.Object.each(v.headers, function (v, k) {
-                    headers += k + ': ' + v + '\n';
+                    rawHeaders += k + ': ' + v + '\n';
                 });
-                comp.rawHeaders = headers;
+                comp.rawHeaders = rawHeaders;
 
                 comp.status = v.status;
                 comp.headers = v.headers;
