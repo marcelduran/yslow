@@ -107,7 +107,11 @@ YSLOW.registerRule({
             '^pimg.kr.yahoo.com',
             '^kr.img.n2o.yahoo.com',
             '^s3.amazonaws.com',
-            '^(www.)?google-analytics.com'
+            '^(www.)?google-analytics.com',
+            '.cloudfront.net',
+            '.ak.fbcdn.net',
+            'platform.twitter.com',
+            'apis.google.com'
         ],
         // array of regexps that will be treated as exception.
         exceptions: [
