@@ -505,7 +505,7 @@ YSLOW.util = {
      * @return {String|Boolean} The value of the computed style, FALSE if get_url is TRUE and the style is not a URL
      */
     getComputedStyle: function (el, st, get_url) {
-        var style,
+        var style, urlMatch,
             res = '';
 
         if (el.currentStyle) {
@@ -527,7 +527,7 @@ YSLOW.util = {
             return false;
         }
 
-        var urlMatch = res.match(/\burl\((\'|\"|)([^\'\"]+?)\1\)/);
+        urlMatch = res.match(/\burl\((\'|\"|)([^\'\"]+?)\1\)/);
         if (urlMatch) {
             return urlMatch[2];
         } else {
