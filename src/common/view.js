@@ -410,7 +410,7 @@ YSLOW.view.prototype = {
 
             // Send a beacon.
             if (pref.getPref('optinBeacon', false)) {
-                info = pref.getPref('info', 'basic'),
+                info = pref.getPref('beaconInfo', 'basic'),
                 url = pref.getPref('beaconUrl',
                     'http://rtblab.pclick.yahoo.com/images/ysb.gif');
                 result = util.getResults(yscontext, info);
