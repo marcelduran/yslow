@@ -25,6 +25,7 @@ YUI().use(function (iY) {
             doc = Y.config.doc,
             config = Y.namespace('YSLOW').config,
             arrayEach = Y.Array.each,
+            objEach = Y.Object.each,
             encode = win.encodeURIComponent,
 
             URL_MAX_LEN = Y.UA.ie && Y.UA.ie < 7 ? 1800 : 6000,
@@ -222,13 +223,11 @@ YUI().use(function (iY) {
                     redir = [].concat(redir);
                     comp = hash[redir[0].url];
                     arrayEach(redir, function (red) {
-                        var headerName,
-                            headers = {};
-                        for (headerName in red.headers) {
-                            if (red.headers.hasOwnProperty(headerName)) {
-                                headers[headerName.toLowerCase()] = red.headers[headerName];
-                            }
-                        }
+                        var headers = {};
+
+                        objEach(red.headers, function (value, key) {
+                            headers[key.toLowerCase()] = value;
+                        });
                         comps.push({
                             url: red.url,
                             href: red.url,
@@ -244,7 +243,7 @@ YUI().use(function (iY) {
                 comp.href = comp.url = v.url;
 
                 // build raw headers
-                Y.Object.each(v.headers, function (v, k) {
+                objEach(v.headers, function (v, k) {
                     rawHeaders += k + ': ' + v + '\n';
                 });
                 comp.rawHeaders = rawHeaders;
