@@ -156,7 +156,7 @@ YSLOW.registerRule({
             }
 
             // experimental custom header, waiting for specification
-            match = headers['X-CDN'] || headers['X-Cdn'] || headers['X-cdn'];
+            match = headers['x-cdn'];
             if (match) {
                 continue;
             }
@@ -186,7 +186,7 @@ YSLOW.registerRule({
                 patterns = config.servers;
                 for (j = 0, lenJ = patterns.length; j < lenJ; j += 1) {
                     re = new RegExp(patterns[j]);
-                    if (re.test(headers.Server)) {
+                    if (re.test(headers.server)) {
                         match = 1;
                         break;
                     }
@@ -660,7 +660,7 @@ YSLOW.registerRule({
         for (i = 0, len = comps.length; i < len; i += 1) {
             comp = comps[i];
             offenders.push(briefUrl(comp.url, 80) + ' redirects to ' +
-                briefUrl(comp.headers.Location, 60));
+                briefUrl(comp.headers.location, 60));
         }
         score = 100 - comps.length * parseInt(config.points, 10);
 
@@ -740,14 +740,13 @@ YSLOW.registerRule({
 
     lint: function (doc, cset, config) {
 
-        var i, len, score, comp, etag, headers,
+        var i, len, score, comp, etag,
             offenders = [],
             comps = cset.getComponentsByType(config.types);
 
         for (i = 0, len = comps.length; i < len; i += 1) {
             comp = comps[i];
-            headers = comp.headers;
-            etag = headers && (headers.ETag || headers.Etag);
+            etag = comp.headers && comp.headers.etag;
             if (etag && !YSLOW.util.isETagGood(etag)) {
                 offenders.push(comp);
             }
@@ -788,7 +787,7 @@ YSLOW.registerRule({
 
         for (i = 0; i < comps.length; i += 1) {
             // check for cache-control: no-cache and cache-control: no-store
-            cache_control = comps[i].headers['Cache-Control'];
+            cache_control = comps[i].headers['cache-control'];
             if (cache_control) {
                 if (cache_control.indexOf('no-cache') !== -1 ||
                         cache_control.indexOf('no-store') !== -1) {

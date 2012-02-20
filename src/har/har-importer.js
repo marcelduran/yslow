@@ -53,7 +53,7 @@
             comps = cset.getComponentsByType('image');
             for (i = 0, len = comps.length; i < len; i += 1) {
                 comp = comps[i];
-                if (urls[comp.req_headers.Referer]) {
+                if (urls[comp.req_headers.referer]) {
                     comp.type = 'cssimage';
                 }
             }
