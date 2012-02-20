@@ -132,7 +132,7 @@ YSLOW.net = {
              * @ignore
              */
             req.onreadystatechange = function (e) {
-                var response, endTimestamp,
+                var response, headerName, endTimestamp,
                     xhr = (e ? e.target : req);
 
                 if (xhr.readyState === 4) { // DONE
@@ -147,8 +147,8 @@ YSLOW.net = {
                     response.headers = YSLOW.net.getXHRResponseHeaders(xhr);
                     response.body = xhr.responseText;
 
-                    if (response.headers && response.headers['Content-Type']) {
-                        response.type = YSLOW.util.getComponentType(response.headers['Content-Type']);
+                    if (response.headers['content-type']) {
+                        response.type = YSLOW.util.getComponentType(response.headers['content-type']);
                     }
 
                     endTimestamp = (new Date()).getTime();
@@ -180,11 +180,11 @@ YSLOW.net = {
      * Accounts for set-cookie and potentially other duplicate headers.
      *
      * @param {XMLHttpRequest} req The XHR object
-     * @return {Object} A hash of headers, like {'Content-Type': 'image/png', 'Content-encoding': 'gzip', etc... }
+     * @return {Object} A hash of headers with the keys in lower case, like {'content-type': 'image/png', 'content-encoding': 'gzip', etc... }
      */
     getXHRResponseHeaders: function (req) {
         var res = {},
-            name, value, i, hdr;
+            name, nameLowerCased, value, i, hdr;
 
         try {
             hdr = req.getAllResponseHeaders();
@@ -197,12 +197,13 @@ YSLOW.net = {
             for (i = 0; i < hdr.length; i += 1) {
                 name = hdr[i].split(':')[0];
                 if (name) {
+                    nameLowerCased = name.toLowerCase();
                     value = req.getResponseHeader(name);
                     if (value) {
-                        if (name.toLowerCase() === "set-cookie") {
-                            res[name] = value;
+                        if (nameLowerCased === "set-cookie") {
+                            res[nameLowerCased] = value;
                         } else {
-                            res[name] = value.replace(/\n/g, ' ');
+                            res[nameLowerCased] = value.replace(/\n/g, ' ');
                         }
                     }
                 }

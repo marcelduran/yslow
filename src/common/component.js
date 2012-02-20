@@ -82,12 +82,23 @@ YSLOW.Component.prototype.setComponentDetails = function (o) {
         
         // firefox
         parseResponse = function (response) {
+            var headerName;
+
             // copy from the response object
             comp.status = response.status;
-            comp.headers = response.headers;
+            for (headerName in response.headers) {
+                if (response.headers.hasOwnProperty(headerName)) {
+                    comp.headers[headerName.toLowerCase()] = response.headers[headerName];
+                }
+            }
             comp.raw_headers = response.raw_headers;
             if (response.req_headers) {
-                comp.req_headers = response.req_headers;
+                comp.req_headers = {};
+                for (headerName in response.req_headers) {
+                    if (response.req_headers.hasOwnProperty(headerName)) {
+                        comp.req_headers[headerName.toLowerCase()] = response.req_headers[headerName];
+                    }
+                }
             }
             comp.body = (response.body !== null) ? response.body : '';
             if (typeof response.method === 'string') {
@@ -136,13 +147,13 @@ YSLOW.Component.prototype.setComponentDetails = function (o) {
             comp.raw_headers = '';
             for (i = 0, len = response.headers.length; i < len; i += 1) {
                 header = response.headers[i];
-                comp.headers[header.name] = header.value;
+                comp.headers[header.name.toLowerCase()] = header.value;
                 comp.raw_headers += header.name + ': ' + header.value + '\n';
             }
             comp.req_headers = {};
             for (i = 0, len = request.headers.length; i < len; i += 1) {
                 header = request.headers[i];
-                comp.req_headers[header.name] = header.value;
+                comp.req_headers[header.name.toLowerCase()] = header.value;
             }
             comp.method = request.method;
             if (response.content && response.content.text) {
@@ -156,8 +167,8 @@ YSLOW.Component.prototype.setComponentDetails = function (o) {
             }   
             // for security checking
             comp.response_type = comp.type;
-            comp.cookie = (comp.headers['Set-Cookie'] || '') + (comp.req_headers['Cookie'] || '');
-            comp.nsize = parseInt(comp.headers['Content-Length'], 10) ||
+            comp.cookie = (comp.headers['set-cookie'] || '') + (comp.req_headers['cookie'] || '');
+            comp.nsize = parseInt(comp.headers['content-length'], 10) ||
                 response.bodySize || response.content.size;
             comp.respTime = entry.time;
             comp.after_onload = (new Date(entry.startedDateTime)
@@ -178,7 +189,7 @@ YSLOW.Component.prototype.setComponentDetails = function (o) {
 
         // parse component (chrome and bookmarklet)
         parseComponent = function (component) {
-            var h, i, len, m,
+            var headerName, h, i, len, m,
                 reHeader = /^([^:]+):\s*([\s\S]+)$/,
                 headers = component.rawHeaders;
 
@@ -186,13 +197,17 @@ YSLOW.Component.prototype.setComponentDetails = function (o) {
             comp.status = component.status;
             comp.raw_headers = headers;
             if (component.headers) {
-                comp.headers = component.headers;
+                for (headerName in component.headers) {
+                    if (component.headers.hasOwnProperty(headerName)) {
+                        comp.headers[headerName.toLowerCase()] = component.headers[headerName];
+                    }
+                }
             } else if (typeof headers === 'string') {
                 h = headers.split('\n');
                 for (i = 0, len = h.length; i < len; i += 1) {
                     m = reHeader.exec(h[i]);
                     if (m) {
-                        comp.headers[m[1]] = m[2];
+                        comp.headers[m[1].toLowerCase()] = m[2];
                     }
                 }
             }
@@ -202,8 +217,8 @@ YSLOW.Component.prototype.setComponentDetails = function (o) {
             comp.type = component.type;
             // for security checking
             comp.response_type = comp.type;
-            comp.cookie = comp.headers['Set-Cookie'] || '';
-            comp.nsize = parseInt(comp.headers['Content-Length'], 10) ||
+            comp.cookie = comp.headers['set-cookie'] || '';
+            comp.nsize = parseInt(comp.headers['content-length'], 10) ||
                 comp.body.length;
             comp.respTime = 0;
             if (component.after_onload) {
@@ -259,9 +274,9 @@ YSLOW.Component.prototype.populateProperties = function (resolveRedirect, ignore
 
     // check location
     // bookmarklet and har already handle redirects
-    if (that.headers.Location && resolveRedirect) {
+    if (that.headers.location && resolveRedirect) {
         // Add a new component.
-        comp = that.parent.addComponentNoDuplicate(that.headers.Location,
+        comp = that.parent.addComponentNoDuplicate(that.headers.location,
             (that.type !== 'redirect' ? that.type : 'unknown'), that.url);
         if (comp && that.after_onload) {
             comp.after_onload = true;
@@ -269,10 +284,10 @@ YSLOW.Component.prototype.populateProperties = function (resolveRedirect, ignore
         that.type = 'redirect';
     }
 
-    content_length = that.headers['Content-Length'];
+    content_length = that.headers['content-length'];
 
     // gzip, deflate
-    encoding = YSLOW.util.trim(that.headers['Content-Encoding']);
+    encoding = YSLOW.util.trim(that.headers['content-encoding']);
     if (encoding === 'gzip' || encoding === 'deflate') {
         that.compressed = encoding;
         that.size = (that.body.length) ? that.body.length : NULL;
@@ -307,8 +322,8 @@ YSLOW.Component.prototype.populateProperties = function (resolveRedirect, ignore
     }
     that.uncompressed_size = that.body.length;
 
-    // expiration based on either Expires or Cache-control headers
-    expires = that.headers.Expires;
+    // expiration based on either Expires or Cache-Control headers
+    expires = that.headers.expires;
     if (expires && expires.length > 0) {
         // set expires as a JS object
         that.expires = new Date(expires);
@@ -329,7 +344,7 @@ YSLOW.Component.prototype.populateProperties = function (resolveRedirect, ignore
             obj = document.createElement('img');
         }
         if (that.body.length) {
-            img_src = 'data:' + that.headers['Content-Type'] + ';base64,' +
+            img_src = 'data:' + that.headers['content-type'] + ';base64,' +
                 YSLOW.util.base64Encode(that.body);
             dataUri = 1;
         } else {
@@ -369,7 +384,7 @@ YSLOW.Component.prototype.populateProperties = function (resolveRedirect, ignore
  */
 YSLOW.Component.prototype.hasOldModifiedDate = function () {
     var now = Number(new Date()),
-        modified_date = this.headers['Last-Modified'];
+        modified_date = this.headers['last-modified'];
 
     if (typeof modified_date !== 'undefined') {
         // at least 1 day in the past
@@ -402,15 +417,12 @@ YSLOW.Component.prototype.hasFarFutureExpiresOrMaxAge = function () {
 };
 
 YSLOW.Component.prototype.getEtag = function () {
-    var headers = this.headers,
-        etag = headers.Etag || headers.ETag;
-
-    return etag || '';
+    return this.headers.etag || '';
 };
 
 YSLOW.Component.prototype.getMaxAge = function () {
     var index, maxage, expires,
-        cache_control = this.headers['Cache-Control'];
+        cache_control = this.headers['cache-control'];
 
     if (cache_control) {
         index = cache_control.indexOf('max-age');
@@ -435,8 +447,8 @@ YSLOW.Component.prototype.getSetCookieSize = function () {
     var aCookies, k,
         size = 0;
 
-    if (this.headers && this.headers['Set-Cookie']) {
-        aCookies = this.headers['Set-Cookie'].split('\n');
+    if (this.headers && this.headers['set-cookie']) {
+        aCookies = this.headers['set-cookie'].split('\n');
         if (aCookies.length > 0) {
             for (k = 0; k < aCookies.length; k += 1) {
                 size += aCookies[k].length;

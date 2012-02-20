@@ -309,7 +309,7 @@ YSLOW.registerRule({
             comps = cset.getComponentsByType('redirect', true, true);
 
         for (i = 0; i < comps.length; i += 1) {
-            offenders.push(YSLOW.util.briefUrl(comps[i].url, 80) + "<br> redirects to <br>" + YSLOW.util.briefUrl(comps[i].headers.Location, 60));
+            offenders.push(YSLOW.util.briefUrl(comps[i].url, 80) + "<br> redirects to <br>" + YSLOW.util.briefUrl(comps[i].headers.location, 60));
         }
         score = 100 - comps.length * parseInt(config.points, 10);
 
@@ -400,7 +400,7 @@ YSLOW.registerRule({
             comps = cset.getComponentsByType(config.types, true, false);
 
         for (i = 0; i < comps.length; i += 1) {
-            if (comps[i].headers && comps[i].headers.Etag && comps[i].headers.Server && !YSLOW.util.isETagGood(comps[i].headers.Etag, comps[i].headers.Server)) {
+            if (comps[i].headers && comps[i].headers.etag && comps[i].headers.server && !YSLOW.util.isETagGood(comps[i].headers.etag, comps[i].headers.server)) {
                 offenders.push(comps[i]);
             }
         }

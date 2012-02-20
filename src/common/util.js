@@ -566,6 +566,38 @@ YSLOW.util = {
     },
 
     /**
+     * Convert a HTTP header name to its canonical form,
+     * e.g. "content-length" => "Content-Length".
+     * @param headerName the header name (case insensitive)
+     * @return {String} the formatted header name
+     */
+    formatHeaderName: (function () {
+        var specialCases = {
+            'content-md5': 'Content-MD5',
+            dnt: 'DNT',
+            etag: 'ETag',
+            p3p: 'P3P',
+            te: 'TE',
+            'www-authenticate': 'WWW-Authenticate',
+            'x-att-deviceid': 'X-ATT-DeviceId',
+            'x-cdn': 'X-CDN',
+            'x-ua-compatible': 'X-UA-Compatible',
+            'x-xss-protection': 'X-XSS-Protection'
+        };
+        return function (headerName) {
+            var lowerCasedHeaderName = headerName.toLowerCase();
+            if (specialCases.hasOwnProperty(lowerCasedHeaderName)) {
+                return specialCases[lowerCasedHeaderName];
+            } else {
+                // Make sure that the first char and all chars following a dash are upper-case:
+                return lowerCasedHeaderName.replace(/(^|-)([a-z])/g, function ($0, optionalLeadingDash, ch) {
+                    return optionalLeadingDash + ch.toUpperCase();
+                });
+            }
+        };
+    }()),
+
+    /**
      * Math mod method.
      * @param {Number} divisee
      * @param {Number} base
