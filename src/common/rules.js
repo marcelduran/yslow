@@ -108,10 +108,12 @@ YSLOW.registerRule({
             '^kr.img.n2o.yahoo.com',
             '^s3.amazonaws.com',
             '^(www.)?google-analytics.com',
-            '.cloudfront.net',
-            '.ak.fbcdn.net',
-            'platform.twitter.com',
-            'apis.google.com'
+            '.cloudfront.net', //Amazon CloudFront
+            '.ak.fbcdn.net', //Facebook images ebeded
+            'platform.twitter.com', //Twitter widget - Always via a CDN
+            'cdn.api.twitter.com', //Twitter API calls, served via Akamai
+            'apis.google.com', //Google's API Hosting
+            '.akamaihd.net' //Akamai - Facebook uses this for SSL assets
         ],
         // array of regexps that will be treated as exception.
         exceptions: [
