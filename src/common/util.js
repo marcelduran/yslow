@@ -523,17 +523,16 @@ YSLOW.util = {
             return res;
         }
 
-        if (typeof res !== 'string' || res.indexOf('url(') !== 0) {
+        if (typeof res !== 'string') {
             return false;
         }
 
-        res = res.replace(/url\(/, '');
-        res = res.substr(0, res.lastIndexOf(')'));
-        if (res.indexOf('"') === 0) {
-            res = res.substr(1, res.length - 2);
+        var urlMatch = res.match(/\burl\((\'|\"|)([^\'\"]+?)\1\)/);
+        if (urlMatch) {
+            return urlMatch[2];
+        } else {
+            return false;
         }
-
-        return res;
     },
 
     /**
