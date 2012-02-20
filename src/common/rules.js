@@ -162,7 +162,7 @@ YSLOW.registerRule({
             }
 
             // experimental custom header, waiting for specification
-            match = headers['X-CDN'] || headers['X-Cdn'] || headers['X-cdn'];
+            match = headers['X-CDN'] || headers['X-Cdn'] || headers['X-cdn'] || headers['X-Amz-Cf-Id'];
             if (match) {
                 continue;
             }
