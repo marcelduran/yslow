@@ -312,13 +312,13 @@ wsh: har
 
 rhino: har
 	@echo "building RHINO HAR IMPORTER..."
-	@if [ ! -d $(BUILD_RHINO)/lib]; then mkdir -p $(BUILD_RHINO)/lib; fi
+	@if [ ! -d $(BUILD_RHINO)/lib ]; then mkdir -p $(BUILD_RHINO)/lib; fi
 	@cp $(BUILD_HAR)/yslow-har.js \
             $(BUILD_RHINO)/lib/yslow.js
-	@cp $(BUILD_HAR)/env.rhino.1.2.js \
-            $(BUILD_HAR)/blank.html \
+	@cp $(SRC_RHINO)/env.rhino.1.2.js \
+            $(SRC_RHINO)/blank.html \
             $(BUILD_RHINO)/lib/
-	@cp $(BUILD_HAR)/controller.js \
+	@cp $(SRC_RHINO)/controller.js \
             $(BUILD_RHINO)/yslow.js
 	@echo "done"
 
