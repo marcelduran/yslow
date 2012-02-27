@@ -307,7 +307,7 @@ YSLOW.peeler = {
      */
     findImportedStyleSheets: function (styleSheet, parentUrl) {
         var i, rules, rule, cssUrl, ff, len,
-            reFile = /url\s*\(["']*([^\)]+)["']*\)/i,
+            reFile = /url\s*\(["']*([^"'\)]+)["']*\)/i,
             comps = [];
 
         try {
