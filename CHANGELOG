@@ -1,3 +1,10 @@
+Version 3.1.0
+-------------
+* Fixed har importer edge cases
+* Issue #7 and #9: parsing of url values
+* Issue #6: more CDNs
+* Issue #5: correct beaconInfo preference
+
 Version 3.0.9
 -------------
 * Firefox 9-11 compatible
