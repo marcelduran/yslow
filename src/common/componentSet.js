@@ -4,7 +4,7 @@
  */
 
 /*global YSLOW,MutationEvent*/
-/*jslint white: true, onevar: true, undef: true, newcap: true, nomen: true, regexp: true, plusplus: true, bitwise: true, browser: true, continue: true, maxerr: 50, indent: 4 */
+/*jslint browser: true, continue: true, sloppy: true, maxerr: 50, indent: 4 */
 
 /**
  * ComponentSet holds an array of all the components and get the response info from net module for each component.
@@ -53,7 +53,7 @@ YSLOW.ComponentSet.prototype = {
      * @type ComponentObject
      */
     addComponent: function (url, type, base_href, o) {
-        var comp;
+        var comp, found, isDoc;
 
         if (!url) {
             if (!this.empty_url) {
@@ -73,11 +73,15 @@ YSLOW.ComponentSet.prototype = {
             // For security purpose
             url = YSLOW.util.escapeHtml(url);
 
-            if (typeof this.component_info[url] === 'undefined') {
-                // make sure this component is not already in this component set.
+            found = typeof this.component_info[url] !== 'undefined';
+            isDoc = type === 'doc';
+
+            // make sure this component is not already in this component set,
+            // but also check if a doc is coming after a redirect using same url
+            if (!found || isDoc) {
                 this.component_info[url] = {
                     'state': 'NONE',
-                    'count': 0
+                    'count': found ? this.component_info[url].count : 0
                 };
 
                 comp = new YSLOW.Component(url, type, this, o);
@@ -86,7 +90,7 @@ YSLOW.ComponentSet.prototype = {
                     this.components[this.components.length] = comp;
 
                     // shortcup for document component
-                    if (!this.doc_comp && comp.type === 'doc') {
+                    if (!this.doc_comp && isDoc) {
                         this.doc_comp = comp;
                     }
 
@@ -275,7 +279,7 @@ YSLOW.ComponentSet.prototype = {
             });
         }
     },
-    
+
     /**
      * After onload guess (simple version)
      * Checkes for elements with src or href attributes within
@@ -364,10 +368,10 @@ YSLOW.ComponentSet.prototype = {
                 ));
                 oldSrc = target.dataOldSrc;
 
-                if (src && 
+                if (src &&
                         (type === 'DOMNodeInserted' ||
                         (type === 'DOMSubtreeModified' && src !== oldSrc) ||
-                        (type === 'DOMAttrModified' && 
+                        (type === 'DOMAttrModified' &&
                             (attr === 'src' || attr === 'href'))) &&
                         !compsHT[src]) {
                     compsHT[src] = 1;
@@ -382,7 +386,7 @@ YSLOW.ComponentSet.prototype = {
             // - wait 3s before calling done if no dom mutation happens
             // - set enough timer, limit is 10 seconds for mutations, this is
             //   for edge cases when page inserts/removes nodes within a loop
-            iframeOnload =  function (e) {
+            iframeOnload =  function () {
                 var i, len, all, el, src;
 
                 clearTimer(noOnloadTimer);
@@ -430,7 +434,7 @@ YSLOW.ComponentSet.prototype = {
         // set afteronload properties for all components loaded after window onlod
         done = function () {
             var i, j, len, lenJ, comp, src, cmp;
-    
+
             // to avoid executing this function twice
             // due to ifrm iwin double listeners
             if (triggered) {

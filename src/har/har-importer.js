@@ -15,6 +15,7 @@
 
             'text/plain': 'doc',
             'text/html': 'doc',
+            'application/xhtml+xml': 'doc',
 
             'text/css': 'css',
 
@@ -31,7 +32,6 @@
             'application/x-js': 'json',
 
             'application/xml': 'xml',
-            'application/xhtml+xml': 'xml',
             'application/vnd.mozilla.xul+xml': 'xml',
             'text/xml': 'xml',
             'text/xul': 'xml',
@@ -146,6 +146,19 @@
                         entry: entry
                     });
                 }
+
+                // use empty doc if none found (redirect chain with no content)
+                if (!cset) {
+                    doc = doct.createElement('div');
+                    cset = new YSLOW.ComponentSet(doc, onloadTimestamp);
+                    entry = entries.length && entries[0];
+                    baseHref = entry && entry.request.url;
+                    cset.doc_comp = {
+                        url: baseHref
+                    };
+                }
+
+                // build YSlow component set
                 for (j = 0, lenJ = comps.length; j < lenJ; j += 1) {
                     comp = comps[j]; 
                     cset.addComponent(comp.href, comp.type, baseHref, {
@@ -170,15 +183,17 @@
             }
 
             // refinement
-            split = splitHtml(doct, base, html);
-            head = split.head;
-            body = split.body;
-            setCssImages(cset);
-            cset.inline = YSLOW.util.getInlineTags(null, head, body);
-            cset.domElementsCount = YSLOW.util.countDOMElements(doc);
-            cset.cookies = cset.doc_comp.cookie;
-            cset.components = YSLOW.util.setInjected(doc,
-                cset.components, cset.doc_comp.body);
+            if (base && html) {
+                split = splitHtml(doct, base, html);
+                head = split.head;
+                body = split.body;
+                setCssImages(cset);
+                cset.inline = YSLOW.util.getInlineTags(null, head, body);
+                cset.domElementsCount = YSLOW.util.countDOMElements(doc);
+                cset.cookies = cset.doc_comp.cookie;
+                cset.components = YSLOW.util.setInjected(doc,
+                    cset.components, cset.doc_comp.body);
+            }
 
             // run analysis
             yscontext.component_set = cset;
