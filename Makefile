@@ -95,6 +95,7 @@ bookmarklet-files:
             $(SRC_COMMON)/version.js \
             $(SRC_COMMON)/componentSet.js \
             $(SRC_COMMON)/component.js \
+            $(SRC_COMMON)/component-bm-chrome.js \
             $(SRC_COMMON)/controller.js \
             $(SRC_COMMON)/util.js \
             $(SRC_COMMON)/doc.js \
@@ -147,6 +148,7 @@ chrome:
             $(SRC_COMMON)/version.js \
             $(SRC_COMMON)/componentSet.js \
             $(SRC_COMMON)/component.js \
+            $(SRC_COMMON)/component-bm-chrome.js \
             $(SRC_COMMON)/controller.js \
             $(SRC_COMMON)/util.js \
             $(SRC_COMMON)/doc.js \
@@ -210,7 +212,6 @@ firefox:
             $(BUILD_FIREFOX)/chrome/content/yslow/img/
 	@cp $(SRC_COMMON)/yslow.js \
             $(SRC_COMMON)/componentSet.js \
-            $(SRC_COMMON)/component.js \
             $(SRC_COMMON)/controller.js \
             $(SRC_COMMON)/util.js \
             $(SRC_COMMON)/doc.js \
@@ -220,6 +221,9 @@ firefox:
             $(SRC_COMMON)/renderers.js \
             $(SRC_COMMON)/yslow.css \
             $(BUILD_FIREFOX)/chrome/content/yslow/
+	@cat $(SRC_COMMON)/component.js \
+            $(SRC_FIREFOX)/chrome/content/yslow/component.js \
+            > $(BUILD_FIREFOX)/chrome/content/yslow/component.js
 	@cat $(SRC_COMMON)/version.js | \
             sed s/{{YSLOW_VERSION}}/$(YSLOW_VERSION)/ \
             > $(BUILD_FIREFOX)/chrome/content/yslow/version.js
@@ -244,6 +248,7 @@ har:
             $(SRC_COMMON)/version.js \
             $(SRC_COMMON)/componentSet.js \
             $(SRC_COMMON)/component.js \
+            $(SRC_HAR)/component.js \
             $(SRC_COMMON)/context.js \
             $(SRC_COMMON)/controller.js \
             $(SRC_COMMON)/util.js \
