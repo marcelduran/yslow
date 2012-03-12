@@ -57,7 +57,7 @@ YSLOW_LICENSE := $(SRC_COMMON)/license
 # lib/tools directories/files
 YUI_LIB := $(SRC_YUI)/build
 IMG := img
-YUICOMPRESSOR := ~/bin/yuicompressor-2.4.6.jar
+YUICOMPRESSOR := java -jar ~/bin/yuicompressor-2.4.7.jar
 
 all: show-version bookmarklet chrome firefox har nodejs opera safari wsh rhino
 
@@ -484,13 +484,13 @@ pkg-bookmarklet: yui bookmarklet-files
             exit 1; \
         fi
 	@echo "    minifying YUI..."
-	@java -jar $(YUICOMPRESSOR) $(BUILD_YUI)/yui$(YUI_MODE).js -o $(BUILD_YUI)/yui$(YUI_MODE)-min.js
+	@$(YUICOMPRESSOR) $(BUILD_YUI)/yui$(YUI_MODE).js -o $(BUILD_YUI)/yui$(YUI_MODE)-min.js
 	@rm $(BUILD_YUI)/yui$(YUI_MODE).js
 	@echo "    done"
 	@echo "    minifying BOOKMARKLET files..."
-	@java -jar $(YUICOMPRESSOR) $(BUILD_BOOKMARKLET)/$(BOOKMARKLET_YSLOW_JS) -o $(PKG_BOOKMARKLET)/$(YSLOW_VERSION)/$(BOOKMARKLET_YSLOW_JS)
+	@$(YUICOMPRESSOR) $(BUILD_BOOKMARKLET)/$(BOOKMARKLET_YSLOW_JS) -o $(PKG_BOOKMARKLET)/$(YSLOW_VERSION)/$(BOOKMARKLET_YSLOW_JS)
 	@rm $(BUILD_BOOKMARKLET)/$(BOOKMARKLET_YSLOW_JS)
-	@java -jar $(YUICOMPRESSOR) $(BUILD_BOOKMARKLET)/$(BOOKMARKLET_YSLOW_CSS) -o $(PKG_BOOKMARKLET)/$(YSLOW_VERSION)/$(BOOKMARKLET_YSLOW_CSS)
+	@$(YUICOMPRESSOR) $(BUILD_BOOKMARKLET)/$(BOOKMARKLET_YSLOW_CSS) -o $(PKG_BOOKMARKLET)/$(YSLOW_VERSION)/$(BOOKMARKLET_YSLOW_CSS)
 	@rm $(BUILD_BOOKMARKLET)/$(BOOKMARKLET_YSLOW_CSS)
 	@echo "    done"
 	@echo "    merging minified YUI and BOOKMARKLET..."
