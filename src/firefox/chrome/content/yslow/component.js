@@ -1,4 +1,9 @@
 /**
+ * Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+ * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+
+/**
  * Parse details (HTTP headers, content, etc) from
  * component response and set as properties.
  */

@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+ * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+
 /*global YSLOW, Firebug, Components, ActiveXObject, gBrowser, window, getBrowser*/
 /*jslint white: true, onevar: true, undef: true, newcap: true, nomen: true, regexp: true, plusplus: true, browser: true, devel: true, maxerr: 50, indent: 4 */
 

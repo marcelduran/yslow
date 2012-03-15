@@ -1,4 +1,9 @@
 /**
+ * Copyright (c) 2012, Yahoo! Inc.  All rights reserved.
+ * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+
+/**
  * Parse details (HTTP headers, content, etc) from a
  * given source and set component properties.
  * @param o The object containing component details.
