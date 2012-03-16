@@ -116,7 +116,7 @@ YSLOW.Component.prototype.populateProperties = function (resolveRedirect, ignore
             that.size_compressed = that.nsize;
         } else {
             // a hack
-            that.size_compressed = that.size / 3;
+            that.size_compressed = Math.round(that.size / 3);
         }
     } else {
         that.compressed = false;
