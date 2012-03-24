@@ -1101,6 +1101,21 @@ YSLOW.util = {
         }
     },
 
+
+    /**
+     * Wrapper for decodeURIComponent, try to decode
+     * otherwise return the input value.
+     * @param {String} value The value to be decoded.
+     * @return {String} The decoded value.
+     */
+    decodeURIComponent: function (value) {
+        try {
+            return decodeURIComponent(value);
+        } catch (err) {
+            return value;
+        }
+    },
+
     /**
      * convert Object to XML
      * @param {Object} obj the Object to be converted to XML
@@ -1118,7 +1133,7 @@ YSLOW.util = {
                 
                 safeXML = function (value, decode) {
                     if (decode) {
-                        value = decodeURIComponent(value);
+                        value = util.decodeURIComponent(value);
                     }
                     if (reInvalid.test(value)) {
                         return '<![CDATA[' + value + ']]>';
@@ -1215,7 +1230,7 @@ YSLOW.util = {
                             type = typeof val;
                             if (type === 'string' || type === 'number') {
                                 str += indent(level + 1) +
-                                    decodeURIComponent(val) + '\n';
+                                    util.decodeURIComponent(val) + '\n';
                             } else {
                                 pp(val, level + 1);
                                 if (i < len - 1) {
@@ -1235,7 +1250,7 @@ YSLOW.util = {
                                 item === 'cr' || item === 'cs') {
                             value = util.kbSize(value) + ' (' + value + ' bytes)';
                         }
-                        str += ' ' + decodeURIComponent(value) + '\n';
+                        str += ' ' + util.decodeURIComponent(value) + '\n';
                     }
                 }
             }
