@@ -804,9 +804,10 @@ YSLOW.util = {
     getResults: function (yscontext, info) {
         var i, l, results, url, type, comps, comp, encoded_url, obj, cr,
             cs, etag, name, len, include_grade, include_comps, include_stats,
-            result, len2, spaceid,
+            result, len2, spaceid, header, sourceHeaders, targetHeaders,
             reButton = / <button [\s\S]+<\/button>/,
-            isArray = YSLOW.util.isArray,
+            util = YSLOW.util,
+            isArray = util.isArray,
             stats = {},
             stats_c = {},
             comp_objs = [],
@@ -839,12 +840,11 @@ YSLOW.util = {
         params.o = parseInt(yscontext.PAGE.overallScore, 10);
         params.u = encodeURIComponent(yscontext.result_set.url);
         params.r = parseInt(yscontext.PAGE.totalRequests, 10);
-        spaceid = YSLOW.util.getPageSpaceid(yscontext.component_set);
+        spaceid = util.getPageSpaceid(yscontext.component_set);
         if (spaceid) {
             params.s = encodeURI(spaceid);
         }
         params.i = yscontext.result_set.getRulesetApplied().id;
-
         if (yscontext.PAGE.t_done) {
             params.lt = parseInt(yscontext.PAGE.t_done, 10);
         }
@@ -922,7 +922,7 @@ YSLOW.util = {
                     obj.gzip = comp.size_compressed;
                 }
                 if (comp.expires && comp.expires instanceof Date) {
-                    obj.expires = YSLOW.util.prettyExpiresDate(comp.expires);
+                    obj.expires = util.prettyExpiresDate(comp.expires);
                 }
                 cr = comp.getReceivedCookieSize();
                 if (cr > 0) {
@@ -935,6 +935,30 @@ YSLOW.util = {
                 etag = comp.getEtag();
                 if (typeof etag === 'string' && etag.length > 0) {
                     obj.etag = etag;
+                }
+                // format req/res headers
+                obj.headers = {};
+                if (comp.req_headers) {
+                    sourceHeaders = comp.req_headers;
+                    obj.headers.request = {};
+                    targetHeaders = obj.headers.request;
+                    for (header in sourceHeaders) {
+                        if (sourceHeaders.hasOwnProperty(header)) {
+                            targetHeaders[util.formatHeaderName(header)] =
+                                sourceHeaders[header];
+                        }
+                    }
+                }
+                if (comp.headers) {
+                    sourceHeaders = comp.headers;
+                    obj.headers.response = {};
+                    targetHeaders = obj.headers.response;
+                    for (header in sourceHeaders) {
+                        if (sourceHeaders.hasOwnProperty(header)) {
+                            targetHeaders[util.formatHeaderName(header)] =
+                                sourceHeaders[header];
+                        }
+                    }
                 }
                 comp_objs.push(obj);
             }
