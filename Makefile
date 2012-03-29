@@ -14,6 +14,7 @@ SRC_OPERA := $(SRC)/opera
 SRC_SAFARI := $(SRC)/safari
 SRC_WSH := $(SRC)/wsh
 SRC_RHINO := $(SRC)/rhino
+SRC_PHANTOMJS := $(SRC)/phantomjs
 
 # build directories
 BUILD := build
@@ -28,6 +29,7 @@ BUILD_SAFARI_ROOT := $(BUILD)/safari
 BUILD_SAFARI := $(BUILD_SAFARI_ROOT)/yslow.safariextension
 BUILD_WSH := $(BUILD)/wsh
 BUILD_RHINO := $(BUILD)/rhino
+BUILD_PHANTOMJS := $(BUILD)/phantomjs
 
 # package directories
 PKG := pkg
@@ -39,6 +41,7 @@ PKG_OPERA := $(PKG)/opera
 PKG_SAFARI := $(PKG)/safari
 PKG_WSH := $(PKG)/wsh
 PKG_RHINO := $(PKG)/rhino
+PKG_PHANTOMJS := $(PKG)/phantomjs
 
 # file names / versions / licenses
 BOOKMARKLET_YSLOW_JS := yslow-files-bookmarklet.js
@@ -59,10 +62,12 @@ YUI_LIB := $(SRC_YUI)/build
 IMG := img
 YUICOMPRESSOR := java -jar ~/bin/yuicompressor-2.4.7.jar
 
-all: show-version bookmarklet chrome firefox har nodejs opera safari wsh rhino
+all: show-version bookmarklet chrome firefox har nodejs opera safari wsh rhino phantomjs
 
-clean: clean-bookmarklet clean-chrome clean-firefox clean-har clean-nodejs clean-opera clean-safari clean-wsh clean-rhino
+clean: clean-bookmarklet clean-chrome clean-firefox clean-har clean-nodejs clean-opera clean-safari clean-wsh clean-rhino clean-phantomjs
 	@if [ -d $(BUILD) ]; then rmdir $(BUILD); fi
+
+pkg: pkg-bookmarklet pkg-chrome pkg-firefox pkg-nodejs pkg-opera pkg-safari pkg-wsh pkg-rhino pkg-phantomjs
 
 show-version:
 	@echo "YSLOW version: $(YSLOW_VERSION)"
@@ -95,7 +100,7 @@ bookmarklet-files:
             $(SRC_COMMON)/version.js \
             $(SRC_COMMON)/componentSet.js \
             $(SRC_COMMON)/component.js \
-            $(SRC_COMMON)/component-bm-chrome.js \
+            $(SRC_COMMON)/component-bm-ch.js \
             $(SRC_COMMON)/controller.js \
             $(SRC_COMMON)/util.js \
             $(SRC_COMMON)/doc.js \
@@ -105,7 +110,7 @@ bookmarklet-files:
             $(SRC_COMMON)/context.js \
             $(SRC_COMMON)/renderers.js \
             $(SRC_COMMON)/peeler.js \
-            $(SRC_BOOKMARKLET)/peeler.js \
+            $(SRC_COMMON)/peeler-bm-ch-ph.js \
             $(SRC_BOOKMARKLET)/$(BM_CONFIG) \
             $(SRC_BOOKMARKLET)/controller.js | \
             sed s/{{YSLOW_VERSION}}/$(YSLOW_VERSION)/ | \
@@ -148,7 +153,7 @@ chrome:
             $(SRC_COMMON)/version.js \
             $(SRC_COMMON)/componentSet.js \
             $(SRC_COMMON)/component.js \
-            $(SRC_COMMON)/component-bm-chrome.js \
+            $(SRC_COMMON)/component-bm-ch.js \
             $(SRC_COMMON)/controller.js \
             $(SRC_COMMON)/util.js \
             $(SRC_COMMON)/doc.js \
@@ -158,7 +163,7 @@ chrome:
             $(SRC_COMMON)/context.js \
             $(SRC_COMMON)/renderers.js \
             $(SRC_COMMON)/peeler.js \
-            $(SRC_CHROME)/peeler.js \
+            $(SRC_COMMON)/peeler-bm-ch-ph.js \
             $(SRC_CHROME)/yslow-chrome-pref.js | \
             sed s/{{YSLOW_VERSION}}/$(YSLOW_VERSION)/ \
             > $(BUILD_CHROME)/yslow-chrome.js
@@ -327,6 +332,30 @@ rhino: har
             $(BUILD_RHINO)/yslow.js
 	@echo "done"
 
+phantomjs:
+	@echo "building PHANTOMJS..."
+	@if [ ! -d $(BUILD_PHANTOMJS) ]; then mkdir -p $(BUILD_PHANTOMJS); fi
+	@(sed '/YSLOW HERE/q;' $(SRC_PHANTOMJS)/controller.js; \
+        cat $(SRC_COMMON)/yslow.js \
+            $(SRC_COMMON)/version.js \
+            $(SRC_COMMON)/componentSet.js \
+            $(SRC_COMMON)/component.js \
+            $(SRC_PHANTOMJS)/component.js \
+            $(SRC_COMMON)/controller.js \
+            $(SRC_COMMON)/util.js \
+            $(SRC_COMMON)/doc.js \
+            $(SRC_COMMON)/rules.js \
+            $(SRC_COMMON)/resultset.js \
+            $(SRC_COMMON)/view.js \
+            $(SRC_COMMON)/context.js \
+            $(SRC_COMMON)/renderers.js \
+            $(SRC_COMMON)/peeler.js \
+            $(SRC_COMMON)/peeler-bm-ch-ph.js; \
+        tail -r $(SRC_PHANTOMJS)/controller.js | sed '/YSLOW HERE/q' | tail -r ) | sed '/YSLOW HERE/d' \
+        > $(BUILD_PHANTOMJS)/yslow.js
+	@sed -i -e "s/{{YSLOW_VERSION}}/$(YSLOW_VERSION)/" $(BUILD_PHANTOMJS)/yslow.js
+	@echo "done"
+
 clean-yui:
 	@echo "cleaning YUI..."
 	@if [ -f $(BUILD_YUI)/yui.js ]; then rm $(BUILD_YUI)/yui.js; fi
@@ -474,7 +503,11 @@ clean-rhino:
 	@if [ -d $(BUILD_RHINO) ]; then rmdir $(BUILD_RHINO); fi
 	@echo "done"
 
-pkg: pkg-bookmarklet pkg-chrome pkg-firefox pkg-nodejs pkg-opera pkg-safari pkg-wsh pkg-rhino
+clean-phantomjs:
+	@echo "cleaning PHANTOMJS..."
+	@if [ -f $(BUILD_PHANTOMJS)/yslow.js ]; then rm $(BUILD_PHANTOMJS)/yslow.js; fi
+	@if [ -d $(BUILD_PHANTOMJS) ]; then rmdir $(BUILD_PHANTOMJS); fi
+	@echo "done"
 
 pkg-bookmarklet: BM_CONFIG := config-ycs.js
 pkg-bookmarklet: yui bookmarklet-files
@@ -499,14 +532,15 @@ pkg-bookmarklet: yui bookmarklet-files
 	@rm $(BUILD_BOOKMARKLET)/$(BOOKMARKLET_YSLOW_CSS)
 	@echo "    done"
 	@echo "    merging minified YUI and BOOKMARKLET..."
-	@# add line break between yui and yslow license
-	@for i in 1; do \
-            cat $(YUI_LICENSE); \
-            cat $(BUILD_YUI)/yui$(YUI_MODE)-min.js; \
-            echo; \
-            cat $(YSLOW_LICENSE); \
-            cat $(PKG_BOOKMARKLET)/$(YSLOW_VERSION)/$(BOOKMARKLET_YSLOW_JS); \
-            done > $(PKG_BOOKMARKLET)/$(YSLOW_VERSION)/$(BOOKMARKLET_JS)
+	@cat $(YUI_LICENSE) \
+            > $(PKG_BOOKMARKLET)/$(YSLOW_VERSION)/$(BOOKMARKLET_JS)
+	@cat $(BUILD_YUI)/yui$(YUI_MODE)-min.js \
+            >> $(PKG_BOOKMARKLET)/$(YSLOW_VERSION)/$(BOOKMARKLET_JS)
+	@echo "" >> $(PKG_BOOKMARKLET)/$(YSLOW_VERSION)/$(BOOKMARKLET_JS)
+	@cat $(YSLOW_LICENSE) \
+            >> $(PKG_BOOKMARKLET)/$(YSLOW_VERSION)/$(BOOKMARKLET_JS)
+	@cat $(PKG_BOOKMARKLET)/$(YSLOW_VERSION)/$(BOOKMARKLET_YSLOW_JS) \
+            >> $(PKG_BOOKMARKLET)/$(YSLOW_VERSION)/$(BOOKMARKLET_JS)
 	@rm $(PKG_BOOKMARKLET)/$(YSLOW_VERSION)/$(BOOKMARKLET_YSLOW_JS) \
             $(BUILD_YUI)/yui$(YUI_MODE)-min.js
 	@cat $(YSLOW_LICENSE) \
@@ -640,4 +674,15 @@ pkg-rhino: rhino
             $(BUILD_RHINO)/lib/env.rhino.1.2.js \
             $(BUILD_RHINO)/lib/blank.html \
             $(PKG_RHINO)/yslow-$(YSLOW_VERSION)lib/
+	@echo "done"
+
+pkg-phantomjs: phantomjs
+	@echo "packaging PHANTOMJS..."
+	@if [ -d $(PKG_PHANTOMJS)/$(YSLOW_VERSION) ]; then \
+            echo "$(PKG_PHANTOMJS)/$(YSLOW_VERSION) already exists"; \
+            exit 1; \
+        fi
+	@mkdir -p $(PKG_PHANTOMJS)/$(YSLOW_VERSION)
+	@cat $(YSLOW_LICENSE) > $(PKG_PHANTOMJS)/$(YSLOW_VERSION)/yslow.js
+	@$(YUICOMPRESSOR) $(BUILD_PHANTOMJS)/yslow.js >> $(PKG_PHANTOMJS)/$(YSLOW_VERSION)/yslow.js
 	@echo "done"

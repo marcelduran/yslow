@@ -15,12 +15,13 @@ Specific flavor:
 
 Available flavors:
 
-* **firefox**: Mozilla Firefox add-on
-* **chrome**: Google Chrome extension
-* **bookmarklet**: Mobile/Any-browser bookmarklet
-* **opera**: Opera extension
-* **safari**: Apple Safari extension
-* **nodejs**: Command Line powered by Node.JS and NPM
+* **firefox**: Mozilla [Firefox add-on](https://addons.mozilla.org/en-US/firefox/)
+* **chrome**: Google [Chrome extension](https://chrome.google.com/webstore/category/extensions)
+* **bookmarklet**: Mobile/Desktop browser [bookmarklet](http://en.wikipedia.org/wiki/Bookmarklet)
+* **opera**: [Opera extension](http://extensions.opera.com/)
+* **safari**: Apple [Safari extension](http://extensions.apple.com/)
+* **nodejs**: Command line for [HAR](http://www.softwareishard.com/blog/har-12-spec/) files powered by [Node.JS](http://nodejs.org/) and [NPM](http://npmjs.org/)
+* **phantomjs**: Command line with headless [WebKit](http://www.webkit.org/) powered by [PhantomJS](http://www.phantomjs.org/)
 
 e.g.:
 
