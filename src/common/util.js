@@ -4,7 +4,7 @@
  */
 
 /*global YSLOW, Firebug, Components, ActiveXObject, gBrowser, window, getBrowser*/
-/*jslint white: true, onevar: true, undef: true, newcap: true, nomen: true, regexp: true, plusplus: true, browser: true, devel: true, maxerr: 50, indent: 4 */
+/*jslint sloppy: true, bitwise: true, browser: true, regexp: true*/
 
 /**
  * @namespace YSLOW
@@ -72,7 +72,7 @@ YSLOW.util = {
             } catch (e2) {
                 // alert shouldn't be used due to its annoying modal behavior
             }
-        } 
+        }
     },
 
     /**
@@ -1141,6 +1141,19 @@ YSLOW.util = {
     },
 
     /**
+     * Decode html entities. e.g.: &lt; becomes <
+     * @param {String} str the html string to decode entities from.
+     * @return {String} the input html with entities decoded.
+     */
+    decodeEntities: function (str) {
+        return String(str)
+            .replace(/&amp;/g, '&')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&quot;/g, '"');
+    },
+
+    /**
      * convert Object to XML
      * @param {Object} obj the Object to be converted to XML
      * @param {String} root the XML root (default = results)
@@ -1151,10 +1164,10 @@ YSLOW.util = {
             util = YSLOW.util,
             reInvalid = /[<&>]/,
             xml = '<?xml version="1.0" encoding="UTF-8"?>';
-            
+
         toXML = function (o) {
             var item, value, i, len, val, type,
-                
+
                 safeXML = function (value, decode) {
                     if (decode) {
                         value = util.decodeURIComponent(value);
@@ -1179,18 +1192,18 @@ YSLOW.util = {
                             } else {
                                 toXML(val);
                             }
-                            xml += '</item>';    
+                            xml += '</item>';
                         }
                     } else if (util.isObject(value)) {
                         toXML(value);
                     } else {
                         xml += safeXML(value, item === 'u' || item === 'url');
                     }
-                    xml += '</' + item + '>';    
+                    xml += '</' + item + '>';
                 }
             }
         };
-        
+
         root = root || 'results';
         xml += '<' + root + '>';
         toXML(obj);
@@ -1202,7 +1215,7 @@ YSLOW.util = {
     /**
      * Pretty print results
      * @param {Object} obj the Object with YSlow results
-     * @return {String} the results in plain text (pretty preinted)
+     * @return {String} the results in plain text (pretty printed)
      */
     prettyPrintResults: function (obj) {
         var pp,
@@ -1231,15 +1244,18 @@ YSLOW.util = {
             },
 
             indent = function (n) {
-                var res = mem[n];
+                var arr,
+                    res = mem[n];
 
                 if (typeof res === 'undefined') {
-                    mem[n] = res = new Array((4 * n) + 1).join(' ');
+                    arr = [];
+                    arr.length = (4 * n) + 1;
+                    mem[n] = res = arr.join(' ');
                 }
 
                 return res;
             };
-            
+
         pp = function (o, level) {
             var item, value, i, len, val, type;
 
@@ -1279,10 +1295,154 @@ YSLOW.util = {
                 }
             }
         };
-        
+
         pp(obj, 0);
 
         return str;
+    },
+
+    /**
+     * Test result against a certain threshold for CI
+     * @param {Object} obj the Object with YSlow results
+     * @param {String|Number|Object} threshold The definition of OK (inclusive)
+     *        Anything >= threshold == OK. It can be a number [0-100],
+     *        a letter [A-F] as follows:
+     *        100 >= A >= 90 > B >= 80 > C >= 70 > D >= 60 > E >= 50 > F >= 0 > N/A = -1
+     *        It can also be a specific per rule. e.g:
+     *        {overall: 80, ycdn: 65, ynumreq: 'B'}
+     *        where overall is the common threshold to be
+     *        used by all rules except those listed
+     * @return {Array} the test result array containing each test result details:
+     */
+    testResults: function (obj, threshold) {
+        var overall, g, grade, grades, score, commonScore, i, len,
+            tests = [],
+            scores = {
+                a: 90,
+                b: 80,
+                c: 70,
+                d: 60,
+                e: 50,
+                f: 0,
+                'n/a': -1
+            },
+            yslow = YSLOW,
+            util = yslow.util,
+            isObj = util.isObject(threshold),
+            rules = yslow.doc.rules,
+
+            getScore = function (value) {
+                var score = parseInt(value, 10);
+
+                if (isNaN(score) && typeof value === 'string') {
+                    score = scores[value.toLowerCase()];
+                }
+
+                // edge case for F or 0
+                if (score === 0) {
+                    return 0;
+                }
+
+                return score || overall || scores.b;
+            },
+
+            getThreshold = function (name) {
+                if (commonScore) {
+                    return commonScore;
+                }
+
+                if (!isObj) {
+                    commonScore = getScore(threshold);
+                    return commonScore;
+                } else if (threshold.hasOwnProperty(name)) {
+                    return getScore(threshold[name]);
+                } else {
+                    return overall || scores.b;
+                }
+            },
+
+            test = function (score, ts, name, offenders) {
+                var desc = rules.hasOwnProperty(name) && rules[name].name;
+
+                tests.push({
+                    ok: score >= ts,
+                    score: score,
+                    grade: util.prettyScore(score),
+                    name: name,
+                    description: desc || '',
+                    offenders: offenders
+                });
+            };
+
+        // overall threshold (default b [80])
+        overall = getThreshold('overall');
+
+        // overall score
+        test(obj.o, overall, 'overall score');
+
+        // grades
+        grades = obj.g;
+        if (grades) {
+            for (grade in grades) {
+                if (grades.hasOwnProperty(grade)) {
+                    g = grades[grade];
+                    score = g.score;
+                    if (typeof score === 'undefined') {
+                        score = -1;
+                    }
+                    test(score, getThreshold(grade), grade, g.components);
+                }
+            }
+        }
+
+        return tests;
+    },
+
+    /**
+     * Format test results as TAP for CI
+     * @see: http://testanything.org/wiki/index.php/TAP_specification
+     * @param {Array} tests the arrays containing the test results from testResults.
+     * @return {String} the results as TAP plain text
+     */
+    formatAsTAP: function (results) {
+        var i, res, line, offenders, j, lenJ,
+            len = results.length,
+            tap = [],
+            util = YSLOW.util,
+            decodeURI = util.decodeURIComponent,
+            decodeEntities = util.decodeEntities;
+
+        // test plan
+        tap.push('1..' + len);
+
+        for (i = 0; i < len; i += 1) {
+            res = results[i];
+            line = res.ok || res.score < 0 ? 'ok' : 'not ok';
+            line += ' ' + (i + 1) + ' - ' + res.grade +
+                '(' + res.score + ') ' + res.name;
+            if (res.description) {
+                line += ': ' + res.description;
+            }
+            if (res.score < 0) {
+                line += ' # SKIP score N/A';
+            }
+            tap.push(line);
+
+            // offenders
+            offenders = res.offenders;
+            if (offenders) {
+                lenJ = offenders.length;
+                if (lenJ > 0) {
+                    tap.push('#\tOffenders:');
+                    for (j = 0; j < lenJ; j += 1) {
+                        tap.push('#\t' +
+                            decodeEntities(decodeURI(offenders[j])));
+                    }
+                }
+            }
+        }
+
+        return tap.join('\n');
     },
 
     /**
@@ -1561,7 +1721,7 @@ YSLOW.util = {
 
                 els = node.getElementsByTagName(tag);
                 for (i = 0, len = els.length; i < len; i += 1) {
-                    el = els[i]; 
+                    el = els[i];
                     if (!el.src) {
                         objs.push({
                             contentNode: contentNode,

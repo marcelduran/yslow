@@ -25,7 +25,9 @@ var i, arg, page, urlCount, viewport,
         beacon: false,
         ua: false,
         viewport: false,
-        console: 0
+        headers: false,
+        console: 0,
+        threshold: 80
     },
     unaryArgs = {
         help: false,
@@ -44,7 +46,9 @@ var i, arg, page, urlCount, viewport,
         vp: 'viewport',
         c: 'console',
         b: 'beacon',
-        v: 'verbose'
+        v: 'verbose',
+        t: 'threshold',
+        ch: 'headers'
     };
 
 // loop args
@@ -97,23 +101,27 @@ if (len === 0 || urlCount === 0 || unaryArgs.help) {
         '    -h, --help               output usage information',
         '    -V, --version            output the version number',
         '    -i, --info <info>        specify the information to display/log (basic|grade|stats|comps|all) [all]',
-        '    -f, --format <format>    specify the output results format (json|xml|plain) [json]',
+        '    -f, --format <format>    specify the output results format (json|xml|plain|tap) [json]',
         '    -r, --ruleset <ruleset>  specify the YSlow performance ruleset to be used (ydefault|yslow1|yblog) [ydefault]',
         '    -b, --beacon <url>       specify an URL to log the results',
         '    -d, --dict               include dictionary of results fields',
         '    -v, --verbose            output beacon response information',
+        '    -t, --threshold <score>  for test formats, the threshold to test scores ([0-100]|[A-F]|{JSON}) [80]',
+        '                             e.g.: -t B or -t 75 or -t \'{"overall": "B", "ycdn": "F", "yexpires": 85}\'',
         '    -u, --ua "<user agent>"  specify the user agent string sent to server when the page requests resources',
         '    -vp, --viewport <WxH>    specify page viewport size WxY, where W = width and H = height [400x300]',
+        '    -ch, --headers <JSON>    specify custom request headers, e.g.: -ch \'{"Cookie": "foo=bar"}\'',
         '    -c, --console <level>    output page console messages (0: none, 1: message, 2: message + line + source) [0]',
         '',
         '  Examples:',
         '',
-        '    phantomjs ' + phantom.scriptName + ' http://getyslow.com',
+        '    phantomjs ' + phantom.scriptName + ' http://yslow.org',
         '    phantomjs ' + phantom.scriptName + ' -i grade -f xml www.yahoo.com www.cnn.com www.nytimes.com',
         '    phantomjs ' + phantom.scriptName + ' -info all --format plain --ua "MSIE 9.0" www.yahoo.com',
-        '    phantomjs ' + phantom.scriptName + ' -i basic --rulseset yslow1 -d http://getyslow.com',
+        '    phantomjs ' + phantom.scriptName + ' -i basic --rulseset yslow1 -d http://yslow.org',
         '    phantomjs ' + phantom.scriptName + ' -i grade -b http://beaconserver.com/ -v www.yahoo.com',
         '    phantomjs --load-plugins=yes ' + phantom.scriptName + ' -vp 800x600 http://www.yahoo.com',
+        '    phantomjs ' + phantom.scriptName + ' -i grade -f tap -t 85 http://yslow.org',
         ''
     ].join('\n'));
     phantom.exit();
@@ -189,6 +197,15 @@ urls.forEach(function (url) {
         };
     }
 
+    // set custom headers
+    if (yslowArgs.headers) {
+        try {
+            page.customHeaders = JSON.parse(yslowArgs.headers);
+        } catch (err) {
+            console.log('Invalid custom headers: ' + err);
+        }
+    }
+
     // open page
     page.startTime = new Date();
     page.open(url, function (status) {
@@ -228,7 +245,7 @@ urls.forEach(function (url) {
             controller = function () {
                 YSLOW.phantomjs.run = function () {
                     try {
-                        var results, xhr, output,
+                        var results, xhr, output, threshold,
                             doc = document,
                             ys = YSLOW,
                             yscontext = new ys.context(doc),
@@ -253,6 +270,21 @@ urls.forEach(function (url) {
                                     return {
                                         content: ysutil.prettyPrintResults(
                                             content
+                                        ),
+                                        contentType: 'text/plain'
+                                    };
+                                case 'tap':
+                                    try {
+                                        threshold = JSON.parse(args.threshold);
+                                    } catch (err) {
+                                        threshold = args.threshold;
+                                    }
+                                    return {
+                                        content: ysutil.formatAsTAP(
+                                            ysutil.testResults(
+                                                content,
+                                                threshold
+                                            )
                                         ),
                                         contentType: 'text/plain'
                                     };
