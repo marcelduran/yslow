@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Yslow by marcelduran</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Yslow</h1>
+<p>YSlow analyzes web pages and why they're slow based on Yahoo!'s rules for high performance web sites.</p>
+        <p class="view"><a href="https://github.com/marcelduran/yslow">View the Project on GitHub <small>marcelduran/yslow</small></a></p>
+        <ul>
+          <li><a href="https://github.com/marcelduran/yslow/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/marcelduran/yslow/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/marcelduran/yslow">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>YSlow analyzes web pages and suggests ways to improve their performance based on a set of <a href="http://developer.yahoo.com/performance/rules.html">rules for high performance web pages</a>. Feature highlights:</p>
+
+<ul>
+<li>Grades web page based on one of three predefined ruleset or a user-defined ruleset;</li>
+<li>It offers suggestions for improving the page's performance;</li>
+<li>Summarizes the page's components;</li>
+<li>Displays statistics about the page;</li>
+<li>Provides tools for performance analysis, including <a href="http://developer.yahoo.com/yslow/smushit/">Smush.it™</a> and <a href="http://jslint.com/">JSLint</a>.</li>
+</ul><h2>Availability</h2>
+
+<ul>
+<li><a href="https://addons.mozilla.org/en-US/firefox/addon/5369">Firefox</a></li>
+<li><a href="https://chrome.google.com/webstore/detail/ninejjcohidippngpapiilnmkgllmakh">Chrome</a></li>
+<li><a href="">Mobile/Bookmarklet</a></li>
+<li><a href="https://addons.opera.com/addons/extensions/details/yslow/">Opera</a></li>
+<li><a href="http://d.yimg.com/jc/safari/yslow.safariextz">Safari</a></li>
+<li><a href="Command-Line-(HAR)">Command Line (HAR)</a></li>
+<li><a href="https://github.com/marcelduran/yslow">Source Code</a></li>
+</ul><p><a href="Ruleset-Limitations">» View YSlow Ruleset Limitations</a> across several browsers/platforms.</p>
+
+<h2>Web Performance Best Practices and Rules</h2>
+
+<p>Yahoo!'s Exceptional Performance team has identified 34 rules that affect web page performance. YSlow's web page analysis is based on the 23 of these 34 rules that are testable. Click each performance rule below to see the details.</p>
+
+<ol>
+<li><a href="http://developer.yahoo.com/performance/rules.html#num_http">Minimize HTTP Requests</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#cdn">Use a Content Delivery Network</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#emptysrc">Avoid empty src or href</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#expires">Add an Expires or a Cache-Control Header</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#gzip">Gzip Components</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#css_top">Put StyleSheets at the Top</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#js_bottom">Put Scripts at the Bottom</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#css_expressions">Avoid CSS Expressions</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#external">Make JavaScript and CSS External</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#dns_lookups">Reduce DNS Lookups</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#minify">Minify JavaScript and CSS</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#redirects">Avoid Redirects</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#js_dupes">Remove Duplicate Scripts</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#etags">Configure ETags</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#cacheajax">Make AJAX Cacheable</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#ajax_get">Use GET for AJAX Requests</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#min_dom">Reduce the Number of DOM Elements</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#no404">No 404s</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#cookie_size">Reduce Cookie Size</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#cookie_free">Use Cookie-Free Domains for Components</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#no_filters">Avoid Filters</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#no_scale">Do Not Scale Images in HTML</a></li>
+<li><a href="http://developer.yahoo.com/performance/rules.html#favicon">Make favicon.ico Small and Cacheable</a></li>
+</ol><p><a href="Ruleset-Matrix">» Check out the YSlow Ruleset Matrix</a> to see how the grade is computed.</p>
+
+<h2>Sample Screenshot</h2>
+
+<p><img src="http://d.yimg.com/jc/ydn/yslow-ss.png" alt="YSlow Grade details screenshot"></p>
+
+<h2>Frequently Asked Questions</h2>
+
+<ol>
+<li><a href="FAQ#wiki-faq_platforms">What platforms does YSlow run on?</a></li>
+<li><a href="FAQ#wiki-faq_work">How does YSlow work?</a></li>
+<li><a href="FAQ#wiki-faq_grading">How are the grades computed?</a></li>
+<li><a href="FAQ#wiki-faq_cdn">How do I add my CDN hostname to YSlow for Rule 2?</a></li>
+<li><a href="FAQ#wiki-faq_beaconformat">What YSlow results are included in the YSlow beacon?</a></li>
+</ol><p><a href="FAQ">See more...</a></p>
+
+
+
+<h2>Contact Us</h2>
+
+<p>YSlow development is discussed in the <a href="http://tech.groups.yahoo.com/group/exceptional-performance/">Exceptional Performance group</a>.</p>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/marcelduran">marcelduran</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+    
+  </body>
+</html>
