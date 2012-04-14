@@ -1,2 +1,5 @@
+_site/
 build/
 pkg/
+*.swp
+.DS_Store
