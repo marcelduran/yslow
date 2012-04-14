@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        {% for meta in page.metadata %}
+        <meta name="{{ meta.name }}" content="{{ meta.content }}">
+        {% endfor %}
+        <title>{{ page.title }}</title>
+        {% if page.bookmarklet %}
+        <style>{% include bookmarklet-min.css %}</style>
+        {% endif %}
+        <link rel="stylesheet" href="/stylesheets/styles-min.css">
+    </head>
+    <body>
+        <a id="fork" href="https://github.com/marcelduran/yslow">Fork me on GitHub</a>
+        <div class="wrapper">
+            <div id="content">
+                <header>    
+                    <h1>{{ page.title }}</h1>
+                    <p>{{ page.tagline }}</p>
+                    <p class="view"><a href="https://github.com/marcelduran/yslow">View the Project on GitHub <small>marcelduran/yslow</small></a></p>
+                    {% if page.install %}
+                    <ul>
+                      <li><a id="install" href="#"><strong>Install YSlow</strong><span id="browser"></span></a></li>
+                    </ul>
+                    {% endif %}
+                </header>
+                <section>
+                    {{ content }}
+                </section>
+            </div>
+            <div id="sidebar">
+                <iframe id="fb" src='http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fgetyslow&amp;width=299&amp;colorscheme=light&amp;show_faces=false&amp;stream=true&amp;header=false&amp;height=395&amp;border_color=%23d9d9d9' scrolling="no" frameborder="0"></iframe>
+                {% include twitter.html %}
+            </div>
+        </div>
+        <footer>
+            <p>Project maintained by <a href="https://github.com/marcelduran">marcelduran</a></p>
+            <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+        </footer>
+        <script>
+            {% if page.install %}{% include install-min.js %}{% endif %}
+            {% if page.bookmarklet %}{% include bookmarklet-min.js %}{% endif %}
+            {% include ga-min.js %}
+        </script>
+    </body>
+</html>
