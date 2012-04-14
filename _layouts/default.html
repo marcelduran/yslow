@@ -4,13 +4,30 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         {% for meta in page.metadata %}
+        {% if meta.name %}
         <meta name="{{ meta.name }}" content="{{ meta.content }}">
+        {% endif %}
+        {% if meta.property %}
+        <meta property="{{ meta.property }}" content="{{ meta.content }}">
+        {% endif %}
         {% endfor %}
         <title>{{ page.title }}</title>
+        {% if page.bookmarklet or page.scoremeter %}
+        <style>
+        {% endif %}
         {% if page.bookmarklet %}
-        <style>{% include bookmarklet-min.css %}</style>
+        {% include bookmarklet-min.css %}
+        {% endif %}
+        {% if page.scoremeter %}
+        {% include scoremeter-min.css %}
+        {% endif %}
+        {% if page.bookmarklet or page.scoremeter %}
+        </style>
         {% endif %}
         <link rel="stylesheet" href="/stylesheets/styles-min.css">
+        {% if page.scoremeter %}
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.3.0/build/widget/assets/skins/sam/widget.css&3.3.0/build/slider/assets/skins/sam/slider.css">
+        {% endif %}
     </head>
     <body>
         <a id="fork" href="https://github.com/marcelduran/yslow">Fork me on GitHub</a>
@@ -39,6 +56,10 @@
             <p>Project maintained by <a href="https://github.com/marcelduran">marcelduran</a></p>
             <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
         </footer>
+        {% if page.scoremeter %}
+        <script src="http://yui.yahooapis.com/combo?3.3.0/build/yui/yui-min.js&3.3.0/build/loader/loader-min.js&3.3.0/build/oop/oop-min.js&3.3.0/build/pluginhost/pluginhost-min.js&3.3.0/build/event-custom/event-custom-min.js&3.3.0/build/dom/dom-min.js&3.3.0/build/event/event-min.js&3.3.0/build/node/node-min.js&3.3.0/build/attribute/attribute-min.js&3.3.0/build/classnamemanager/classnamemanager-min.js&3.3.0/build/base/base-min.js&3.3.0/build/widget/widget-min.js&3.3.0/build/dd/dd-ddm-base-min.js&3.3.0/build/dd/dd-drag-min.js&3.3.0/build/dd/dd-constrain-min.js&3.3.0/build/substitute/substitute-min.js&3.3.0/build/slider/slider-min.js"></script>
+        <script src="http://d.yimg.com/jc/ydn/scoremeter-min.js"></script>
+        {% endif %}
         <script>
             {% if page.install %}{% include install-min.js %}{% endif %}
             {% if page.bookmarklet %}{% include bookmarklet-min.js %}{% endif %}
