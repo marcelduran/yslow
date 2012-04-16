@@ -1,4 +1,5 @@
 .svn/
+_site/
 build/
 pkg/
 *.swp
