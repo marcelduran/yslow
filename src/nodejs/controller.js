@@ -20,7 +20,7 @@ var files, dict,
      * @param {Error|String} err The error object or string to be displayed.
      */
     showError = function (err) {
-        console.error(err);
+        prettyPrint(err);
         process.exit(1);
     },
 
