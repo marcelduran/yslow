@@ -169,6 +169,12 @@
                 }
             }
 
+            // if no doc was provided return error
+            if (!doc) {
+                throw new Error('No document found');
+                return;
+            }
+
             // set favicon
             favicons = YSLOW.peeler.findFavicon(doc, baseHref);
             comps = cset.components;
