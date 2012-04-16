@@ -196,7 +196,7 @@ program
             '',
             '  More Info:',
             '',
-            '     http://developer.yahoo.com/yslow/help/beacons.html#version2'
+            '     http://wh.yslow.org/HN4eVY'
         ].join('\n'));
     });
 program.parse(process.argv);
