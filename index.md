@@ -24,6 +24,7 @@ metadata:
 * [Opera](https://addons.opera.com/addons/extensions/details/yslow/){: .opera}
 * [Safari](http://d.yimg.com/jc/safari/yslow.safariextz){: .safari}
 * [Command Line (HAR)](https://github.com/marcelduran/yslow/wiki/Command-Line-%28HAR%29){: .command}
+* [PhantomJS](https://github.com/marcelduran/yslow/wiki/PhantomJS){: .phantomjs}
 * [Source Code](https://github.com/marcelduran/yslow){: .source}
 {: .avail}
 

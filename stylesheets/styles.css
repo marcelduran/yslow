@@ -355,7 +355,7 @@ footer p + p {
     width: 45%;
 }
 .avail a {
-    background: url(http://d.yimg.com/jc/ydn/yslow-versions-new.png) no-repeat;
+    background: url(http://d.yimg.com/jc/ydn/yslow-versions-120316.png) no-repeat;
     display: block;
     height: 24px;
     margin-bottom: 0.7em;
@@ -365,8 +365,9 @@ footer p + p {
 .avail .mobile {background-position: 0 -64px;}
 .avail .command {background-position: 0 -96px;}
 .avail .opera {background-position: 0 -128px;}
-.avail .safari{background-position: 0 -160px;}
-.avail .source{background-position: 0 -192px;}
+.avail .safari {background-position: 0 -160px;}
+.avail .source {background-position: 0 -192px;}
+.avail .phantomjs {background-position: 0 -224px;}
 
 @media print, screen and (max-width: 950px) {
   body {
