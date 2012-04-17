@@ -1,3 +1,10 @@
+Version 3.1.1
+-------------
+* Added PhantomJS integration
+* Added YSlow testing framework with TAP output format
+* Command-line HAR: error output same as --format
+* Command-line HAR: error thrown when doc is not found
+
 Version 3.1.0
 -------------
 * Fixed har importer edge cases
