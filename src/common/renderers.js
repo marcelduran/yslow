@@ -732,7 +732,7 @@ YSLOW.registerRenderer({
         }
 
         // social
-        link = 'http://developer.yahoo.com/yslow/scoremeter/?url=' +
+        link = 'http://yslow.org/scoremeter/?url=' +
             encodeURIComponent(url) + '&grade=' + grade;
         for (i = 0; i < total; i += 1) {
             result = results[i];

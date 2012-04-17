@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Author</key>
-	<string>Yahoo! Inc.</string>
+	<string>YSlow</string>
 	<key>CFBundleDisplayName</key>
 	<string>YSlow</string>
 	<key>CFBundleIdentifier</key>
@@ -65,6 +65,6 @@
         <key>Update Manifest URL</key>
         <string>http://d.yimg.com/jc/safari/update.plist</string>
 	<key>Website</key>
-	<string>http://getyslow.com/</string>
+	<string>http://yslow.org/</string>
 </dict>
 </plist>
