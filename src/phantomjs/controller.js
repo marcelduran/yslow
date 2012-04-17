@@ -117,9 +117,9 @@ if (len === 0 || urlCount === 0 || unaryArgs.help) {
         '',
         '    phantomjs ' + phantom.scriptName + ' http://yslow.org',
         '    phantomjs ' + phantom.scriptName + ' -i grade -f xml www.yahoo.com www.cnn.com www.nytimes.com',
-        '    phantomjs ' + phantom.scriptName + ' -info all --format plain --ua "MSIE 9.0" www.yahoo.com',
+        '    phantomjs ' + phantom.scriptName + ' -info all --format plain --ua "MSIE 9.0" http://yslow.org',
         '    phantomjs ' + phantom.scriptName + ' -i basic --rulseset yslow1 -d http://yslow.org',
-        '    phantomjs ' + phantom.scriptName + ' -i grade -b http://beaconserver.com/ -v www.yahoo.com',
+        '    phantomjs ' + phantom.scriptName + ' -i grade -b www.showslow.com/beacon/yslow/ -v yslow.org',
         '    phantomjs --load-plugins=yes ' + phantom.scriptName + ' -vp 800x600 http://www.yahoo.com',
         '    phantomjs ' + phantom.scriptName + ' -i grade -f tap -t 85 http://yslow.org',
         ''
