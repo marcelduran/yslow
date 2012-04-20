@@ -1412,14 +1412,17 @@ YSLOW.util = {
             decodeURI = util.decodeURIComponent,
             decodeEntities = util.decodeEntities;
 
+        // tap version
+        tap.push('TAP version 13');
+
         // test plan
         tap.push('1..' + len);
 
         for (i = 0; i < len; i += 1) {
             res = results[i];
             line = res.ok || res.score < 0 ? 'ok' : 'not ok';
-            line += ' ' + (i + 1) + ' - ' + res.grade +
-                '(' + res.score + ') ' + res.name;
+            line += ' ' + (i + 1) + ' ' + res.grade +
+                ' (' + res.score + ') ' + res.name;
             if (res.description) {
                 line += ': ' + res.description;
             }
@@ -1433,11 +1436,13 @@ YSLOW.util = {
             if (offenders) {
                 lenJ = offenders.length;
                 if (lenJ > 0) {
-                    tap.push('#\tOffenders:');
+                    tap.push('  ---');
+                    tap.push('  offenders:');
                     for (j = 0; j < lenJ; j += 1) {
-                        tap.push('#\t' +
-                            decodeEntities(decodeURI(offenders[j])));
+                        tap.push('    - "' +
+                            decodeURI(offenders[j]) + '"');
                     }
+                    tap.push('  ...');
                 }
             }
         }
