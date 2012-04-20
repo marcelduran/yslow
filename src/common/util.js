@@ -861,6 +861,12 @@ YSLOW.util = {
                         obj.score = 'n/a';
                     }
                 }
+                // removing hardcoded open link,
+                // TODO: remove those links from original messages
+                obj.message = result.message.replace(
+                    /javascript:document\.ysview\.openLink\('(.+)'\)/,
+                    '$1'
+                );
                 comps = result.components;
                 if (isArray(comps)) {
                     obj.components = [];
@@ -1153,6 +1159,21 @@ YSLOW.util = {
             .replace(/&quot;/g, '"');
     },
 
+    safeXML: (function () {
+        var decodeComp = this.decodeURIComponent,
+            reInvalid = /[<&>]/;
+
+        return function (value, decode) {
+            if (decode) {
+                value = decodeComp(value);
+            }
+            if (reInvalid.test(value)) {
+                return '<![CDATA[' + value + ']]>';
+            }
+            return value;
+        };
+    }()),
+
     /**
      * convert Object to XML
      * @param {Object} obj the Object to be converted to XML
@@ -1162,21 +1183,11 @@ YSLOW.util = {
     objToXML: function (obj, root) {
         var toXML,
             util = YSLOW.util,
-            reInvalid = /[<&>]/,
+            safeXML = util.safeXML,
             xml = '<?xml version="1.0" encoding="UTF-8"?>';
 
         toXML = function (o) {
-            var item, value, i, len, val, type,
-
-                safeXML = function (value, decode) {
-                    if (decode) {
-                        value = util.decodeURIComponent(value);
-                    }
-                    if (reInvalid.test(value)) {
-                        return '<![CDATA[' + value + ']]>';
-                    }
-                    return value;
-                };
+            var item, value, i, len, val, type;
 
             for (item in o) {
                 if (o.hasOwnProperty(item)) {
@@ -1361,7 +1372,7 @@ YSLOW.util = {
                 }
             },
 
-            test = function (score, ts, name, offenders) {
+            test = function (score, ts, name, message, offenders) {
                 var desc = rules.hasOwnProperty(name) && rules[name].name;
 
                 tests.push({
@@ -1370,6 +1381,7 @@ YSLOW.util = {
                     grade: util.prettyScore(score),
                     name: name,
                     description: desc || '',
+                    message: message,
                     offenders: offenders
                 });
             };
@@ -1390,7 +1402,8 @@ YSLOW.util = {
                     if (typeof score === 'undefined') {
                         score = -1;
                     }
-                    test(score, getThreshold(grade), grade, g.components);
+                    test(score, getThreshold(grade), grade,
+                        g.message, g.components);
                 }
             }
         }
@@ -1409,8 +1422,7 @@ YSLOW.util = {
             len = results.length,
             tap = [],
             util = YSLOW.util,
-            decodeURI = util.decodeURIComponent,
-            decodeEntities = util.decodeEntities;
+            decodeURI = util.decodeURIComponent;
 
         // tap version
         tap.push('TAP version 13');
@@ -1431,23 +1443,128 @@ YSLOW.util = {
             }
             tap.push(line);
 
+            // message
+            if (res.message) {
+                tap.push('  ---');
+                tap.push('  message: ' + res.message);
+            }
+
             // offenders
             offenders = res.offenders;
             if (offenders) {
                 lenJ = offenders.length;
                 if (lenJ > 0) {
-                    tap.push('  ---');
+                    if (!res.message) {
+                        tap.push('  ---');
+                    }
                     tap.push('  offenders:');
                     for (j = 0; j < lenJ; j += 1) {
                         tap.push('    - "' +
                             decodeURI(offenders[j]) + '"');
                     }
-                    tap.push('  ...');
                 }
+            }
+
+            if (res.message || lenJ > 0) {
+                tap.push('  ...');
             }
         }
 
         return tap.join('\n');
+    },
+
+    /**
+     * Format test results as JUnit XML for CI
+     * @see: http://www.junit.org/
+     * @param {Array} tests the arrays containing the test results from testResults.
+     * @return {String} the results as JUnit XML text
+     */
+    formatAsJUnit: function (results) {
+        var i, res, line, offenders, j, lenJ,
+            len = results.length,
+            skipped = 0,
+            failures = 0,
+            junit = [],
+            cases = [],
+            util = YSLOW.util,
+            decodeURI = util.decodeURIComponent,
+            safeXML = util.safeXML,
+
+            safeAttr = function (str) {
+                return str
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;');
+            };
+
+        for (i = 0; i < len; i += 1) {
+            res = results[i];
+            line = '    <testcase name="' + safeAttr(res.name +
+                (res.description ? ': ' + res.description : '')) + '"';
+            line += ' status="' + res.grade +
+                ' (' + res.score + ')';
+            if (res.ok) {
+                cases.push(line + '"/>');
+            } else {
+                failures += 1;
+                cases.push(line + '">');
+
+                // skipped
+                if (res.score < 0) {
+                    skipped += 1;
+                    cases.push('      <skipped>score N/A</skipped>');
+                }
+
+                line = '      <failure';
+                if (res.message) {
+                    line += ' message="' + safeAttr(res.message) + '"';
+                }
+
+                // offenders
+                offenders = res.offenders;
+                if (offenders) {
+                    cases.push(line + '>');
+                    lenJ = offenders.length;
+                    for (j = 0; j < lenJ; j += 1) {
+                        cases.push('        ' + safeXML(decodeURI(offenders[j])));
+                    }
+                    cases.push('      </failure>');
+                } else {
+                    cases.push(line + '/>');
+                }
+
+                cases.push('    </testcase>');
+            }
+        }
+
+        // xml
+        junit.push('<?xml version="1.0" encoding="UTF-8" ?>');
+
+        // open test suites wrapper
+        junit.push('<testsuites>');
+
+        // open test suite w/ summary
+        line = '  <testsuite name="YSlow" tests="' + len + '"';
+        if (failures) {
+            line += ' failures="' + failures + '"';
+        }
+        if (skipped) {
+            line += ' skipped="' + skipped + '"';
+        }
+        line += '>';
+        junit.push(line);
+
+        // concat test cases
+        junit = junit.concat(cases);
+
+        // close test suite
+        junit.push('  </testsuite>');
+
+        // close test suites wrapper
+        junit.push('</testsuites>');
+
+        return junit.join('\n');
     },
 
     /**

@@ -101,7 +101,7 @@ if (len === 0 || urlCount === 0 || unaryArgs.help) {
         '    -h, --help               output usage information',
         '    -V, --version            output the version number',
         '    -i, --info <info>        specify the information to display/log (basic|grade|stats|comps|all) [all]',
-        '    -f, --format <format>    specify the output results format (json|xml|plain|tap) [json]',
+        '    -f, --format <format>    specify the output results format (json|xml|plain|tap|junit) [json]',
         '    -r, --ruleset <ruleset>  specify the YSlow performance ruleset to be used (ydefault|yslow1|yblog) [ydefault]',
         '    -b, --beacon <url>       specify an URL to log the results',
         '    -d, --dict               include dictionary of results fields',
@@ -260,7 +260,19 @@ urls.forEach(function (url) {
 
                             // format out with appropriate content type
                             formatOutput = function (content) {
-                                switch (args.format) {
+                                var format = (args.format || '').toLowerCase(),
+                                    harness = {
+                                        'tap': {
+                                            func: ysutil.formatAsTAP,
+                                            contentType: 'text/plain'
+                                        },
+                                        'junit': {
+                                            func: ysutil.formatAsJUnit,
+                                            contentType: 'text/xml'
+                                        }
+                                    };
+
+                                switch (format) {
                                 case 'xml':
                                     return {
                                         content: ysutil.objToXML(content),
@@ -273,20 +285,22 @@ urls.forEach(function (url) {
                                         ),
                                         contentType: 'text/plain'
                                     };
+                                // test formats
                                 case 'tap':
+                                case 'junit':
                                     try {
                                         threshold = JSON.parse(args.threshold);
                                     } catch (err) {
                                         threshold = args.threshold;
                                     }
                                     return {
-                                        content: ysutil.formatAsTAP(
+                                        content: harness[format].func(
                                             ysutil.testResults(
                                                 content,
                                                 threshold
                                             )
                                         ),
-                                        contentType: 'text/plain'
+                                        contentType: harness[format].contentType
                                     };
                                 default:
                                     return {
