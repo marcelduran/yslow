@@ -498,7 +498,7 @@ YSLOW.registerRule({
 
         return {
             score: score,
-            message: total > 0 ? 'There are a total of ' +
+            message: total > 0 ? 'There is a total of ' +
                 YSLOW.util.plural('%num% expression%s%', total) : '',
             components: offenders
         };
@@ -521,7 +521,7 @@ YSLOW.registerRule({
 
         if (styles.length) {
             message = YSLOW.util.plural(
-                'There are a total of %num% inline css',
+                'There is a total of %num% inline css',
                 styles.length
             );
             offenders.push(message);
@@ -529,7 +529,7 @@ YSLOW.registerRule({
 
         if (scripts.length) {
             message = YSLOW.util.plural(
-                'There are a total of %num% inline script%s%',
+                'There is a total of %num% inline script%s%',
                 scripts.length
             );
             offenders.push(message);
@@ -1099,7 +1099,7 @@ YSLOW.registerRule({
         return {
             score: score,
             message: (filter_total + hack_filter_total) > 0 ?
-                'There are a total of ' + YSLOW.util.plural(
+                'There is a total of ' + YSLOW.util.plural(
                     '%num% filter%s%',
                     filter_total + hack_filter_total
                 ) : '',
