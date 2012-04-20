@@ -245,8 +245,8 @@ YSLOW.registerRule({
         } else {
             message += '<p>You can specify CDN hostnames in your ' +
                 'preferences. See <a href="javascript:document.ysview.' +
-                'openLink(\'http://developer.yahoo.com/yslow/faq.html#' +
-                'faq_cdn\')">YSlow FAQ</a> for details.</p>';
+                'openLink(\'https://github.com/marcelduran/yslow/wiki/FAQ#' +
+                'wiki-faq_cdn\')">YSlow FAQ</a> for details.</p>';
         }
 
         // list unique domains only to avoid long list of offenders
