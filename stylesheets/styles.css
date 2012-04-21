@@ -370,6 +370,11 @@ footer p + p {
 .avail .phantomjs {background-position: 0 -224px;}
 .avail .nodejs {background-position: 0 -256px;}
 
+#translator {
+    float: none;
+    text-align: center;
+}
+
 @media print, screen and (max-width: 950px) {
   body {
     padding: 0;
@@ -406,6 +411,9 @@ footer p + p {
   }
   footer p + p {
     float: none;
+  }
+  #translator {
+    text-align: left;
   }
 
     #sidebar,
