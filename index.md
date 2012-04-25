@@ -74,5 +74,5 @@ Yahoo!'s Exceptional Performance team has identified 34 rules that affect web pa
 [See more...](https://github.com/marcelduran/yslow/wiki/FAQ)
 
 ## Contact Us
-YSlow development is discussed in the [GitHub Issue Tracker](../issues).  
+YSlow development is discussed in the [GitHub Issue Tracker](https://github.com/marcelduran/yslow/issues).  
 General performance questions are discussed in the [Exceptional Performance group](http://tech.groups.yahoo.com/group/exceptional-performance/).
