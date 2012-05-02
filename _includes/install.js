@@ -16,7 +16,7 @@
         set('Chrome', 'https://chrome.google.com/webstore/detail/ninejjcohidippngpapiilnmkgllmakh');
     } else if (test('Opera/') && !test(' Mini/')) {
         set('Opera', 'https://addons.opera.com/addons/extensions/details/yslow/');
-    } else if (test(' Safari/') && !test(' Mobile') && !test(' CrMo/')) {
+    } else if (test(' Safari/') && !test(' Mobile') && !test(' CrMo/') && !test(' Silk/') && !test(' Kindle')) {
         set('Safari', 'http://d.yimg.com/jc/safari/yslow.safariextz', 1);
     } else {
         set('Mobile/Bookmarklet', '/mobile', 1);
