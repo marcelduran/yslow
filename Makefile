@@ -351,7 +351,7 @@ phantomjs:
             $(SRC_COMMON)/renderers.js \
             $(SRC_COMMON)/peeler.js \
             $(SRC_COMMON)/peeler-bm-ch-ph.js; \
-        tail -r $(SRC_PHANTOMJS)/controller.js | sed '/YSLOW HERE/q' | tail -r ) | sed '/YSLOW HERE/d' \
+        tac $(SRC_PHANTOMJS)/controller.js | sed '/YSLOW HERE/q' | tac ) | sed '/YSLOW HERE/d' \
         > $(BUILD_PHANTOMJS)/yslow.js
 	@sed -i -e "s/{{YSLOW_VERSION}}/$(YSLOW_VERSION)/" $(BUILD_PHANTOMJS)/yslow.js
 	@echo "done"
