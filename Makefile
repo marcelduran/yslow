@@ -105,6 +105,7 @@ bookmarklet-files:
             $(SRC_COMMON)/util.js \
             $(SRC_COMMON)/doc.js \
             $(SRC_COMMON)/rules.js \
+            $(SRC_COMMON)/rulesets/*.js \
             $(SRC_COMMON)/resultset.js \
             $(SRC_COMMON)/view.js \
             $(SRC_COMMON)/context.js \
@@ -158,6 +159,7 @@ chrome:
             $(SRC_COMMON)/util.js \
             $(SRC_COMMON)/doc.js \
             $(SRC_COMMON)/rules.js \
+            $(SRC_COMMON)/rulesets/*.js \
             $(SRC_COMMON)/resultset.js \
             $(SRC_COMMON)/view.js \
             $(SRC_COMMON)/context.js \
@@ -220,12 +222,14 @@ firefox:
             $(SRC_COMMON)/controller.js \
             $(SRC_COMMON)/util.js \
             $(SRC_COMMON)/doc.js \
-            $(SRC_COMMON)/rules.js \
             $(SRC_COMMON)/resultset.js \
             $(SRC_COMMON)/context.js \
             $(SRC_COMMON)/renderers.js \
             $(SRC_COMMON)/yslow.css \
             $(BUILD_FIREFOX)/chrome/content/yslow/
+	@cat $(SRC_COMMON)/rules.js \
+            $(SRC_COMMON)/rulesets/*.js \
+            > $(BUILD_FIREFOX)/chrome/content/yslow/rules.js
 	@cat $(SRC_COMMON)/component.js \
             $(SRC_FIREFOX)/chrome/content/yslow/component.js \
             > $(BUILD_FIREFOX)/chrome/content/yslow/component.js
@@ -259,6 +263,7 @@ har:
             $(SRC_COMMON)/util.js \
             $(SRC_COMMON)/doc.js \
             $(SRC_COMMON)/rules.js \
+            $(SRC_COMMON)/rulesets/*.js \
             $(SRC_COMMON)/resultset.js \
             $(SRC_COMMON)/peeler.js \
             $(SRC_HAR)/har-importer.js \
@@ -345,6 +350,7 @@ phantomjs:
             $(SRC_COMMON)/util.js \
             $(SRC_COMMON)/doc.js \
             $(SRC_COMMON)/rules.js \
+            $(SRC_COMMON)/rulesets/*.js \
             $(SRC_COMMON)/resultset.js \
             $(SRC_COMMON)/view.js \
             $(SRC_COMMON)/context.js \

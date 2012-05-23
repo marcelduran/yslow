@@ -14,7 +14,30 @@ function onRequest(request, sender, callback) {
         callback(YSLOW.peeler.getBaseHref(document));
         break;
     case 'afterOnload':
-        YSLOW.ComponentSet.prototype.setAfterOnload(callback, {
+        function buildComponentSet(comps) {
+            var i, comp, len, score,
+                baseHref = request.baseHref,
+                doc = document,
+                yscontext = new YSLOW.context(doc),
+                cset = new YSLOW.ComponentSet(doc);
+
+            for (i = 0, len = comps.length; i < len; i += 1) {
+                comp = comps[i];
+                cset.addComponent(comp.href, comp.type,
+                    comp.base ? comp.base : baseHref, {
+                        obj: comp.obj,
+                        component: comp,
+                        comp: comp
+                    });
+            }
+            yscontext.component_set = cset;
+            YSLOW.controller.lint(doc, yscontext, /*ruleset ||*/ 'ydefault');
+            yscontext.result_set.url = baseHref;
+            score = yscontext.PAGE.overallScore;
+            yscontext.collectStats();
+            console.log(yscontext);
+        }
+        YSLOW.ComponentSet.prototype.setAfterOnload(buildComponentSet, {
             docBody: request.docBody,
             doc: document,
             components: request.components
