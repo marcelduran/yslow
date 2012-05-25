@@ -1,4 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
 html {
   background: #6C7989;
   background: #6c7989 -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6c7989), color-stop(100%, #434b55)) fixed;
@@ -74,7 +73,7 @@ header.without-description h1 {
 header p {
   margin: 0;
   color: #61778B;
-  width: 320px;
+  width: 60%;
   font-size: 13px;
 }
 header p.view {
@@ -111,7 +110,7 @@ header ul {
   -webkit-box-shadow: inset rgba(255, 255, 255, 0.45) 0 1px 0, inset rgba(0, 0, 0, 0.2) 0 -1px 0;
   -o-box-shadow: inset rgba(255, 255, 255, 0.45) 0 1px 0, inset rgba(0, 0, 0, 0.2) 0 -1px 0;
   box-shadow: inset rgba(255, 255, 255, 0.45) 0 1px 0, inset rgba(0, 0, 0, 0.2) 0 -1px 0;
-  width: 240px;
+  width: 35%;
 }
 header ul:before {
   content: '';
@@ -373,6 +372,21 @@ footer p + p {
 #translator {
     float: none;
     text-align: center;
+}
+
+#menu {
+    position: static;
+    margin-top: 1em;
+    width: auto;
+}
+
+#menu li {
+    display: inline-block;
+    width: 19%;
+}
+#menu li a {
+    font-size: 16px;
+    padding-top: 9px;
 }
 
 @media print, screen and (max-width: 950px) {
