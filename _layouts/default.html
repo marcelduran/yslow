@@ -24,7 +24,7 @@
         {% if page.bookmarklet or page.scoremeter %}
         </style>
         {% endif %}
-        <link rel="stylesheet" href="../stylesheets/styles-0512-min.css">
+        <link rel="stylesheet" href="../stylesheets/styles-120525-min.css">
         {% if page.scoremeter %}
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.3.0/build/widget/assets/skins/sam/widget.css&3.3.0/build/slider/assets/skins/sam/slider.css">
         {% endif %}
@@ -34,11 +34,10 @@
         <div class="wrapper">
             <div id="content">
                 <header>    
-                    <h1>{{ page.title }}</h1>
+                    <h1><a href="/">{{ page.title }}</a></h1>
                     <p>{{ page.tagline }}</p>
-                    <p class="view"><a href="https://github.com/marcelduran/yslow">View the Project on GitHub <small>marcelduran/yslow</small></a></p>
                     {% if page.install %}
-                    <ul>
+                    <ul id="install-btns">
                       <li><a id="install" href="#"><strong>Install YSlow </strong><span id="browser"></span></a></li>
                     </ul>
                     {% endif %}
@@ -48,6 +47,7 @@
                       <li><a href="https://github.com/marcelduran/yslow/wiki/FAQ">FAQ</a></li>
                       <li><a href="https://github.com/marcelduran/yslow/wiki/User-Guide">Help</a></li>
                       <li><a href="http://yslow.es/">En Español</a></li>
+                      <li class="mobile"><a href="mobile/">Mobile</a></li>
                     </ul>
                 </header>
                 <section>

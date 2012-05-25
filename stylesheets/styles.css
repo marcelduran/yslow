@@ -76,18 +76,6 @@ header p {
   width: 60%;
   font-size: 13px;
 }
-header p.view {
-  display: none;
-  font-weight: 700;
-  text-shadow: rgba(255, 255, 255, 0.9) 0 1px 0;
-  -webkit-font-smoothing: antialiased;
-}
-header p.view a {
-  color: #06c;
-}
-header p.view small {
-  font-weight: 400;
-}
 header ul {
   margin: 0;
   padding: 0;
@@ -96,8 +84,10 @@ header ul {
   z-index: 1;
   right: 20px;
   top: 20px;
-  height: 38px;
   padding: 1px 0;
+  width: 35%;
+}
+header li {
   background: #5198DF;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #77b9fb), color-stop(100%, #3782cd));
   background: -webkit-linear-gradient(#77b9fb, #3782cd);
@@ -110,7 +100,6 @@ header ul {
   -webkit-box-shadow: inset rgba(255, 255, 255, 0.45) 0 1px 0, inset rgba(0, 0, 0, 0.2) 0 -1px 0;
   -o-box-shadow: inset rgba(255, 255, 255, 0.45) 0 1px 0, inset rgba(0, 0, 0, 0.2) 0 -1px 0;
   box-shadow: inset rgba(255, 255, 255, 0.45) 0 1px 0, inset rgba(0, 0, 0, 0.2) 0 -1px 0;
-  width: 35%;
 }
 header ul:before {
   content: '';
@@ -132,12 +121,6 @@ header ul:before {
   -o-box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0, inset rgba(255, 255, 255, 0.7) 0 -1px 0;
   box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 0, inset rgba(255, 255, 255, 0.7) 0 -1px 0;
 }
-header ul li {
-  /*width: 79px;
-  float: left;
-  border-right: 1px solid #3A7CBE;*/
-  height: 38px;
-}
 header ul li + li {
   width: 78px;
   border-left: 1px solid #8BBEF3;
@@ -154,8 +137,7 @@ header ul a {
   display: block;
   text-align: center;
   font-weight: 400;
-  padding-top: 6px;
-  height: 40px;
+  padding: 6px 0 9px 0;
   text-shadow: rgba(0, 0, 0, 0.4) 0 -1px 0;
 }
 header ul a strong {
@@ -375,18 +357,22 @@ footer p + p {
 }
 
 #menu {
+    height: auto;
     position: static;
     margin-top: 1em;
     width: auto;
 }
-
 #menu li {
     display: inline-block;
+    vertical-align: top;
     width: 19%;
 }
 #menu li a {
     font-size: 16px;
     padding-top: 9px;
+}
+#menu .mobile {
+    display: none;
 }
 
 @media print, screen and (max-width: 950px) {
@@ -436,21 +422,21 @@ footer p + p {
     }
 }
 @media print, screen and (max-width:580px) {
-  header ul {
+  #install-btns {
     display: none;
   }
 
-  header p.view {
-    display: block;
+  #menu li {
+      margin-bottom: 3px;
+      width: 49%;
+  }
+
+  #menu .mobile {
+      display: inline-block;
   }
 
   header p,
   .avail li {
     width: 100%;
-  }
-}
-@media print {
-  header p.view a small:before {
-    content: 'at http://github.com/';
   }
 }
