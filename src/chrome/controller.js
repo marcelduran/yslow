@@ -142,8 +142,7 @@
             chrome.tabs.sendRequest(currentTab.id, {
                 action: 'afterOnload',
                 docBody: docBody,
-                components: comps,
-                baseHref: baseHref
+                components: comps
             }, setInjected);
         }
     }
