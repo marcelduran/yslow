@@ -15,6 +15,7 @@ SRC_SAFARI := $(SRC)/safari
 SRC_WSH := $(SRC)/wsh
 SRC_RHINO := $(SRC)/rhino
 SRC_PHANTOMJS := $(SRC)/phantomjs
+SRC_NODESERVER := $(SRC)/nodeserver
 
 # build directories
 BUILD := build
@@ -30,6 +31,7 @@ BUILD_SAFARI := $(BUILD_SAFARI_ROOT)/yslow.safariextension
 BUILD_WSH := $(BUILD)/wsh
 BUILD_RHINO := $(BUILD)/rhino
 BUILD_PHANTOMJS := $(BUILD)/phantomjs
+BUILD_NODESERVER := $(BUILD)/nodeserver
 
 # package directories
 PKG := pkg
@@ -42,6 +44,7 @@ PKG_SAFARI := $(PKG)/safari
 PKG_WSH := $(PKG)/wsh
 PKG_RHINO := $(PKG)/rhino
 PKG_PHANTOMJS := $(PKG)/phantomjs
+PKG_NODESERVER := $(PKG)/nodeserver
 
 # file names / versions / licenses
 BOOKMARKLET_YSLOW_JS := yslow-files-bookmarklet.js
@@ -62,12 +65,14 @@ YUI_LIB := $(SRC_YUI)/build
 IMG := img
 YUICOMPRESSOR := java -jar ~/bin/yuicompressor-2.4.7.jar
 
-all: show-version bookmarklet chrome firefox har nodejs opera safari wsh rhino phantomjs
+.PHONY: bookmarklet chrome firefox har nodejs opera safari wsh rhino phantomjs nodeserver
 
-clean: clean-bookmarklet clean-chrome clean-firefox clean-har clean-nodejs clean-opera clean-safari clean-wsh clean-rhino clean-phantomjs
+all: show-version bookmarklet chrome firefox har nodejs opera safari wsh rhino phantomjs nodeserver
+
+clean: clean-bookmarklet clean-chrome clean-firefox clean-har clean-nodejs clean-opera clean-safari clean-wsh clean-rhino clean-phantomjs clean-nodeserver
 	@if [ -d $(BUILD) ]; then rmdir $(BUILD); fi
 
-pkg: pkg-bookmarklet pkg-chrome pkg-firefox pkg-nodejs pkg-opera pkg-safari pkg-wsh pkg-rhino pkg-phantomjs
+pkg: pkg-bookmarklet pkg-chrome pkg-firefox pkg-nodejs pkg-opera pkg-safari pkg-wsh pkg-rhino pkg-phantomjs pkg-nodeserver
 
 show-version:
 	@echo "YSLOW version: $(YSLOW_VERSION)"
@@ -362,6 +367,25 @@ phantomjs:
 	@sed -i -e "s/{{YSLOW_VERSION}}/$(YSLOW_VERSION)/" $(BUILD_PHANTOMJS)/yslow.js
 	@echo "done"
 
+nodeserver:
+	@echo "building NODEJS SERVER..."
+	@if [ ! -d $(BUILD_NODESERVER) ]; then mkdir -p $(BUILD_NODESERVER); fi
+	@cp $(SRC_NODESERVER)/server.js \
+		$(BUILD_NODESERVER)/yslow-server.js
+	@if [ -n "$(shell which npm)" ]; then \
+		if [ -z "$(shell npm list | egrep ' yslow@')" ]; then \
+			echo "YSlow NodeJS Sserver requires 'yslow'"; \
+			npm install yslow; \
+		fi; \
+		if [ -z "$(shell npm list | egrep ' express@')" ]; then \
+			echo "YSlow NodeJS Sserver requires 'express'"; \
+			npm install express; \
+		fi \
+	else \
+		echo "WARNING: YSlow NodeJS Server requires NPM for 'yslow' and 'express' packages"; \
+	fi
+	@echo "done"
+
 clean-yui:
 	@echo "cleaning YUI..."
 	@if [ -f $(BUILD_YUI)/yui.js ]; then rm $(BUILD_YUI)/yui.js; fi
@@ -513,6 +537,12 @@ clean-phantomjs:
 	@echo "cleaning PHANTOMJS..."
 	@if [ -f $(BUILD_PHANTOMJS)/yslow.js ]; then rm $(BUILD_PHANTOMJS)/yslow.js; fi
 	@if [ -d $(BUILD_PHANTOMJS) ]; then rmdir $(BUILD_PHANTOMJS); fi
+	@echo "done"
+
+clean-nodeserver:
+	@echo "cleaning NODEJS SERVER..."
+	@if [ -f $(BUILD_NODESERVER)/yslow-server.js ]; then rm $(BUILD_NODESERVER)/yslow-server.js; fi
+	@if [ -d $(BUILD_NODESERVER) ]; then rmdir $(BUILD_NODESERVER); fi
 	@echo "done"
 
 pkg-bookmarklet: BM_CONFIG := config-ycs.js
@@ -691,4 +721,15 @@ pkg-phantomjs: phantomjs
 	@mkdir -p $(PKG_PHANTOMJS)/$(YSLOW_VERSION)
 	@cat $(YSLOW_LICENSE) > $(PKG_PHANTOMJS)/$(YSLOW_VERSION)/yslow.js
 	@$(YUICOMPRESSOR) $(BUILD_PHANTOMJS)/yslow.js >> $(PKG_PHANTOMJS)/$(YSLOW_VERSION)/yslow.js
+	@echo "done"
+
+pkg-nodeserver: nodeserver
+	@echo "packaging NODEJS SERVER..."
+	@if [ -f $(PKG_NODESERVER)/yslow-server-$(YSLOW_VERSION).js ]; then \
+            echo "$(PKG_NODESERVER)/yslow-server-$(YSLOW_VERSION).js already exists"; \
+            exit 1; \
+        fi
+	@mkdir -p $(PKG_NODESERVER)
+	@cp $(BUILD_NODESERVER)/yslow-server.js \
+            $(PKG_NODESERVER)/yslow-server-$(YSLOW_VERSION).js
 	@echo "done"
