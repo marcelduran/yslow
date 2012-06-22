@@ -22,6 +22,7 @@ Available flavors:
 * **safari**: Apple [Safari extension](http://extensions.apple.com/)
 * **nodejs**: Command line for [HAR](http://www.softwareishard.com/blog/har-12-spec/) files powered by [Node.JS](http://nodejs.org/) and [NPM](http://npmjs.org/)
 * **phantomjs**: Command line with headless [WebKit](http://www.webkit.org/) powered by [PhantomJS](http://www.phantomjs.org/)
+* **nodeserver**: Node.JS Server powered by [express](http://expressjs.com/)
 
 e.g.:
 
