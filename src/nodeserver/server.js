@@ -11,7 +11,7 @@ var express = require('express'),
     http = require('http'),
     url = require('url'),
     fs = require('fs'),
-    appPort = process.env.app_port || 15785,
+    appPort = process.argv[2] || process.env.app_port || 15785,
     app = express.createServer(),
 
     reTrue = /^(true|1|yes)$/i,
