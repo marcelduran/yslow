@@ -25,7 +25,7 @@ metadata:
 * [Safari](http://d.yimg.com/jc/safari/yslow.safariextz){: .safari}
 * [Command Line (HAR)](https://github.com/marcelduran/yslow/wiki/Command-Line-%28HAR%29){: .command}
 * [PhantomJS](https://github.com/marcelduran/yslow/wiki/PhantomJS){: .phantomjs}
-<!--* [NodeJS](https://github.com/marcelduran/yslow/wiki/NodeJS){: .nodejs}-->
+* [Node.js Server](https://github.com/marcelduran/yslow/wiki/Node.js-Server){: .nodejs}
 * [Source Code](https://github.com/marcelduran/yslow){: .source}
 {: .avail}
 
