@@ -64,6 +64,7 @@ YSLOW_LICENSE := $(SRC_COMMON)/license
 YUI_LIB := $(SRC_YUI)/build
 IMG := img
 YUICOMPRESSOR := java -jar ~/bin/yuicompressor-2.4.7.jar
+TAC = $(shell which tac || echo 'tail -r')
 
 .PHONY: bookmarklet chrome firefox har nodejs opera safari wsh rhino phantomjs nodeserver
 
@@ -362,7 +363,7 @@ phantomjs:
             $(SRC_COMMON)/renderers.js \
             $(SRC_COMMON)/peeler.js \
             $(SRC_COMMON)/peeler-bm-ch-ph.js; \
-        tail -r $(SRC_PHANTOMJS)/controller.js | sed '/YSLOW HERE/q' | tail -r ) | sed '/YSLOW HERE/d' \
+        $(TAC) $(SRC_PHANTOMJS)/controller.js | sed '/YSLOW HERE/q' | $(TAC) ) | sed '/YSLOW HERE/d' \
         > $(BUILD_PHANTOMJS)/yslow.js
 	@sed -i -e "s/{{YSLOW_VERSION}}/$(YSLOW_VERSION)/" $(BUILD_PHANTOMJS)/yslow.js
 	@echo "done"
