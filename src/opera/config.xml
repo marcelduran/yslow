@@ -2,7 +2,7 @@
 <widget xmlns="http://www.w3.org/ns/widgets" id="http://getyslow.com/" version="{{YSLOW_VERSION}}">
     <name>YSlow</name>
     <description>YSlow analyzes web pages and suggests ways to improve their performance based on a set of rules for high performance web pages. For more details, see http://yslow.org/</description>
-    <author href="http://yslow.org/" email="info@yslow.org">YSlow (@getyslow)</author>
+    <author href="http://yslow.org/" email="info@yslow.org">YSlow (@yslow)</author>
     <icon src="images/icon_64.png"/>
     <icon src="images/icon_18.png"/>
 </widget>

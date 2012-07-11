@@ -747,7 +747,7 @@ YSLOW.registerRenderer({
         url = encodeURIComponent(encodeURIComponent(url.slice(0, 60) + (url.length > 60 ? '...' : '')));
 
         html += '<li class="social"><a class="facebook" href="javascript:document.ysview.openPopup(\'http://www.facebook.com/sharer.php?t=YSlow%20Scoremeter&u=' + link + '\', \'facebook\')" title="Share these results"><span>Share</span></a></li>';
-        html += '<li class="social"><a class="twitter" href="javascript:document.ysview.openPopup(\'http://twitter.com/share?original_referer=&source=tweetbutton&text=YSlow%20grade%20' + grade + '%20for%20' + url + '&url=' + link + '&via=getyslow\', \'twitter\')" title="Tweet these results"><span>Tweet</spam></a></li>';
+        html += '<li class="social"><a class="twitter" href="javascript:document.ysview.openPopup(\'http://twitter.com/share?original_referer=&source=tweetbutton&text=YSlow%20grade%20' + grade + '%20for%20' + url + '&url=' + link + '&via=yslow\', \'twitter\')" title="Tweet these results"><span>Tweet</spam></a></li>';
 
         html += '</ul></div>';
 
