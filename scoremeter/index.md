@@ -9,10 +9,17 @@ metadata:
 - {property: og:title, content: YSlow Scoremeter}
 - {property: og:type, content: website}
 - {property: og:image, content: http://d.yimg.com/jc/ydn/yslow_128x77.png}
-- {property: og:url, content: http://developer.yahoo.com/yslow/scoremeter/}
+- {property: og:url, content: http://yslow.org/scoremeter/}
 - {property: og:site_name, content: YSlow Scoremeter}
 - {property: fb:admins, content: 100002389604296}
 - {property: og:description, content: YSlow Scoremeter allows you to view and adjust all rules scores from page performance analysis}
+- {name: twitter:card, content: summary}
+- {name: twitter:site, content: @yslow}
+- {name: twitter:creator, content: @yslow}
+- {name: twitter:url, content: http://yslow.org/scoremeter/}
+- {name: twitter:description, content: YSlow Scoremeter allows you to view and adjust all rules scores from page performance analysis}
+- {name: twitter:title, content: YSlow Scoremeter}
+- {name: twitter:image, content: http://d.yimg.com/jc/ydn/yslow_128x77.png}
 install: true
 scoremeter: true
 ---
