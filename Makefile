@@ -546,7 +546,7 @@ clean-nodeserver:
 	@if [ -d $(BUILD_NODESERVER) ]; then rmdir $(BUILD_NODESERVER); fi
 	@echo "done"
 
-pkg-bookmarklet: BM_CONFIG := config-ycs.js
+pkg-bookmarklet: BM_CONFIG := config-production.js
 pkg-bookmarklet: yui bookmarklet-files
 	@echo "packaging BOOKMARKLET..."
 	@if [ ! -d $(PKG_BOOKMARKLET)/$(YSLOW_VERSION) ]; then mkdir -p $(PKG_BOOKMARKLET)/$(YSLOW_VERSION); fi
