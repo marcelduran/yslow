@@ -325,7 +325,7 @@ footer p + p {
     background: #fff;
     border: none;
     height: 395px;
-    margin-bottom: 7px;
+    margin: 7px 0;
     overflow: hidden;
     width: 299px;
 }
