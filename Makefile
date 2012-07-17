@@ -63,7 +63,7 @@ YSLOW_LICENSE := $(SRC_COMMON)/license
 # lib/tools directories/files
 YUI_LIB := $(SRC_YUI)/build
 IMG := img
-YUICOMPRESSOR := java -jar ~/bin/yuicompressor-2.4.7.jar
+YUICOMPRESSOR := `which yuicompressor`
 TAC = $(shell which tac || echo 'tail -r')
 
 .PHONY: bookmarklet chrome firefox har nodejs opera safari wsh rhino phantomjs nodeserver
