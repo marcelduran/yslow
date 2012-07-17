@@ -8,13 +8,13 @@
 YUI.add('yslow-config', function (Y) {
     Y.namespace('YSLOW').config = {
         /* make sure host has trailing slash */
-        host: 'http://d.yimg.com/jc/',
+        host: 'http://yslow.org/',
         /* do no include scheme nor colon and double slashes */
         /* comment out to use the default provided by YUI YQL */
         //yql: 'staging.query.yahooapis.com/v1/public/yql?',
         /* yql opentable url */
         /* comment out to use the default YQL community table data.headers */
-        //table: 'http://d.yimg.com/jc/data.headers.xml',
+        //table: 'http://yslow.org/data.headers.xml',
         js: '{{BOOKMARKLET_JS}}',
         css: '{{BOOKMARKLET_CSS}}'
     };
