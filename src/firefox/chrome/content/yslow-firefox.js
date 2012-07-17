@@ -100,7 +100,8 @@ YSLOW.firefox = {
             // "YSLOW.firefox.startup():TypeError: FBL.extend is not a
             // function".  Hack around this by retrying the call to
             // YSLOW.FBYSlow.init() if it fails.
-            if (typeof FBL.extend !== 'function') {
+            if (typeof FBL === 'undefined' || (typeof FBL !== 'undefined' &&
+                    typeof FBL.extend !== 'function')) {
                 YSLOW.util.setTimer(function() {
                     YSLOW.firefox.startup(wmode);
                 }, 10);
@@ -118,6 +119,11 @@ YSLOW.firefox = {
             } catch (err) {
                 YSLOW.util.dump("YSLOW.firefox.startup():" + err);
             }
+            return;
+        } else {
+            YSLOW.util.setTimer(function() {
+                YSLOW.firefox.startup(wmode);
+            }, 10);
             return;
         }
 
