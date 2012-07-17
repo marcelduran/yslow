@@ -1,3 +1,10 @@
+Version 3.1.2
+-------------
+* Compatible with Firebug 1.10.0
+* Updated Twitter bird and username
+* Updated Speedometer URL
+* Update CDN list
+
 Version 3.1.1
 -------------
 * Added PhantomJS integration
