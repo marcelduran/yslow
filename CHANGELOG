@@ -1,3 +1,7 @@
+Version 3.1.3
+-------------
+* Fixed Firefox issue https://bugzilla.mozilla.org/show_bug.cgi?id=777397
+
 Version 3.1.2
 -------------
 * Compatible with Firebug 1.10.0
