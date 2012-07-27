@@ -66,7 +66,7 @@
         </footer>
         {% if page.scoremeter %}
         <script src="http://yui.yahooapis.com/combo?3.3.0/build/yui/yui-min.js&3.3.0/build/loader/loader-min.js&3.3.0/build/oop/oop-min.js&3.3.0/build/pluginhost/pluginhost-min.js&3.3.0/build/event-custom/event-custom-min.js&3.3.0/build/dom/dom-min.js&3.3.0/build/event/event-min.js&3.3.0/build/node/node-min.js&3.3.0/build/attribute/attribute-min.js&3.3.0/build/classnamemanager/classnamemanager-min.js&3.3.0/build/base/base-min.js&3.3.0/build/widget/widget-min.js&3.3.0/build/dd/dd-ddm-base-min.js&3.3.0/build/dd/dd-drag-min.js&3.3.0/build/dd/dd-constrain-min.js&3.3.0/build/substitute/substitute-min.js&3.3.0/build/slider/slider-min.js"></script>
-        <script src="http://d.yimg.com/jc/ydn/scoremeter-min.js"></script>
+        <script>{% include scoremeter-min.js %}</script>
         {% endif %}
         <script>
             {% if page.install %}{% include install-min.js %}{% endif %}
