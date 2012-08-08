@@ -82,7 +82,7 @@ YSLOW.firefox = {
                     typeof FBL.extend !== 'function')) {
                 YSLOW.util.setTimer(function() {
                     YSLOW.firefox.startup(wmode);
-                }, 100);
+                }, 10);
                 return;
             }
 
@@ -101,7 +101,7 @@ YSLOW.firefox = {
         } else {
             YSLOW.util.setTimer(function() {
                 YSLOW.firefox.startup(wmode);
-            }, 100);
+            }, 10);
             return;
         }
 
