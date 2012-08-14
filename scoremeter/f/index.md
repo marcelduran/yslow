@@ -6,7 +6,7 @@ metadata:
 - {name: author, content: Marcel Duran}
 - {property: og:title, content: YSlow Scoremeter Grade F}
 - {property: og:type, content: website}
-- {property: og:image, content: http://imgur.com/VPpSy}
+- {property: og:image, content: http://imgur.com/VPpSy.png}
 - {property: og:url, content: http://yslow.org/scoremeter/}
 - {property: og:site_name, content: YSlow Scoremeter}
 - {property: fb:admins, content: 100002389604296}
@@ -17,6 +17,6 @@ metadata:
 - {name: twitter:url, content: http://yslow.org/scoremeter/}
 - {name: twitter:description, content: YSlow Scoremeter allows you to view and adjust all rules scores from page performance analysis}
 - {name: twitter:title, content: YSlow Scoremeter Grade F}
-- {name: twitter:image, content: http://imgur.com/VPpSy}
+- {name: twitter:image, content: http://imgur.com/VPpSy.png}
 levelup: true
 ---
