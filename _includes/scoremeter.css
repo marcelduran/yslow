@@ -1,4 +1,4 @@
-#url {text-overflow: ellipsis; overflow: hidden; white-space: nowrap; float: right; width: 27em; text-align: right;}
+#url {text-overflow: ellipsis; overflow: hidden; white-space: nowrap; float: right; width: 24em; text-align: right;}
 #yslow {position: relative; padding-top: 1em;}
 #overall .title {float: left;}
 #overall .score {float: left; font-weight: bold; color: #fff; height: 1.3em; width: 1.3em; padding: 0; text-align: center; margin: 0 0.5em; -moz-border-radius: 1em; -webkit-border-radius: 1em; border-radius: 1em;}

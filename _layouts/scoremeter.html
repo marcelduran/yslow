@@ -1,0 +1,32 @@
+---
+layout: default
+title: YSlow Scoremeter
+tagline: Scoremeter shows a breakdown of YSlow grade that your site received. Adjust the sliders to estimate how each action will contribute to your web page’s performance.
+install: true
+scoremeter: true
+---
+<div id="yslow" class="yui3-skin-sam  yui-skin-sam">
+    <div id="url">
+    </div>
+    <h2 id="overall">
+        <span class="title">Overall Grade</span>
+        <span class="score"></span>
+        <span class="val"></span>
+    </h2>
+    <table id="rules">
+        <tbody>
+            <tr class="header">
+                <th colspan="2">score</th>
+                <th>rule</th>
+                <th>weight</th>
+                <th>slider</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+[» Check out the YSlow Ruleset Matrix](https://github.com/marcelduran/yslow/wiki/Ruleset-Matrix) to see how the grade is computed.
+
+## Contact Us
+YSlow development is discussed in the [GitHub Issue Tracker](../issues).  
+General performance questions are discussed in the [Exceptional Performance group](http://tech.groups.yahoo.com/group/exceptional-performance/).
