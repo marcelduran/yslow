@@ -189,14 +189,14 @@ program
             '',
             '    ' + n + ' file.har',
             '    ' + n + ' -i grade -f xml -b http://server.com/beacon file1.har file2.har',
-            '    ' + n + ' -info all --format plain /tmp/*.har',
+            '    ' + n + ' --info all --format plain /tmp/*.har',
             '    ' + n + ' -i basic --rulseset yslow1 -d < file.har',
             '    curl example.com/file.har | ' + n + ' -i grade -b http://server.com/beacon -v',
             '    curl www.webpagetest.org/export.php?test=ID | ' + n + ' -i grade | curl www.showslow.com/beacon/yslow -d @-',
             '',
             '  More Info:',
             '',
-            '     http://wh.yslow.org/HN4eVY'
+            '     http://wh.yslow.org/yslow_beacon'
         ].join('\n'));
     });
 program.parse(process.argv);
