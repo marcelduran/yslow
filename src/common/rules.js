@@ -118,7 +118,8 @@ YSLOW.registerRule({
             'platform.twitter.com', //Twitter widget - Always via a CDN
             'cdn.api.twitter.com', //Twitter API calls, served via Akamai
             'apis.google.com', //Google's API Hosting
-            '.akamaihd.net' //Akamai - Facebook uses this for SSL assets
+            '.akamaihd.net', //Akamai - Facebook uses this for SSL assets
+            '.rackcdn.com' //Generic RackSpace CloudFiles CDN
         ],
         // array of regexps that will be treated as exception.
         exceptions: [
@@ -261,7 +262,7 @@ YSLOW.registerRule({
                         offender.sum_size_compressed > 0 ? ' (' +
                         kbSize(offender.sum_size_compressed) + ' GZip)' : ''
                     ) + (hasPref ? (
-                    ' <button onclick="javascript:document.ysview.addCDN(\'' + 
+                    ' <button onclick="javascript:document.ysview.addCDN(\'' +
                     offender.domain + '\')">Add as CDN</button>') : '');
             }
         }
@@ -1038,7 +1039,7 @@ YSLOW.registerRule({
     },
 
     lint: function (doc, cset, config) {
-        var i, len, score, comp, type, count, filter_count, 
+        var i, len, score, comp, type, count, filter_count,
             instyles = (cset.inline && cset.inline.styles) || [],
             comps = cset.getComponentsByType('css'),
             offenders = [],
