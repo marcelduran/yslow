@@ -374,6 +374,9 @@ footer p + p {
 #menu .mobile {
     display: none;
 }
+.twitter-timeline {
+  display: block;
+}
 
 @media print, screen and (max-width: 950px) {
   body {
