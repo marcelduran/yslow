@@ -4,3 +4,4 @@ build/
 pkg/
 *.swp
 .DS_Store
+node_modules/

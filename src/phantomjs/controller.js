@@ -172,6 +172,9 @@ urls.forEach(function (url) {
             page.onConsoleMessage = function (msg) {
                 console.log(msg);
             };
+            page.onError = function (msg) {
+                console.error(msg);
+            };
         } else {
             page.onConsoleMessage = function (msg, line, source) {
                 console.log(JSON.stringify({
@@ -180,7 +183,17 @@ urls.forEach(function (url) {
                     source: source
                 }, null, 4));
             };
+            page.onError = function (msg, trace) {
+                console.error(JSON.stringify({
+                    message: msg,
+                    stacktrace: trace
+                }));
+            };
         }
+    } else {
+        page.onError = function () {
+            // catch uncaught error from the page
+        };
     }
 
     // set user agent string
