@@ -1,3 +1,7 @@
+Version 3.1.5
+-------------
+* Added onerror handler to PhantomJS
+
 Version 3.1.4
 -------------
 * Fixed Firebug init issue
