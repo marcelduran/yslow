@@ -836,6 +836,7 @@ YSLOW.util = {
             }
         }
 
+        params.v = YSLOW.version;
         params.w = parseInt(yscontext.PAGE.totalSize, 10);
         params.o = parseInt(yscontext.PAGE.overallScore, 10);
         params.u = encodeURIComponent(yscontext.result_set.url);
