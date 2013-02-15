@@ -420,8 +420,16 @@ footer p + p {
   }
 
     #sidebar,
+    #twitter-widget-0,
+    #fb,
+    #adsense {
+      width: 100%;
+    }
+    #sidebar {
+      margin-top: 10px;
+    }
     #fork {
-        display: none;
+      display: none;
     }
 }
 @media print, screen and (max-width:580px) {
