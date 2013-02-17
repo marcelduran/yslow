@@ -24,7 +24,7 @@
         {% if page.bookmarklet or page.scoremeter %}
         </style>
         {% endif %}
-        <link rel="stylesheet" href="{% if page.levelup %}../{% endif %}../stylesheets/styles-130215-min.css">
+        <link rel="stylesheet" href="{% if page.levelup %}../{% endif %}../stylesheets/styles-130217-min.css">
         {% if page.scoremeter %}
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.3.0/build/widget/assets/skins/sam/widget.css&3.3.0/build/slider/assets/skins/sam/slider.css">
         {% endif %}
@@ -51,13 +51,14 @@
                     </ul>
                 </header>
                 <section>
+                    <div id="adsense-top">{% include adsense-top.html %}</div>
                     {{ content }}
                 </section>
             </div>
             <div id="sidebar">
                 {% include twitter.html %}
                 <iframe id="fb" src='http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fgetyslow&amp;width=299&amp;colorscheme=light&amp;show_faces=false&amp;stream=true&amp;header=false&amp;height=395&amp;border_color=%23d9d9d9' scrolling="no" frameborder="0"></iframe>
-                <div id="adsense">{% include adsense.html %}</div>
+                <div id="adsense-side">{% include adsense-side.html %}</div>
             </div>
         </div>
         <footer>

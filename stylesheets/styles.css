@@ -304,7 +304,7 @@ footer p + p {
 
 #content,
 #fb,
-.twtr-widget.twtr-widget-profile {
+#adsense-side iframe {
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     -o-border-radius: 8px;
@@ -328,6 +328,11 @@ footer p + p {
     margin: 7px 0;
     overflow: hidden;
     width: 299px;
+}
+
+#adsense-top,
+#adsense-side {
+  text-align: center;
 }
 
 .avail li {
@@ -422,7 +427,7 @@ footer p + p {
     #sidebar,
     #twitter-widget-0,
     #fb,
-    #adsense {
+    #adsense-side {
       width: 100%;
     }
     #sidebar {
