@@ -1,7 +1,7 @@
 {
     "name": "YSlow",
     "version": "{{YSLOW_VERSION}}",
-    "description": "Make your pages faster with Yahoo!'s page performance tool",
+    "description": "YSlow analyzes web pages and suggests ways to improve their performance based on a set of rules for high performance web pages.",
     "icons": {
         "128": "128.png",
         "16": "16.png",
