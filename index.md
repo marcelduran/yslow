@@ -5,7 +5,7 @@ tagline: YSlow analyzes web pages and why they're slow based on Yahoo!'s rules f
 install: true
 metadata:
 - {name: keywords, content: performance,analysis,tool,wpo,optimization,speed,fast}
-- {name: description, content: YSlow analyzes web pages and why they're slow based on Yahoo!'s rules for high performance web sites}
+- {name: description, content: The Official YSlow Open Source Project Website. YSlow analyzes web pages and suggests ways to improve their performance based on a set of rules for high performance web pages.
 - {name: author, content: Marcel Duran}
 ---
 ## Feature highlights
