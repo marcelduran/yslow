@@ -14,11 +14,18 @@
         set('Firefox', 'https://addons.mozilla.org/en-US/firefox/addon/5369');
     } else if (test(' Chrome/')) {
         set('Chrome', 'https://chrome.google.com/webstore/detail/ninejjcohidippngpapiilnmkgllmakh');
+        if (typeof chrome !== 'undefined' && chrome.webstore &&
+            chrome.webstore.install && chrome.app && !chrome.app.isInstalled) {
+          install.addEventListener('click', function(e) {
+            e.preventDefault();
+            chrome.webstore.install();
+          }, false);
+        }
     } else if (test('Opera/') && !test(' Mini/')) {
         set('Opera', 'https://addons.opera.com/addons/extensions/details/yslow/');
     } else if (test(' Safari/') && !test(' Mobile') && !test(' CrMo/') && !test(' Silk/') && !test(' Kindle')) {
-        set('Safari', 'http://d.yimg.com/jc/safari/yslow.safariextz', 1);
+        set('Safari', '/safari/', 1);
     } else {
-        set('Mobile/Bookmarklet', '/mobile', 1);
+        set('Mobile/Bookmarklet', '/mobile/', 1);
     }
 }(document));
