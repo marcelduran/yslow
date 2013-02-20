@@ -216,7 +216,6 @@ pre {
   padding: 20px;
   background: #3A3C42;
   color: #f8f8f2;
-  margin: 0 -20px 20px;
   overflow-x:auto;
 }
 pre code {
@@ -235,7 +234,7 @@ table {
 th, td {
   text-align: left;
   padding: 5px 10px;
-  border-bottom: 1px solid #aaa;
+  border: 1px solid #aaa;
 }
 
 dt {
@@ -304,7 +303,7 @@ footer p + p {
 
 #content,
 #fb,
-#adsense-side iframe {
+.adsense.side iframe {
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     -o-border-radius: 8px;
@@ -330,8 +329,7 @@ footer p + p {
     width: 299px;
 }
 
-#adsense-top,
-#adsense-side {
+.adsense {
   text-align: center;
 }
 
@@ -381,6 +379,16 @@ footer p + p {
 }
 .twitter-timeline {
   display: block;
+}
+.wide-wrapper {
+  overflow-x: auto;
+}
+.biglink {
+  text-align: center;
+  font-size: 200%;
+  font-weight: bold;
+  display: block;
+  margin: 1em 0;
 }
 
 @media print, screen and (max-width: 950px) {

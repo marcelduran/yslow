@@ -1,11 +1,13 @@
 ---
 layout: default
-title: YSlow
+title: YSlow - Official Open Source Project Website
+heading: YSlow
 tagline: YSlow analyzes web pages and why they're slow based on Yahoo!'s rules for high performance web sites
 install: true
+home: true
 metadata:
 - {name: keywords, content: performance,analysis,tool,wpo,optimization,speed,fast}
-- {name: description, content: The Official YSlow Open Source Project Website. YSlow analyzes web pages and suggests ways to improve their performance based on a set of rules for high performance web pages.
+- {name: description, content: Official YSlow Open Source Project Website. YSlow analyzes web pages and suggests ways to improve their performance based on a set of rules for high performance web pages.}
 - {name: author, content: Marcel Duran}
 ---
 ## Feature highlights
@@ -18,18 +20,19 @@ metadata:
 
 ## Availability
 
-* [Firefox](https://addons.mozilla.org/en-US/firefox/addon/5369){: .firefox}
-* [Chrome](https://chrome.google.com/webstore/detail/ninejjcohidippngpapiilnmkgllmakh){: .chrome}
-* [Mobile/Bookmarklet](mobile){: .mobile}
-* [Opera](https://addons.opera.com/addons/extensions/details/yslow/){: .opera}
-* [Safari](http://d.yimg.com/jc/safari/yslow.safariextz){: .safari}
-* [Command Line (HAR)](https://github.com/marcelduran/yslow/wiki/Command-Line-%28HAR%29){: .command}
-* [PhantomJS](https://github.com/marcelduran/yslow/wiki/PhantomJS){: .phantomjs}
-* [Node.js Server](https://github.com/marcelduran/yslow/wiki/Node.js-Server){: .nodejs}
-* [Source Code](https://github.com/marcelduran/yslow){: .source}
-{: .avail}
+<ul class="avail">
+  <li><a class="firefox" href="https://addons.mozilla.org/en-US/firefox/addon/5369">Firefox</a>
+  <li><a class="chrome" href="https://chrome.google.com/webstore/detail/ninejjcohidippngpapiilnmkgllmakh">Chrome</a>
+  <li><a class="mobile" href="mobile/">Mobile/Bookmarklet</a>
+  <li><a class="opera" href="https://addons.opera.com/addons/extensions/details/yslow/">Opera</a>
+  <li><a class="safari" href="safari/">Safari</a>
+  <li><a class="command" href="command-line-har/">Command Line (HAR)</a>
+  <li><a class="phantomjs" href="phantomjs/">PhantomJS</a>
+  <li><a class="nodejs" href="node-server/">Node.js Server</a>
+  <li><a class="source" href="https://github.com/marcelduran/yslow">Source Code</a>
+</ul>
 
-[» View YSlow Ruleset Limitations](https://github.com/marcelduran/yslow/wiki/Ruleset-Limitations) across several browsers/platforms.
+[» View YSlow Ruleset Limitations](ruleset-limitations/) across several browsers/platforms.
 
 ## Web Performance Best Practices and Rules
 
@@ -59,19 +62,19 @@ Yahoo!'s Exceptional Performance team has identified 34 rules that affect web pa
 1. [Do Not Scale Images in HTML](http://developer.yahoo.com/performance/rules.html#no_scale)
 1. [Make favicon.ico Small and Cacheable](http://developer.yahoo.com/performance/rules.html#favicon)
 
-[» Check out the YSlow Ruleset Matrix](https://github.com/marcelduran/yslow/wiki/Ruleset-Matrix) to see how the grade is computed.
+[» Check out the YSlow Ruleset Matrix](ruleset-matrix/) to see how the grade is computed.
 
 ## Sample Screenshot
 ![YSlow Grade details screenshot](http://d.yimg.com/jc/ydn/yslow-ss.png)
 
 ## Frequently Asked Questions
-1. [What platforms does YSlow run on?](https://github.com/marcelduran/yslow/wiki/FAQ#wiki-faq_platforms)
-1. [How does YSlow work?](https://github.com/marcelduran/yslow/wiki/FAQ#wiki-faq_work)
-1. [How are the grades computed?](https://github.com/marcelduran/yslow/wiki/FAQ#wiki-faq_grading)
-1. [How do I add my CDN hostname to YSlow for Rule 2?](https://github.com/marcelduran/yslow/wiki/FAQ#wiki-faq_cdn)
-1. [What YSlow results are included in the YSlow beacon?](https://github.com/marcelduran/yslow/wiki/FAQ#wiki-faq_beaconformat)
+1. [What platforms does YSlow run on?](faq/#faq_platforms)
+1. [How does YSlow work?](faq/#faq_work)
+1. [How are the grades computed?](faq/#faq_grading)
+1. [How do I add my CDN hostname to YSlow for Rule 2?](faq/#faq_cdn)
+1. [What YSlow results are included in the YSlow beacon?](faq/#faq_beaconformat)
 
-[See more...](https://github.com/marcelduran/yslow/wiki/FAQ)
+[See more...](faq/)
 
 ## Contact Us
 YSlow development is discussed in the [GitHub Issue Tracker](https://github.com/marcelduran/yslow/issues).  

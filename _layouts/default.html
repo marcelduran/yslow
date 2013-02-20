@@ -12,19 +12,22 @@
         {% endif %}
         {% endfor %}
         <title>{{ page.title }}</title>
-        {% if page.bookmarklet or page.scoremeter %}
+        {% if page.bookmarklet or page.scoremeter or page.syntaxhighlight %}
         <style>
         {% endif %}
         {% if page.bookmarklet %}
         {% include bookmarklet-min.css %}
         {% endif %}
+        {% if page.syntaxhighlight %}
+        {% include pygment-min.css %}
+        {% endif %}
         {% if page.scoremeter %}
         {% include scoremeter-min.css %}
         {% endif %}
-        {% if page.bookmarklet or page.scoremeter %}
+        {% if page.bookmarklet or page.scoremeter or page.syntaxhighlight %}
         </style>
         {% endif %}
-        <link rel="stylesheet" href="{% if page.levelup %}../{% endif %}../stylesheets/styles-130217-min.css">
+        <link rel="stylesheet" href="{% if page.levelup %}../{% endif %}../stylesheets/styles-130220-min.css">
         {% if page.scoremeter %}
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.3.0/build/widget/assets/skins/sam/widget.css&3.3.0/build/slider/assets/skins/sam/slider.css">
         {% endif %}
@@ -34,7 +37,7 @@
         <div class="wrapper">
             <div id="content">
                 <header>    
-                    <h1><a href="/">{{ page.title }}</a></h1>
+                    <h1><a href="/">{{ page.heading }}</a></h1>
                     <p>{{ page.tagline }}</p>
                     {% if page.install %}
                     <ul id="install-btns">
@@ -42,23 +45,28 @@
                     </ul>
                     {% endif %}
                     <ul id="menu">
+                      {% if page.home %}
+                      <li><a href="http://yslow.es/" target="_blank">En Español</a></li>
+                      {% else %}
+                      <li><a href="/">Home</a></li>
+                      {% endif %}
                       <li><a href="https://github.com/marcelduran/yslow/">Source</a></li>
-                      <li><a href="https://github.com/marcelduran/yslow/wiki">Wiki</a></li>
-                      <li><a href="https://github.com/marcelduran/yslow/wiki/FAQ">FAQ</a></li>
-                      <li><a href="https://github.com/marcelduran/yslow/wiki/User-Guide">Help</a></li>
-                      <li><a href="http://yslow.es/">En Español</a></li>
-                      <li class="mobile"><a href="mobile/">Mobile</a></li>
+                      <li><a href="https://github.com/marcelduran/yslow/issues">Issues</a></li>
+                      <li><a href="/faq/">FAQ</a></li>
+                      <li><a href="/user-guide/">Help</a></li>
+                      <li class="mobile"><a href="/mobile/">Mobile</a></li>
                     </ul>
                 </header>
                 <section>
-                    <div id="adsense-top">{% include adsense-top.html %}</div>
+                    <div class="adsense">{% include adsense-top.html %}</div>
                     {{ content }}
+                    <div class="adsense">{% include adsense-bottom.html %}</div>
                 </section>
             </div>
             <div id="sidebar">
                 {% include twitter.html %}
                 <iframe id="fb" src='http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fgetyslow&amp;width=299&amp;colorscheme=light&amp;show_faces=false&amp;stream=true&amp;header=false&amp;height=395&amp;border_color=%23d9d9d9' scrolling="no" frameborder="0"></iframe>
-                <div id="adsense-side">{% include adsense-side.html %}</div>
+                <div class="adsense side">{% include adsense-side.html %}</div>
             </div>
         </div>
         <footer>

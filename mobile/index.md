@@ -1,6 +1,7 @@
 ---
 layout: default
-title: YSlow
+title: YSlow - Official Open Source Project Website
+heading: YSlow for Mobile/Bookmarklet
 tagline: YSlow analyzes web pages and why they're slow based on Yahoo!'s rules for high performance web sites
 metadata:
 - {name: keywords, content: performance,analysis,tool,wpo,optimization,speed,fast,mobile,bookmarklet}

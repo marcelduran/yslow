@@ -1,4 +1,5 @@
 name: YSlow
 uri: http://yslow.org
 pygments: true
-paginate: 6
+lsi: false
+markdown: redcarpet
