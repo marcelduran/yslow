@@ -12,3 +12,13 @@ metadata:
 YSlow for Safari is available at [Safari Extensions Gallery](http://extensions.apple.com/) under **Developer** category. Unfortunately there is no way to link to YSlow extension on that gallery. Safari users can one-click install directly from the gallery page or alternatively
 
 <a class="biglink" href="../yslow.safariextz">Install YSlow for Safari Now</a>
+
+## Installation Instructions
+
+1. Click the link above to download **YSlow for Safari**
+1. Double-click the downloaded `yslow.safariextz` file
+![downloaded yslow for safari file](http://i.imgur.com/IewMwBu.png)
+1. On the popup dialog click **Install**
+![install dialog](http://i.imgur.com/XIyQv0v.png)
+1. Done! **YSlow for Safari** will show up next to location bar
+![yslow for safari installed](http://i.imgur.com/B6LrBli.png)
