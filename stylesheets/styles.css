@@ -303,8 +303,7 @@ footer p + p {
 }
 
 #content,
-#fb,
-.adsense.side iframe {
+#fb {
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     -o-border-radius: 8px;
@@ -332,6 +331,10 @@ footer p + p {
 
 .adsense {
   text-align: center;
+}
+
+.adsense.narrow {
+  display: none;
 }
 
 .avail li {
@@ -435,8 +438,7 @@ footer p + p {
 
     #sidebar,
     #twitter-widget-0,
-    #fb,
-    #adsense-side {
+    #fb {
       width: 100%;
     }
     #sidebar {
@@ -463,5 +465,13 @@ footer p + p {
   header p,
   .avail li {
     width: 100%;
+  }
+
+  .adsense {
+    display: none;
+  }
+
+  .adsense.narrow {
+    display: block;
   }
 }
