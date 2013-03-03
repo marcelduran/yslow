@@ -1,3 +1,7 @@
+Version 3.1.6
+-------------
+* Fixed bookmarklet yql response *result* on headers. Thanks @souders
+
 Version 3.1.5
 -------------
 * Added onerror handler to PhantomJS

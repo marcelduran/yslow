@@ -225,6 +225,9 @@ YUI().use(function (iY) {
                     arrayEach(redir, function (red) {
                         var headers = {};
 
+                        // normalize headers, yql introduced result in response
+                        red.headers = red.headers.result || red.headers;
+
                         objEach(red.headers, function (value, key) {
                             headers[key.toLowerCase()] = value;
                         });
@@ -241,6 +244,9 @@ YUI().use(function (iY) {
                     comp = hash[v.url];
                 }
                 comp.href = comp.url = v.url;
+
+                // normalize headers, yql introduced result in response
+                v.headers = v.headers.result || v.headers;
 
                 // build raw headers
                 objEach(v.headers, function (v, k) {
