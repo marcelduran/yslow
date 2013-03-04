@@ -333,10 +333,6 @@ footer p + p {
   text-align: center;
 }
 
-.adsense.narrow {
-  display: none;
-}
-
 .avail li {
     display: inline-block;
     list-style: none;
@@ -465,13 +461,5 @@ footer p + p {
   header p,
   .avail li {
     width: 100%;
-  }
-
-  .adsense {
-    display: none;
-  }
-
-  .adsense.narrow {
-    display: block;
   }
 }

@@ -27,7 +27,7 @@
         {% if page.bookmarklet or page.scoremeter or page.syntaxhighlight %}
         </style>
         {% endif %}
-        <link rel="stylesheet" href="{% if page.levelup %}../{% endif %}../stylesheets/styles-130225-min.css">
+        <link rel="stylesheet" href="{% if page.levelup %}../{% endif %}../stylesheets/styles-130303-min.css">
         {% if page.scoremeter %}
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.3.0/build/widget/assets/skins/sam/widget.css&3.3.0/build/slider/assets/skins/sam/slider.css">
         {% endif %}
@@ -60,10 +60,8 @@
                 </header>
                 <section>
                     <div class="adsense">{% include adsense-top.html %}</div>
-                    <div class="adsense narrow">{% include adsense-top-narrow.html %}</div>
                     {{ content }}
                     <div class="adsense">{% include adsense-bottom.html %}</div>
-                    <div class="adsense narrow">{% include adsense-bottom-narrow.html %}</div>
                 </section>
             </div>
             <div id="sidebar">
