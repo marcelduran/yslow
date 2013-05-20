@@ -141,15 +141,13 @@ YSLOW.Component.prototype.populateProperties = function (resolveRedirect, ignore
     that.uncompressed_size = that.body.length;
 
     // expiration based on either Expires or Cache-Control headers
-    expires = that.headers.expires;
-    if (expires && expires.length > 0) {
-        // set expires as a JS object
-        that.expires = new Date(expires);
-        if (that.expires.toString() === 'Invalid Date') {
-            that.expires = that.getMaxAge();
-        }
-    } else {
+    // always use max-age if exists following 1.1 spec
+    // http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.3                                                                                      
+    if (that.getMaxAge() !== undefined) {
         that.expires = that.getMaxAge();
+    }
+    else if (that.headers.expires && that.headers.expires.length > 0) {
+        that.expires = new Date(that.headers.expires);
     }
 
     // compare image original dimensions with actual dimensions, data uri is
