@@ -345,7 +345,7 @@ urls.forEach(function (url) {
                             };
 
                         comps.forEach(function (comp) {
-                            var res = resources[comp.href] || {};
+                            var res = resources[ys.util.makeAbsoluteUrl(comp.href, comp.base)] || {};
 
                             cset.addComponent(
                                 comp.href,
