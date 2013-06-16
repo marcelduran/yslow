@@ -29,7 +29,7 @@ YSlow Node.js Server requires:
 Once all requirements are installed, you can either:
 
 * [build from source](https://github.com/marcelduran/yslow): `make nodeserver`, or
-* [download built server script](../yslow-server-3.1.1.js)
+* [download built server script](../yslow-server-3.1.2.js)
 
 To run Node.js Server:
 
@@ -75,4 +75,4 @@ $ curl localhost:8080
 <a name="examples">
 ## Examples
 </a>
-Play with [live demo](http://yslow.nodester.com/) hosted at [Nodester](http://nodester.com/)
+Play with [live demo](http://yslow.aws.af.cm/) hosted at [AppFog](http://appfog.com/)
