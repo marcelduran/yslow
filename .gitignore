@@ -1,5 +1,6 @@
 _site/
 build/
+node_modules/
 pkg/
 *.swp
 .DS_Store
