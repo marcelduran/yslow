@@ -11,8 +11,8 @@ var express = require('express'),
     http = require('http'),
     url = require('url'),
     fs = require('fs'),
-    appPort = process.argv[2] || process.env.app_port || 15785,
-    app = express.createServer(),
+    appPort = process.argv[2] || process.env.VCAP_APP_PORT || 8080,
+    app = express(),
 
     reTrue = /^(true|1|yes)$/i,
 
@@ -62,14 +62,7 @@ var express = require('express'),
      */
     sendError = function (err, req, res) {
         var i, output,
-            errObj = {error: {}};
-
-        // augment error object with source error info
-        for (i in err) {
-            if (err.hasOwnProperty(i)) {
-                errObj.error[i] = err[i];
-            }
-        }
+            errObj = {error: err.message};
 
         output = objToStr(errObj, req.param('format', req.param('f', 'json')));
         sendResults(output, res);
@@ -241,10 +234,8 @@ var express = require('express'),
     };
 
 // configuration
-app.configure(function () {
-    app.use(express.bodyParser());
-    app.use(express.errorHandler());
-});
+app.use(express.bodyParser());
+app.use(express.errorHandler());
 
 // main route good for POST and GET
 app.all('/', function (req, res) {
@@ -337,7 +328,7 @@ app.all('/', function (req, res) {
             // no har provided, print help and error
             output = help('http://' + req.header('host') +
                 req.route.path);
-            output.error = new Error('No HAR provided');
+            output.error = 'No HAR provided';
             output = objToStr(output, context.format);
             res.contentType(output.contentType);
             res.send(output.content);
@@ -347,11 +338,8 @@ app.all('/', function (req, res) {
     }
 });
 
-// error handling
-app.error(sendError);
-
 // only listen on $ node server.js
 if (!module.parent) {
     app.listen(appPort);
-    console.log('Express server listening on port %d', app.address().port);
+    console.log('Express server listening on port %d', appPort);
 }
