@@ -1,4 +1,5 @@
 _site/
 build/
+node_modules/
 pkg/
 .swp
