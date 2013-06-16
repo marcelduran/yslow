@@ -1,0 +1,9 @@
+{
+  "name": "yslow-server",
+  "version": "0.0.1",
+  "dependencies": {
+    "yslow": "~3.1.0",
+    "express": "~3.2.6",
+    "jsdom": "~0.6.5"
+  }
+}
