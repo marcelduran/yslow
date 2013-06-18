@@ -441,13 +441,13 @@ urls.forEach(function (url) {
                     delete this.prefs[name];
                 };
                 Preferences.prototype.getPrefList = function (branch_name, default_value) {
-                    var list = {};
-                    for (var key in this.prefs) {
+                    var values = [], key;
+                    for (key in this.prefs) {
                         if (this.prefs.hasOwnProperty(key) && key.indexOf(branch_name) === 0) {
-                            list[key] = this.prefs[key];
+                            values.push({ 'name': key, 'value': this.prefs[key] });
                         }
                     }
-                    return list;
+                    return values.length === 0 ? default_value : values;
                 };
 
                 return YSLOW.phantomjs.run();
