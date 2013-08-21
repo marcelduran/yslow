@@ -394,7 +394,9 @@ YSLOW.firefox.Panel.prototype = {
 
         this.ysview = new YSLOW.view(this, this.document.yslowContext);
         YSLOW.ysview = this.ysview;
-        this.document.ysview = this.ysview;
+
+        var doc = FBL.getContentView(this.document);
+        doc.ysview = this.ysview;
 
         this.ysview.setSplashView();
 
