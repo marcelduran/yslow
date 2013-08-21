@@ -62,15 +62,16 @@ YSLOW.view = function (panel, yscontext) {
     this.yscontext = yscontext;
 
     YSLOW.util.addEventListener(this.panelNode, 'click', function (e) {
-        var help, helplink, x, y, parent,
-            toolbar = panel.document.ysview.getElementByTagNameAndId(panel.panelNode, "div", "toolbarDiv");
+        var help, helplink, x, y, parent;
+        var doc = FBL.getContentView(panel.document);
+        var toolbar = doc.ysview.getElementByTagNameAndId(panel.panelNode, "div", "toolbarDiv");
 
         // In order to support YSlow running on mutli-tab,
         // we need to look up helpDiv using panelNode.
         // panel_doc.getElementById('helpDiv') will always find
         // helpDiv of YSlow running on the first browser tab.
         if (toolbar) {
-            helplink = panel.document.ysview.getElementByTagNameAndId(toolbar, "li", "helpLink");
+            helplink = doc.ysview.getElementByTagNameAndId(toolbar, "li", "helpLink");
             if (helplink) {
                 x = helplink.offsetLeft;
                 y = helplink.offsetTop;
@@ -84,7 +85,7 @@ YSLOW.view = function (panel, yscontext) {
                     return;
                 }
             }
-            help = panel.document.ysview.getElementByTagNameAndId(toolbar, "div", "helpDiv");
+            help = doc.ysview.getElementByTagNameAndId(toolbar, "div", "helpDiv");
         }
         if (help && help.style.visibility === "visible") {
             help.style.visibility = "hidden";
@@ -92,7 +93,8 @@ YSLOW.view = function (panel, yscontext) {
     });
 
     YSLOW.util.addEventListener(this.panelNode, 'scroll', function (e) {
-        var overlay = panel.document.ysview.modaldlg;
+        var doc = FBL.getContentView(panel.document);
+        var overlay = doc.ysview.modaldlg;
 
         if (overlay && overlay.style.display === "block") {
             overlay.style.top = panel.panelNode.scrollTop + 'px';
@@ -107,19 +109,22 @@ YSLOW.view = function (panel, yscontext) {
             if (e.target.nodeName === "LABEL" && e.target.className === "rules") {
                 if (e.target.firstChild && e.target.firstChild.nodeName === "INPUT" && e.target.firstChild.type === "checkbox") {
                     rule = YSLOW.controller.getRule(e.target.firstChild.value);
-                    panel.document.ysview.tooltip.show('<b>' + rule.name + '</b><br><br>' + rule.info, e.target);
+                    var doc = FBL.getContentView(panel.document);
+                    doc.ysview.tooltip.show('<b>' + rule.name + '</b><br><br>' + rule.info, e.target);
                 }
             }
         }
     });
 
     YSLOW.util.addEventListener(this.panelNode, 'mouseout', function (e) {
-        panel.document.ysview.tooltip.hide();
+        var doc = FBL.getContentView(panel.document);
+        doc.ysview.tooltip.hide();
     });
 
     YSLOW.util.addEventListener(this.panel_doc.defaultView ||
-            this.panel_doc.parentWindow, 'resize', function (e) {
-        var overlay = panel.document.ysview.modaldlg;
+        this.panel_doc.parentWindow, 'resize', function (e) {
+        var doc = FBL.getContentView(panel.document);
+        var overlay = doc.ysview.modaldlg;
 
         if (overlay && overlay.style.display === "block") {
             overlay.style.display = "none";
@@ -459,7 +464,8 @@ YSLOW.view.prototype = {
             sText = this.getRulesetListSource(rulesets),
 
             onchangeFunc = function (event) {
-                this.ownerDocument.ysview.onChangeRuleset(event);
+                var doc = FBL.getContentView(this.ownerDocument);
+                doc.ysview.onChangeRuleset(event);
             };
 
         for (i = 0; i < selects.length; i += 1) {
@@ -1443,8 +1449,39 @@ YSLOW.view.prototype = {
                 }
             }
         }
-    }
+    },
 
+    // exposed for access from content scope (Firebug UI, panel.html)
+    // See: https://blog.mozilla.org/addons/2012/08/20/exposing-objects-to-content-safely/
+    __exposedProps__: {
+        "openLink": "rw",
+        "showComponentHeaders": "rw",
+        "smushIt": "rw",
+        "saveRuleset": "rw",
+        "regenComponentsTable": "rw",
+        "expandCollapseComponentType": "rw",
+        "expandAll": "rw",
+        "updateFilterSelection": "rw",
+        "openPopup": "rw",
+        "runTool": "rw",
+        "onclickRuleset": "rw",
+        "createRuleset": "rw",
+        "addCDN": "rw",
+        "closeDialog": "rw",
+        "setAutorun": "rw",
+        "setAntiIframe": "rw",
+        "runTest": "rw",
+        "onChangeRuleset": "rw",
+        "showRuleSettings": "rw",
+        "openPrintableDialog": "rw",
+        "showHideHelp": "rw",
+        "setSplashView": "rw",
+        "onclickToolbarMenu": "rw",
+        "showPerformance": "rw",
+        "showComponents": "rw",
+        "showStats": "rw",
+        "showTools": "rw",
+    },
 };
 
 YSLOW.view.Tooltip = function (panel_doc, parentNode) {
