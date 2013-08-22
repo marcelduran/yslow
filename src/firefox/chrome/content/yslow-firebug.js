@@ -22,7 +22,7 @@ YSLOW.FBYSlow = {
          */
         Firebug.YSlow = FBL.extend(Firebug.Module, {
             initialize: function (prefDomain, prefNames) {
-                // nasty hack to workaround FB iinit issues
+                // nasty hack to workaround FB init issues
                 YSLOW.FBModInitialized = true;
 
                 YSLOW.net.registerNative(YSLOW.FBYSlow.net);
@@ -60,7 +60,9 @@ YSLOW.FBYSlow = {
                     panel = fbCtx.getPanel('YSlow');
                     panel.document.yslow_panel = panel;
                     panel.document.yslowContext = fbCtx.yslowContext;
-                    panel.document.ysview = panel.ysview;
+
+                    var doc = FBL.getContentView(panel.document);
+                    doc.ysview = panel.ysview;
                     // update the document object we store in ysview
                     panel.ysview.setDocument(panel.document);
                     // reload all css.
@@ -80,7 +82,7 @@ YSLOW.FBYSlow = {
 
             showPanel: function (browser, panel) {
                 var isYSlow = panel && panel.name === "YSlow",
-                    YSlowButtons = browser.chrome.$("fbYSlowButtons");
+                    YSlowButtons = Firebug.chrome.$("fbYSlowButtons");
 
                 FBL.collapse(YSlowButtons, !isYSlow);
             },
@@ -259,7 +261,7 @@ YSLOW.FBYSlow = {
             editable: false,
 
             initialize: function (context, doc) {
-                // nasty hack to workaround FB iinit issues
+                // nasty hack to workaround FB init issues
                 if (!YSLOW.FBModInitialized) {
                     Firebug.YSlow.initialize();
                 }
@@ -284,7 +286,9 @@ YSLOW.FBYSlow = {
 
                 this.ysview = new YSLOW.view(this, this.context.yslowContext);
                 YSLOW.ysview = this.ysview;
-                this.document.ysview = this.ysview;
+
+                var doc = FBL.getContentView(this.document);
+                doc.ysview = this.ysview;
 
                 this.ysview.setSplashView();
             },
@@ -298,7 +302,9 @@ YSLOW.FBYSlow = {
                 // There is only ONE DOCUMENT shared by all browser tabs. So if the user opens two
                 // browser tabs, we have to restore the appropriate yslowContext when switching between tabs.
                 this.document.yslowContext = fbCtx.yslowContext;
-                this.document.ysview = this.ysview;
+
+                var doc = FBL.getContentView(this.document);
+                doc.ysview = this.ysview;
             },
 
             createProgressBar: function () {
