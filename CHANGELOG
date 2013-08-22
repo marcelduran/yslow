@@ -1,3 +1,7 @@
+Version 3.1.7
+-------------
+* Fixed Firebug 1.12 compatibility issue thanks to Honza
+
 Version 3.1.6
 -------------
 * Fixed bookmarklet yql response *result* on headers. Thanks @souders
