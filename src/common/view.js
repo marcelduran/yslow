@@ -1182,6 +1182,8 @@ YSLOW.view.prototype = {
             left_button_func = function (e) {
                 var i,
                     doc = YSLOW.util.getCurrentTarget(e).ownerDocument,
+                    doc = FBL.getContentView(doc);
+
                     aInputs = doc.getElementsByName('print-type'),
                     print_type = {};
 
@@ -1266,6 +1268,7 @@ YSLOW.view.prototype = {
             if (button) {
                 button.value = left_button_label;
                 button.onclick = left_button_func || function (e) {
+                    doc = FBL.getContentView(doc);
                     doc.ysview.closeDialog(doc);
                 };
             }
@@ -1481,6 +1484,7 @@ YSLOW.view.prototype = {
         "showComponents": "rw",
         "showStats": "rw",
         "showTools": "rw",
+        "onclickResult": "rw",
     },
 };
 
