@@ -39,7 +39,7 @@ YSLOW.FBYSlow = {
 
             showContext: function (browser, context) {
                 YSLOW.view.clearStatusBar();
-                if (context.yslowContext) {
+                if (context && context.yslowContext) {
                     YSLOW.view.restoreStatusBar(context.yslowContext);
                 }
             },
