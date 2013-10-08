@@ -29,7 +29,8 @@ var i, arg, page, urlCount, viewport,
         viewport: false,
         headers: false,
         console: 0,
-        threshold: 80
+        threshold: 80,
+        cdns: ''
     },
     unaryArgs = {
         help: false,
@@ -114,6 +115,7 @@ if (len === 0 || urlCount === 0 || unaryArgs.help) {
         '    -vp, --viewport <WxH>    specify page viewport size WxY, where W = width and H = height [400x300]',
         '    -ch, --headers <JSON>    specify custom request headers, e.g.: -ch \'{"Cookie": "foo=bar"}\'',
         '    -c, --console <level>    output page console messages (0: none, 1: message, 2: message + line + source) [0]',
+        '    --cdns "<list>"          specify comma separated list of additional CDNs',
         '',
         '  Examples:',
         '',
@@ -258,6 +260,7 @@ urls.forEach(function (url) {
 
             // YSlow phantomjs controller
             controller = function () {
+                var Preferences;
                 YSLOW.phantomjs.run = function () {
                     try {
                         var results, xhr, output, threshold,
@@ -272,6 +275,7 @@ urls.forEach(function (url) {
                             resources = ysphantomjs.resources,
                             args = ysphantomjs.args,
                             ysutil = ys.util,
+                            preferences,
 
                             // format out with appropriate content type
                             formatOutput = function (content) {
@@ -359,6 +363,10 @@ urls.forEach(function (url) {
                             );
                         });
 
+                        preferences = new Preferences();
+                        preferences.setPref('cdnHostnames', args.cdns);
+                        ysutil.Preference.registerNative(preferences);
+
                         // refinement
                         cset.inline = ysutil.getInlineTags(doc);
                         cset.domElementsCount = ysutil.countDOMElements(doc);
@@ -418,6 +426,28 @@ urls.forEach(function (url) {
                     } catch (err) {
                         return err;
                     }
+                };
+                // Implement a bare minimum preferences object to be able to use custom CDN URLs
+                Preferences = function () {
+                    this.prefs = {};
+                };
+                Preferences.prototype.getPref = function (name, defaultValue) {
+                    return this.prefs.hasOwnProperty(name) ? this.prefs[name] : defaultValue;
+                };
+                Preferences.prototype.setPref = function (name, value) {
+                    this.prefs[name] = value;
+                };
+                Preferences.prototype.deletePref = function (name) {
+                    delete this.prefs[name];
+                };
+                Preferences.prototype.getPrefList = function (branch_name, default_value) {
+                    var values = [], key;
+                    for (key in this.prefs) {
+                        if (this.prefs.hasOwnProperty(key) && key.indexOf(branch_name) === 0) {
+                            values.push({ 'name': key, 'value': this.prefs[key] });
+                        }
+                    }
+                    return values.length === 0 ? default_value : values;
                 };
 
                 return YSLOW.phantomjs.run();
