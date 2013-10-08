@@ -92,7 +92,7 @@ YSLOW.Component.prototype.populateProperties = function (resolveRedirect, ignore
 
     // check location
     // bookmarklet and har already handle redirects
-    if (that.headers.location && resolveRedirect) {
+    if (that.headers.location && resolveRedirect && that.headers.location !== that.url) {
         // Add a new component.
         comp = that.parent.addComponentNoDuplicate(that.headers.location,
             (that.type !== 'redirect' ? that.type : 'unknown'), that.url);

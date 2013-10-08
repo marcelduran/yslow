@@ -498,10 +498,9 @@ YSLOW.ComponentSet.prototype = {
 };
 
 /*
- * List of protocols to ignore in component set.
+ * List of valid protocols in component sets.
  */
-YSLOW.ComponentSet.ignoreProtocols = ['data', 'chrome', 'javascript', 'about',
-    'resource', 'jar', 'chrome-extension', 'file'];
+YSLOW.ComponentSet.validProtocols = ['http', 'https', 'ftp'];
 
 /**
  * @private
@@ -511,21 +510,21 @@ YSLOW.ComponentSet.ignoreProtocols = ['data', 'chrome', 'javascript', 'about',
  */
 YSLOW.ComponentSet.isValidProtocol = function (s) {
     var i, index, protocol,
-        ignoreProtocols = this.ignoreProtocols,
-        len = ignoreProtocols.length;
+        validProtocols = this.validProtocols,
+        len = validProtocols.length;
 
     s = s.toLowerCase();
     index = s.indexOf(':');
     if (index > 0) {
         protocol = s.substr(0, index);
         for (i = 0; i < len; i += 1) {
-            if (protocol === ignoreProtocols[i]) {
-                return false;
+            if (protocol === validProtocols[i]) {
+                return true;
             }
         }
     }
 
-    return true;
+    return false;
 };
 
 
