@@ -5,6 +5,8 @@ Version 3.1.8
 * Use max-age if exists following 1.1 spec. Issue #74
 * ETag IIS7+ compatible. Issue #66
 * Location header fix; add YSlow version to beacon; valid protocols check. Issue #65
+* Absolute url, fix for @import relative css. Issue #75
+* Test failures count to PhantomJS exit status code
 
 Version 3.1.7
 -------------
