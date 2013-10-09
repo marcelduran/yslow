@@ -53,12 +53,13 @@ $ phantomjs yslow.js --help
     -vp, --viewport <WxH>    specify page viewport size WxY, where W = width and H = height [400x300]
     -ch, --headers <JSON>    specify custom request headers, e.g.: -ch '{"Cookie": "foo=bar"}'
     -c, --console <level>    output page console messages (0: none, 1: message, 2: message + line + source) [0]
+    --cdns "<list>"          specify comma separated list of additional CDNs
 
   Examples:
 
     phantomjs yslow.js http://yslow.org
     phantomjs yslow.js -i grade -f xml www.yahoo.com www.cnn.com www.nytimes.com
-    phantomjs yslow.js -info all --format plain --ua "MSIE 9.0" http://yslow.org
+    phantomjs yslow.js --info all --format plain --ua "MSIE 9.0" http://yslow.org
     phantomjs yslow.js -i basic --rulseset yslow1 -d http://yslow.org
     phantomjs yslow.js -i grade -b http://www.showslow.com/beacon/yslow/ -v yslow.org
     phantomjs --load-plugins=yes yslow.js -vp 800x600 http://www.yahoo.com
