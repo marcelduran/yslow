@@ -20,7 +20,7 @@ YSlow for PhantomJS also introduces new output formats for automated test framew
 
 1. Check [steps to install PhantomJS](http://phantomjs.org/download.html) or alternatively [build it from source](http://phantomjs.org/build.html).
 1. Assuming PhantomJS is properly installed and executable from your PATH:  
-[Download YSlow for PhantomJS](http://yslow.org/yslow-phantomjs-3.1.5.zip)
+[Download YSlow for PhantomJS](http://yslow.org/yslow-phantomjs-3.1.8.zip)
 1. Extract the content into any directory.
 
 <a name="help">
