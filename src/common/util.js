@@ -1048,6 +1048,7 @@ YSLOW.util = {
             controller = yslow.controller,
             rules = yslow.doc.rules,
             dict = {
+                v: 'version',
                 w: 'size',
                 o: 'overall score',
                 u: 'url',
@@ -1236,6 +1237,7 @@ YSLOW.util = {
             mem = {},
 
             dict = {
+                v: 'version',
                 w: 'size',
                 o: 'overall score',
                 u: 'url',
