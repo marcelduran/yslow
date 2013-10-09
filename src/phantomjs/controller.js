@@ -226,7 +226,9 @@ urls.forEach(function (url) {
     // open page
     page.startTime = new Date();
     page.open(url, function (status) {
-        var yslow, ysphantomjs, controller, evalFunc, loadTime, url, resp,
+        var yslow, ysphantomjs, controller, evalFunc,
+            loadTime, url, resp, output,
+            exitStatus = 0,
             startTime = page.startTime,
             resources = page.resources;
 
@@ -278,7 +280,8 @@ urls.forEach(function (url) {
 
                             // format out with appropriate content type
                             formatOutput = function (content) {
-                                var format = (args.format || '').toLowerCase(),
+                                var testResults,
+                                    format = (args.format || '').toLowerCase(),
                                     harness = {
                                         'tap': {
                                             func: ysutil.formatAsTAP,
@@ -311,14 +314,16 @@ urls.forEach(function (url) {
                                     } catch (err) {
                                         threshold = args.threshold;
                                     }
+                                    testResults = harness[format].func(
+                                        ysutil.testResults(
+                                            content,
+                                            threshold
+                                        )
+                                    );
                                     return {
-                                        content: harness[format].func(
-                                            ysutil.testResults(
-                                                content,
-                                                threshold
-                                            )
-                                        ),
-                                        contentType: harness[format].contentType
+                                        content: testResults.content,
+                                        contentType: harness[format].contentType,
+                                        failures: testResults.failures
                                     };
                                 default:
                                     return {
@@ -475,7 +480,7 @@ urls.forEach(function (url) {
                             }
                         }
 
-                        return output.content;
+                        return output;
                     } catch (err) {
                         return err;
                     }
@@ -520,13 +525,15 @@ urls.forEach(function (url) {
             evalFunc = new Function(yslow + ysphantomjs + controller);
 
             // evaluate script and log results
-            console.log(page.evaluate(evalFunc));
+            output = page.evaluate(evalFunc);
+            exitStatus += output.failures || 0;
+            console.log(output.content);
         }
 
         // finish phantomjs
         urlCount -= 1;
         if (urlCount === 0) {
-            phantom.exit();
+            phantom.exit(exitStatus);
         }
     });
 });

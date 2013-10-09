@@ -1418,10 +1418,13 @@ YSLOW.util = {
      * Format test results as TAP for CI
      * @see: http://testanything.org/wiki/index.php/TAP_specification
      * @param {Array} tests the arrays containing the test results from testResults.
-     * @return {String} the results as TAP plain text
+     * @return {Object}:
+     *    failures: {Number} total test failed,
+     *    content: {String} the results as TAP plain text
      */
     formatAsTAP: function (results) {
         var i, res, line, offenders, j, lenJ,
+            failures = 0,
             len = results.length,
             tap = [],
             util = YSLOW.util,
@@ -1436,6 +1439,7 @@ YSLOW.util = {
         for (i = 0; i < len; i += 1) {
             res = results[i];
             line = res.ok || res.score < 0 ? 'ok' : 'not ok';
+            failures += (res.ok || res.score < 0) ? 0 : 1;
             line += ' ' + (i + 1) + ' ' + res.grade +
                 ' (' + res.score + ') ' + res.name;
             if (res.description) {
@@ -1473,14 +1477,19 @@ YSLOW.util = {
             }
         }
 
-        return tap.join('\n');
+        return {
+          failures: failures,
+          content: tap.join('\n')
+        };
     },
 
     /**
      * Format test results as JUnit XML for CI
      * @see: http://www.junit.org/
      * @param {Array} tests the arrays containing the test results from testResults.
-     * @return {String} the results as JUnit XML text
+     * @return {Object}:
+     *    failures: {Number} total test failed,
+     *    content: {String} the results as JUnit XML text
      */
     formatAsJUnit: function (results) {
         var i, res, line, offenders, j, lenJ,
@@ -1510,13 +1519,14 @@ YSLOW.util = {
             if (res.ok) {
                 cases.push(line + '"/>');
             } else {
-                failures += 1;
                 cases.push(line + '">');
 
                 // skipped
                 if (res.score < 0) {
                     skipped += 1;
                     cases.push('      <skipped>score N/A</skipped>');
+                } else {
+                  failures += 1;
                 }
 
                 line = '      <failure';
@@ -1567,7 +1577,10 @@ YSLOW.util = {
         // close test suites wrapper
         junit.push('</testsuites>');
 
-        return junit.join('\n');
+        return {
+            failures: failures,
+            content: junit.join('\n')
+        };
     },
 
     /**
