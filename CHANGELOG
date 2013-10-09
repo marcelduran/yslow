@@ -1,3 +1,11 @@
+Version 3.1.8
+-------------
+* Custom CDNs list entry for PhantomJS. Issue #79
+* Fetch assets that are missing from PhantomJS. Issue #76
+* Use max-age if exists following 1.1 spec. Issue #74
+* ETag IIS7+ compatible. Issue #66
+* Location header fix; add YSlow version to beacon; valid protocols check. Issue #65
+
 Version 3.1.7
 -------------
 * Fixed Firebug 1.12 compatibility issue thanks to Honza
