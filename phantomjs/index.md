@@ -12,7 +12,7 @@ metadata:
 ---
 [PhantomJS](http://www.phantomjs.org/) is a headless WebKit with JavaScript API. YSlow for PhantomJS is a command line script that allows page performance analysis from live URLs, unlike YSlow for [Command Line (HAR)](../command-line-har/) where a pre-generated [HAR](http://www.softwareishard.com/blog/har-12-spec/) file is needed in order to analyze page performance.
 
-YSlow for PhantomJS also introduces new output formats for automated test frameworks: [TAP (Test Anything Protocol)](http://www.testanything.org/) and [JUnit](http://www.junit.org/), other formats as well as hook for custom formatters will be available soon, keep watching. With this new feature, YSlow can now be added to your [continuous integration](http://en.wikipedia.org/wiki/Continuous_integration) pipeline as a performance test suite, preventing performance regression to be pushed to production. See [examples](#wiki-examples) and [screenshots](#wiki-screenshots) below.
+YSlow for PhantomJS also introduces new output formats for automated test frameworks: [TAP (Test Anything Protocol)](http://www.testanything.org/) and [JUnit](http://www.junit.org/), other formats as well as hook for custom formatters will be available soon, keep watching. With this new feature, YSlow can now be added to your [continuous integration](http://en.wikipedia.org/wiki/Continuous_integration) pipeline as a performance test suite, preventing performance regression to be pushed to production. See [examples](#examples) and [screenshots](#screenshots-jenkins) (below)[#screenshots-travisci].
 
 <a name="installation">
 ## Installation
@@ -185,19 +185,6 @@ ok 24 A (95) yfavicon: Make favicon small and cacheable
   ...
 ```
 
-<a name="screenshots">
-## Screenshots
-</a>
-
-### [Jenkins](http://jenkins-ci.org/) with TAP test results
-![Jenkins with TAP test results screenshot](http://i.imgur.com/K2WK3.png)
-
-### [Jenkins](http://jenkins-ci.org/) with JUnit test results
-![Jenkins with JUnit test results screenshot](http://i.imgur.com/PTD6j.png)
-
-### [Jenkins](http://jenkins-ci.org/) with JUnit test result details
-![Jenkins with JUnit test result details screenshot](http://i.imgur.com/0vjzQ.png)
-
 <a name="jenkins-integration">
 ## Jenkins integration
 </a>
@@ -229,3 +216,66 @@ In line above:
  - `yslow.tap` is the output results in TAP format
 
 Make sure you publish JUnit and/or TAP results report in the post-build actions pointing to the output test results file(s), e.g: yslow.xml, yslow.tap, etc.
+
+<a name="screenshots-jenkins">
+### Screenshots
+</a>
+
+### [Jenkins](http://jenkins-ci.org/) with TAP test results
+![Jenkins with TAP test results screenshot](http://i.imgur.com/K2WK3.png)
+
+### [Jenkins](http://jenkins-ci.org/) with JUnit test results
+![Jenkins with JUnit test results screenshot](http://i.imgur.com/PTD6j.png)
+
+### [Jenkins](http://jenkins-ci.org/) with JUnit test result details
+![Jenkins with JUnit test result details screenshot](http://i.imgur.com/0vjzQ.png)
+
+<a name="travisci-integration">
+## Travis-CI integration
+</a>
+
+[Travis-CI](http://travis-ci.org/) relies on the `exit code` for success, i.e. 0 means success anything else is a failure. As from version 3.1.8 YSlow for PhantomJS returns the number of failures as `exit code` for both `TAP` and `JUnit` output formats.
+
+```bash
+$ phantomjs yslow.js --info grade --format tap --threshold '{"yminify": 90}' example.com
+TAP version 13
+1..24
+ok 1 B (88) overall score
+not ok 2 C (72) ynumreq: Make fewer HTTP requests
+ok 3 C (70) ycdn: Use a Content Delivery Network (CDN)
+ok 4 A (100) yemptysrc: Avoid empty src or href
+not ok 5 F (12) yexpires: Add Expires headers
+ok 6 A (100) ycompress: Compress components with gzip
+ok 7 A (100) ycsstop: Put CSS at top
+ok 8 A (100) yjsbottom: Put JavaScript at bottom
+ok 9 A (100) yexpressions: Avoid CSS expressions
+ok 10 N/A (-1) yexternal: Make JavaScript and CSS external # SKIP score N/A
+not ok 11 C (70) ydns: Reduce DNS lookups
+ok 12 A (90) yminify: Minify JavaScript and CSS
+ok 13 A (100) yredirects: Avoid URL redirects
+ok 14 A (100) ydupes: Remove duplicate JavaScript and CSS
+ok 15 A (100) yetags: Configure entity tags (ETags)
+ok 16 A (100) yxhr: Make AJAX cacheable
+ok 17 A (100) yxhrmethod: Use GET for AJAX requests
+ok 18 A (100) ymindom: Reduce the number of DOM elements
+ok 19 A (100) yno404: Avoid HTTP 404 (Not Found) error
+ok 20 A (100) ymincookie: Reduce cookie size
+ok 21 A (100) ycookiefree: Use cookie-free domains
+ok 22 A (100) ynofilter: Avoid AlphaImageLoader filter
+ok 23 A (100) yimgnoscale: Do not scale images in HTML
+ok 24 A (95) yfavicon: Make favicon small and cacheable
+
+$ echo $?
+3
+```
+
+In the example above there were 3 *not ok* tests in the ruleset, hence the `exit code` is 3 which would not pass on Travis-CI.
+
+See [sample project](https://github.com/marcelduran/travis-playground/blob/master/package.json) with YSlow for PhantomJS as pretest script and [sample results](https://travis-ci.org/marcelduran/travis-playground/builds/12356059).
+
+<a name="screenshots-travisci">
+### Screenshots
+</a>
+
+### [Travis-CI](http://travis-ci.org/) with TAP test failure results
+![Travis-CI with TAP test failure results screenshot](http://i.imgur.com/vfnaSaP.png)
