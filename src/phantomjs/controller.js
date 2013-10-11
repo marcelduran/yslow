@@ -12,7 +12,7 @@
  * later evaluated into the page in order to run YSlow.
  */
 
-// For using yslow in phantomjs, see instructions @ https://github.com/marcelduran/yslow/wiki/PhantomJS
+// For using yslow in phantomjs, see instructions @ http://yslow.org/phantomjs/
 
 // parse args
 var i, arg, page, urlCount, viewport,
