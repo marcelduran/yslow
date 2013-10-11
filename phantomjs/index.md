@@ -91,6 +91,13 @@ ruleset: ydefault
 page load time: 2576
 ```
 
+### Adding custom CDNs
+A custom list of CDNs can be specified via `--cdns` argument.
+
+```bash
+$ phantomjs yslow.js -i grade --cdns "foo.com,bar.com,baz.com" example.com
+```
+
 ### Basic test (overall score only) with TAP output
 ```bash
 $ phantomjs yslow.js --info basic --format tap --threshold B http://yslow.org
