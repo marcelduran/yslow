@@ -280,7 +280,7 @@ YSLOW.view.prototype = {
             text = text.replace(/<li>Tools[^<]+<\/li>/, '');
         }
         
-        sHtml = '<div id="splashDiv">' + '<div id="splashDivCenter">' + '<b id="splashImg" width="250" height="150" alt="splash image" src="chrome://yslow/content/yslow/img/speedometer.png"></b>' + '<div id="left"><h2>' + title + '</h2>' + '<div id="content" class="padding50"><h3>' + header + '</h3><ul id="splashBullets">' + text + '</ul>';
+        sHtml = '<div id="splashDiv">' + '<div id="splashDivCenter">' + '<b id="splashImg" width="250" height="150" alt="splash image" ></b>' + '<div id="left"><h2>' + title + '</h2>' + '<div id="content" class="padding50"><h3>' + header + '</h3><ul id="splashBullets">' + text + '</ul>';
         
         if (typeof hideAutoRun !== 'undefined') {
             YSLOW.hideAutoRun = hideAutoRun;
