@@ -53,3 +53,7 @@ Licensing
 Copyright (c) 2012, Yahoo! Inc. All rights reserved.  
 Copyright (c) 2013, Marcel Duran and other contributors. All rights reserved.  
 Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/marcelduran/yslow/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
