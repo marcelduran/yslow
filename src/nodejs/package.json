@@ -1,7 +1,7 @@
 {
     "name": "yslow",
     "version": "{{YSLOW_VERSION}}",
-    "description": "Commnad line version of YSlow web performance analysis tool from HAR files",
+    "description": "Command line version of YSlow web performance analysis tool from HAR files",
     "keywords": ["yslow", "performance", "har", "yahoo", "wpo", "command", "line", "automation"],
     "homepage": "http://yslow.org",
     "author": "Marcel Duran <yslow@marcelduran.com> (http://yslow.org)",
