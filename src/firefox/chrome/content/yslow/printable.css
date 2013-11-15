@@ -20,7 +20,7 @@ table {
 
 /* printable view */
 #printableDiv {
-    background: #fff;
+    background-color: #fff;
     padding: 0 10px;
 }
 
@@ -65,7 +65,7 @@ table {
 
 #yslowDiv {
     width: 950px;
-    margin: 0px auto;
+    margin: 0 auto;
     margin-top: 10px;
     margin-bottom: 20px;
     text-align: left;
@@ -134,7 +134,7 @@ table {
     margin-left: 180px;
 }
 
-#statsDiv #stats-detail .summary-row, 
+#statsDiv #stats-detail .summary-row,
 #statsDiv #stats-detail .summary-row-2 {
     font-weight: bold;
     font-size: 10pt;
@@ -203,7 +203,7 @@ table {
     border-spacing: 0;
     font-size: 0.85em;
 }
- 
+
 #componentsDiv #components th {
     border: solid #676767;
     border-width: 1px 0 0 1px;
@@ -225,7 +225,7 @@ table {
     text-align: right;
 }
 
-#componentsDiv #components td.components, 
+#componentsDiv #components td.components,
 #componentsDiv #components td.headers {
     text-align: center;
 }
@@ -246,7 +246,7 @@ table {
 
 #reportDiv tr.header {
     font-weight: bold;
-    background: #dfdfdf;
+    background-color: #dfdfdf;
 }
 
 #reportDiv tr.header td {
@@ -312,9 +312,9 @@ table {
 }
 
 tr.odd {
-    background: #ffffff;
+    background-color: #fff;
 }
 
 tr.even {
-    background: #efefef;
+    background-color: #efefef;
 }
