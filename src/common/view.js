@@ -279,9 +279,9 @@ YSLOW.view.prototype = {
             // nasty :-P
             text = text.replace(/<li>Tools[^<]+<\/li>/, '');
         }
-        
+
         sHtml = '<div id="splashDiv">' + '<div id="splashDivCenter">' + '<b id="splashImg" width="250" height="150" alt="splash image" ></b>' + '<div id="left"><h2>' + title + '</h2>' + '<div id="content" class="padding50"><h3>' + header + '</h3><ul id="splashBullets">' + text + '</ul>';
-        
+
         if (typeof hideAutoRun !== 'undefined') {
             YSLOW.hideAutoRun = hideAutoRun;
         } else {
@@ -294,7 +294,7 @@ YSLOW.view.prototype = {
             }
             sHtml += '> Autorun YSlow each time a web page is loaded</label>';
         }
-        
+
         if (typeof showAntiIframe !== 'undefined') {
             YSLOW.showAntiIframe = showAntiIframe;
         } else {
@@ -303,7 +303,7 @@ YSLOW.view.prototype = {
         if (showAntiIframe) {
             sHtml += '<label><input type="checkbox" onclick="javascript:document.ysview.setAntiIframe(this.checked)"> Check here if the current page prevents itself from being embedded/iframed. A simpler post onload detection will be used instead.</label>';
         }
-        
+
         sHtml += '<div id="runtestDiv"><button id="runtest-btn" onclick="javascript:document.ysview.runTest()">Run Test</button></div></div><div class="footer"><div class="moreinfo">' + '<a href="javascript:document.ysview.openLink(\'https://yslow.org/\');"><b>&#187;</b>' + more_info_text + '</a></div></div></div></div></div>';
 
         this.addButtonView('panel_about', sHtml);
@@ -704,7 +704,7 @@ YSLOW.view.prototype = {
             el = panel.getElementById('tab-label-list'),
             lis = el.getElementsByTagName('li'),
             len = lis.length;
-        
+
         if (cdns) {
             cdns = cdns.replace(/\s+/g, '').split(',');
             cdns.push(cdn);
@@ -1083,8 +1083,8 @@ YSLOW.view.prototype = {
      * Open link in a popup window
      * @param {String} url URL of the page to be opened.
      * @param {String} name (optional) the window name.
-     * @param {Number} width (optional) the popup window width. 
-     * @param {Number} height (optional) the popup window height. 
+     * @param {Number} width (optional) the popup window width.
+     * @param {Number} height (optional) the popup window height.
      */
     openPopup: function (url, name, width, height, features) {
         window.open(url, name || '_blank', 'width=' + (width || 626) +

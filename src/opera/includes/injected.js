@@ -15,17 +15,17 @@ window.addEventListener('DOMContentLoaded', function () {
             p.style.cssText = 'display:none';
             o = p.contentWindow.document;
             o.open().write(
-                '<head>' + 
-                '<body onload = "' + 
-                '   YUI_config = {' + 
-                '       win: window.parent,' + 
-                '       doc: window.parent.document' + 
-                '   };' + 
-                '   var d = document;' + 
-                '   d.getElementsByTagName(\'head\')[0]' + 
-                '       .appendChild(' + 
-                '           d.createElement(\'script\')' + 
-                '       ).src = \'http://d.yimg.com/jc/yslow-bookmarklet.js\'"' + 
+                '<head>' +
+                '<body onload = "' +
+                '   YUI_config = {' +
+                '       win: window.parent,' +
+                '       doc: window.parent.document' +
+                '   };' +
+                '   var d = document;' +
+                '   d.getElementsByTagName(\'head\')[0]' +
+                '       .appendChild(' +
+                '           d.createElement(\'script\')' +
+                '       ).src = \'http://d.yimg.com/jc/yslow-bookmarklet.js\'"' +
                 '>'
             );
             o.close()

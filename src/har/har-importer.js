@@ -26,7 +26,7 @@
             'image/x-icon': 'image',
 
             'application/x-shockwave-flash': 'flash',
-                
+
             'text/x-json': 'json',
             'text/x-js': 'json',
             'application/json': 'json',
@@ -38,7 +38,7 @@
             'text/xul': 'xml',
             'application/rdf+xml': 'xml'
         },
-        
+
         // distinguish images from css images
         setCssImages = function (cset) {
             var i, len, comp,
@@ -97,7 +97,7 @@
                 log = har.log || {},
                 pages = log.pages || [],
                 entries = log.entries || [];
-                
+
             // pages loop (first page only for now)
             // TODO: think of a way to analyze all pages
             for (i = 0, len = (pages.length ? 1 : 0); i < len; i += 1) {
@@ -161,7 +161,7 @@
 
                 // build YSlow component set
                 for (j = 0, lenJ = comps.length; j < lenJ; j += 1) {
-                    comp = comps[j]; 
+                    comp = comps[j];
                     cset.addComponent(comp.href, comp.type, baseHref, {
                             entry: comp.entry,
                             comp: comp
@@ -185,7 +185,7 @@
                     comp = comps[j];
                     if (comp.url === favicon.href) {
                         comp.type = 'favicon';
-                    }  
+                    }
                 }
             }
 

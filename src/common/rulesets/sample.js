@@ -7,7 +7,7 @@
  *     id: 'foo-rule1',
  *     name: 'Sample Test #1',
  *     info: 'How simple is that?',
- * 
+ *
  *     lint: function (doc, cset, config) {
  *         return {
  *             score: 90,
@@ -16,7 +16,7 @@
  *         };
  *     }
  * });
- * 
+ *
  * YSLOW.registerRuleset({
  *     id: 'foo',
  *     name: 'Foobar Ruleset',

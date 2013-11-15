@@ -65,7 +65,7 @@
         var i, len,
             cset = yscontext.component_set,
             comps = cset.components;
-        
+
         cset.cookies = cookies;
 
         for (i = 0, len = comps.length; i < len; i += 1) {
@@ -80,7 +80,7 @@
             action: 'getDocCookies'
         }, getDocCookies);
     }
-    
+
     function inlineTags(inline) {
         yscontext.component_set.inline = inline;
 
@@ -198,7 +198,7 @@
             } else {
                 doc.ysview.updateProgressView('message',
                     'page still loading, waiting...');
-                setTimeout(run, 250);    
+                setTimeout(run, 250);
             }
         });
     }
@@ -212,7 +212,7 @@
                 doc.ysview.openDialog(doc, 400, 150,
                     'For security reasons Chrome extensions cannot run ' +
                     'content scripts at this page.', null, 'OK');
-                
+
                 return;
             } else {
                 yscontext.result_set = null;

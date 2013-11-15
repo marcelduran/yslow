@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Create the button and add it to the toolbar.
     opera.contexts.toolbar.addItem(button);
-    
+
     // Only enable the button when the extension and page are ready.
     opera.extension.onconnect = toggleButton;
     opera.extension.tabs.onfocus = toggleButton;

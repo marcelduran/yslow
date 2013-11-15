@@ -6,29 +6,29 @@ Copyrights licensed under the New BSD License. See the accompanying LICENSE file
 -->
 
 <bindings xmlns="http://www.mozilla.org/xbl"
-	xmlns:xbl="http://www.mozilla.org/xbl"
-	xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    xmlns:xbl="http://www.mozilla.org/xbl"
+    xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-	<binding id="startup">
-		<implementation>
-			<constructor><![CDATA[
-				YSLOW.firefox.startup(false);
-			]]></constructor>
-			<destructor><![CDATA[
-				YSLOW.firefox.shutdown();
-			]]></destructor>
-		</implementation>
-	</binding>
+    <binding id="startup">
+        <implementation>
+            <constructor><![CDATA[
+                YSLOW.firefox.startup(false);
+            ]]></constructor>
+            <destructor><![CDATA[
+                YSLOW.firefox.shutdown();
+            ]]></destructor>
+        </implementation>
+    </binding>
 
-	<binding id="windowStartup">
-		<implementation>
-			<constructor><![CDATA[
-				YSLOW.firefox.startup(true);
-			]]></constructor>
-			<destructor><![CDATA[
-				YSLOW.firefox.shutdown();
-			]]></destructor>
-		</implementation>
-	</binding>
+    <binding id="windowStartup">
+        <implementation>
+            <constructor><![CDATA[
+                YSLOW.firefox.startup(true);
+            ]]></constructor>
+            <destructor><![CDATA[
+                YSLOW.firefox.shutdown();
+            ]]></destructor>
+        </implementation>
+    </binding>
 
 </bindings>

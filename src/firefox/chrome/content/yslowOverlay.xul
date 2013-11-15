@@ -15,7 +15,7 @@ Copyrights licensed under the New BSD License. See the accompanying LICENSE file
      <vbox id="yslow-view" persist="height" flex="1">
           <toolbox>
               <toolbar id="yslow-TopBar" align="center" flex="0">
-                  <toolbarbutton id="yslow-TopBarButton-Peel" 
+                  <toolbarbutton id="yslow-TopBarButton-Peel"
                   label="Run YSlow" tooltiptext="Run Slow"
                   command="cmd_yslow_run"/>
                   <toolbarbutton id="yslow-TopBarButton-Close"

@@ -59,7 +59,7 @@ var files, dict,
                 ? content
                 : objToStr(content)
             );
-        }); 
+        });
     },
 
     /**
@@ -69,7 +69,7 @@ var files, dict,
     sendBeacon = function (content) {
         var options, req,
             beacon = program.beacon,
-            
+
             // request callback (response)
             response = function (res) {
                 if (program.verbose) {
@@ -89,7 +89,7 @@ var files, dict,
                     prettyPrint(content);
                 }
             };
-        
+
         // normalize beacon url
         if (beacon.indexOf('http') !== 0) {
             prefix = 'http:';
@@ -101,7 +101,7 @@ var files, dict,
 
         // set request options
         options = {
-            host: beacon.hostname, 
+            host: beacon.hostname,
             port: beacon.port || 80,
             path: beacon.pathname + (beacon.search || ''),
             method: 'POST',
@@ -111,7 +111,7 @@ var files, dict,
             }
         };
 
-        // build request 
+        // build request
         req = http.request(options, response);
 
         // report errors
@@ -140,7 +140,7 @@ var files, dict,
             if (dict) {
                 content.dictionary = dict;
             }
-            
+
             if (program.beacon) {
                 sendBeacon(objToStr(content));
             } else {
@@ -150,7 +150,7 @@ var files, dict,
             showError(err);
         }
     },
-    
+
     /**
      * Read and parse HAR file
      * @param {Error} err

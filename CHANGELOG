@@ -85,7 +85,7 @@ Version 3.0.3
 -------------
 
 * Added cdn checking from HTTP headers: Server and X-CDN (currently cloudflare)
-* Added Social support: Sharing YSlow results through Twitter and Facebook 
+* Added Social support: Sharing YSlow results through Twitter and Facebook
 * Like (Facebook) and Follow (Twitter) links on help menu
 
 

@@ -143,7 +143,7 @@ YSLOW.Component.prototype.populateProperties = function (resolveRedirect, ignore
 
     // expiration based on either Expires or Cache-Control headers
     // always use max-age if exists following 1.1 spec
-    // http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.3                                                                                      
+    // http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.3
     if (that.getMaxAge() !== undefined) {
         that.expires = that.getMaxAge();
     }

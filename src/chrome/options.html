@@ -25,7 +25,7 @@
                     list = pref.getPrefList(),
                     html = '<table><tbody>',
                     undo = {},
-                    
+
                     change = function (e) {
                         var last, oldValue,
                             target = util.getCurrentTarget(e),
@@ -41,7 +41,7 @@
                         pref.setPref(id, target.value);
                         doc.getElementById('item_' + id).className = 'undo';
                     },
-                    
+
                     undoChange = function (e) {
                         var undos, value,
                             target = util.getTarget(e),

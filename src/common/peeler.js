@@ -156,7 +156,7 @@ YSLOW.peeler = {
      */
     findComponentsInNode: function (node, baseHref, type) {
         var comps = [];
-        
+
         try {
             comps = this.findStyleSheets(node, baseHref);
         } catch (e1) {
@@ -189,7 +189,7 @@ YSLOW.peeler = {
         } catch (e6) {
             YSLOW.util.dump(e6);
         }
-        
+
         return comps;
     },
 
@@ -543,7 +543,7 @@ YSLOW.peeler = {
         links = node.getElementsByTagName('link');
         for (i = 0, len = links.length; i < len; i += 1) {
             link = links[i];
-            rel = (link.rel || '').toLowerCase(); 
+            rel = (link.rel || '').toLowerCase();
             if (link.href && (rel === 'icon' ||
                 rel === 'shortcut icon')) {
                 comps.push({
@@ -573,10 +573,10 @@ YSLOW.peeler = {
      */
     getBaseHref: function (doc) {
         var base;
-        
+
         try {
             base = doc.getElementsByTagName('base')[0];
-            base = (base && base.href) || doc.URL; 
+            base = (base && base.href) || doc.URL;
         } catch (e) {
             YSLOW.util.dump(e);
         }

@@ -19,7 +19,7 @@ YUI().use(function (iY) {
     };
 
     iY.use('features', 'node-base', 'node-style', 'yql', 'jsonp-url', 'yslow-config', function (Y) {
-        var 
+        var
             iwin, idoc, fetchCount, fetchTotal, iframeNode,
 
             win = Y.config.win,
@@ -117,7 +117,7 @@ YUI().use(function (iY) {
             iY.one('#ysToolButton').remove();
             iY.one('#printLink').remove();
         });
-        
+
         function buildComponentSet(comps) {
             var i, comp, len,
                 baseHref = YSLOW.peeler.getBaseHref(doc),
@@ -183,7 +183,7 @@ YUI().use(function (iY) {
                 if (getHostname(comp.url) === docDomain &&
                         comp.cookie.length < cookies.length) {
                     comp.cookie = cookies;
-                } 
+                }
             }
         }
 
@@ -280,9 +280,9 @@ YUI().use(function (iY) {
         function request(hash, comps, urls) {
             urls = breakDownUrls(urls);
             fetchCount = fetchTotal = urls.length;
-            
+
             arrayEach(urls, function (url) {
-                Y.YQL(YQL_REQ_TABLE + 
+                Y.YQL(YQL_REQ_TABLE +
                     'select * from data.headers where url in (' + url + ') and ua="' +
                     YQL_REQ_UA + '";', {
                         on: {
@@ -333,7 +333,7 @@ YUI().use(function (iY) {
         YSLOW.util.event.addListener('componentFetchDone', function () {
             idoc.ysview.show();
         });
-        
+
         idoc.ysview.setSplashView(true, true, true);
     });
 });

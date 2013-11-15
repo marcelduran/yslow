@@ -296,7 +296,7 @@ YSLOW.Tools = {
         //If we were generating performance stats for a printable version, we should reset this flag after we are done.
         //This is required so that performance output on the FF panel remains unexpanded and correctly formated.
         YSLOW.renderer.bPrintable = false;
-        
+
         // add styling
         uri = 'chrome://yslow/content/yslow/printable.css';
         req2 = new XMLHttpRequest();
