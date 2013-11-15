@@ -15,7 +15,7 @@ body {
 #yslowDiv {
     font-size: 11px;
     font-weight: bold;
-    font-family: Lucida Grande, Tahoma, sans-serif;
+    font-family: "Lucida Grande", Tahoma, sans-serif;
     color: #101010; /* dark grey */
     margin-right: 10px;
     padding: 1px;
@@ -44,7 +44,7 @@ body {
 #yslowDiv option {
     font-size: 8pt;
     font-weight: bold;
-    font-family: Lucida Grande, Tahoma, sans-serif;
+    font-family: "Lucida Grande", Tahoma, sans-serif;
     color: #101010; /* dark grey */
     margin: 0;
     padding: 0;
