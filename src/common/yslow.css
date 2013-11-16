@@ -271,9 +271,7 @@ body {
 
 #yslowDiv #toolbarDiv #toolbar-ruleset li {
     display: inline;
-    list-style-image: none;
-    list-style-position: outside;
-    list-style-type: none;
+    list-style: none;
     border-left: 1px solid #676767;
     margin-right: 0.5em;
 }
@@ -335,9 +333,7 @@ body {
     display: inline-block;
     *display: inline; /* IE */
     font-weight: 600; /* semi-bold */
-    list-style-image: none;
-    list-style-position: outside;
-    list-style-type: none;
+    list-style: none;
     margin: 0;
     padding: 1px 0 0; /* gecko: make room for overflow */
     *width: 100px;
@@ -691,9 +687,7 @@ body {
     border-left: 1px solid #101010;
     float: left;
     font-weight: bold;
-    list-style-image: none;
-    list-style-position: outside;
-    list-style-type: none;
+    list-style: none;
     margin-left: 5px;
     padding-left: 8px;
 }
