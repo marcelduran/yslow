@@ -634,12 +634,12 @@ YSLOW.registerRule({
         // check inline scripts/styles/whatever
         for (i = 0, len = styles.length; i < len; i += 1) {
             if (!YSLOW.util.isMinified(styles[i].body)) {
-                offenders.push('inline &lt;style&gt; tag #' + (i + 1));
+                offenders.push('inline &lt;style&gt; tag #' + (i + 1) + ' (parent node is &lt;'+styles[i].contentNode+'&gt;)<br /><pre>' + YSLOW.util.escapeHtml(styles[i].body) + '</pre>');
             }
         }
         for (i = 0, len = scripts.length; i < len; i += 1) {
             if (!YSLOW.util.isMinified(scripts[i].body)) {
-                offenders.push('inline &lt;script&gt; tag #' + (i + 1));
+                offenders.push('inline &lt;script&gt; tag #' + (i + 1) + ' (parent node is &lt;'+scripts[i].contentNode+'&gt;)<br /><pre>' + YSLOW.util.escapeHtml(scripts[i].body) + '</pre>');
             }
         }
 
