@@ -11,7 +11,7 @@
                     !tab.url.indexOf('chrome-extension://')) {
                     alert('For security reasons Chrome extensions cannot ' +
                         'run content scripts at this page.');
-                    
+
                     return;
                 }
                 chrome.windows.create({
@@ -22,6 +22,12 @@
                     height: parseInt(screen.availHeight / 2, 10) || 400,
                     type: 'popup'
                 });
+            });
+            chrome.browserAction.setIcon({
+                path: {
+                    "19": "icon19x19.png",
+                    "38": "icon19x19@2x.png"
+                }
             });
         </script>
     </body>
