@@ -10,22 +10,23 @@
     },
     "browser_action": {
         "name": "YSlow",
-        "default_icon": "icon.png"
+        "default_icon": {
+            "19": "icon38x19.png",
+            "38": "icon38x19@2x.png"
+        },
     },
     "background_page": "background.html",
     "options_page": "options.html",
-    "content_scripts": [
-        {
-            "matches": [
-                "http://*/*",
-                "https://*/*"
-            ],
-            "js": [
-                "content.js",
-                "yslow-chrome.js"
-            ]
-        }
-    ],
+    "content_scripts": [{
+        "matches": [
+            "http://*/*",
+            "https://*/*"
+        ],
+        "js": [
+            "content.js",
+            "yslow-chrome.js"
+        ]
+    }],
     "permissions": [
         "tabs",
         "cookies",
