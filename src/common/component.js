@@ -302,4 +302,4 @@ YSLOW.Component.prototype.getReceivedCookieSize = function () {
  * Platform implementation of
  * YSLOW.Component.prototype.setComponentDetails = function (o) {}
  * goes here
-/*
+ */
