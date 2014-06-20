@@ -251,7 +251,7 @@ YSLOW.util = {
 
     /**
      * Returns the hostname (domain) for a given URL
-     * 
+     *
      * @param {String} url The absolute URL to get hostname from
      * @return {String} The hostname
      */
@@ -846,8 +846,11 @@ YSLOW.util = {
             params.s = encodeURI(spaceid);
         }
         params.i = yscontext.result_set.getRulesetApplied().id;
-        if (yscontext.PAGE.t_done) {
-            params.lt = parseInt(yscontext.PAGE.t_done, 10);
+        if (yscontext.PAGE.t_ready) {
+            params.rt = parseInt(yscontext.PAGE.t_ready, 10);
+        }
+        if (yscontext.PAGE.t_load) {
+            params.lt = parseInt(yscontext.PAGE.t_load, 10);
         }
 
         if (include_grade) {
@@ -1905,7 +1908,7 @@ YSLOW.util = {
 
     /**
      * identifies injected elements (js, css, iframe, flash, image)
-     * @param doc the document to create/manipulate dom elements 
+     * @param doc the document to create/manipulate dom elements
      * @param comps the component set components
      * @param body the root (raw) document body (html)
      * @return the same components with injected info

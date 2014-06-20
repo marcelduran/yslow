@@ -168,6 +168,17 @@ urls.forEach(function (url) {
         }
     };
 
+    // timingStartTime, timingDOMContentLoaded
+    // https://groups.google.com/forum/?fromgroups=#!topic/phantomjs/WnXZLIb_jVc
+    page.onInitialized = function () {
+        page.timingStartTime = page.evaluate(function () {
+            (function () {
+                document.addEventListener("DOMContentLoaded", function(){window.timingDOMContentLoaded = Date.now();}, false);
+            })();
+            return Date.now();
+        });
+    };
+
     // enable console output, useful for debugging
     yslowArgs.console = parseInt(yslowArgs.console, 10) || 0;
     if (yslowArgs.console) {
@@ -237,7 +248,14 @@ urls.forEach(function (url) {
             console.log('FAIL to load ' + url);
         } else {
             // page load time
-            loadTime = new Date() - startTime;
+            loadTime = new Date() - page.timingStartTime;
+
+            // timingDOMContentLoaded
+            // https://groups.google.com/forum/?fromgroups=#!topic/phantomjs/WnXZLIb_jVc
+            page.timingDOMContentLoaded = JSON.parse(page.evaluate(function () {
+                return window.timingDOMContentLoaded;
+            }));
+            page.readyTime = page.timingDOMContentLoaded - page.timingStartTime;
 
             // set resources response time
             for (url in resources) {
@@ -259,6 +277,7 @@ urls.forEach(function (url) {
             ysphantomjs = 'YSLOW.phantomjs = {' +
                 'resources: ' + JSON.stringify(resources) + ',' +
                 'args: ' + JSON.stringify(yslowArgs) + ',' +
+                'readyTime: ' + JSON.stringify(page.readyTime) + ',' +
                 'loadTime: ' + JSON.stringify(loadTime) + '};';
 
             // YSlow phantomjs controller
@@ -437,7 +456,8 @@ urls.forEach(function (url) {
                         yscontext.component_set = cset;
                         ys.controller.lint(doc, yscontext, args.ruleset);
                         yscontext.result_set.url = baseHref;
-                        yscontext.PAGE.t_done = ysphantomjs.loadTime;
+                        yscontext.PAGE.t_load = ysphantomjs.loadTime;
+                        yscontext.PAGE.t_ready = ysphantomjs.readyTime;
                         yscontext.collectStats();
                         results = ysutil.getResults(yscontext, args.info);
 
