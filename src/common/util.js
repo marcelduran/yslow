@@ -1525,11 +1525,12 @@ YSLOW.util = {
                 if (res.score < 0) {
                     skipped += 1;
                     cases.push('      <skipped>score N/A</skipped>');
+                    line = '      <failure type="skipped"';
                 } else {
                   failures += 1;
+                  line = '      <failure type="failed"';
                 }
 
-                line = '      <failure';
                 if (res.message) {
                     line += ' message="' + safeAttr(res.message) + '"';
                 }
