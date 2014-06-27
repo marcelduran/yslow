@@ -1,7 +1,8 @@
-YSlow
-=====
+# YSlow
 
-YSlow analyzes web pages and suggests ways to improve their performance based on a set of [rules for high performance web pages](http://developer.yahoo.com/performance/rules.html).
+YSlow analyzes web pages and suggests ways to improve their performance based on
+a set of [rules for high performance web pages](http://developer.yahoo.com/performance/rules.html).
+
 
 ### Building
 
@@ -28,10 +29,11 @@ e.g.:
 
     make chrome
 
+
 ### Packaging
 
 All flavors:
-    
+
     make pkg
 
 Specific flavor:
@@ -42,18 +44,17 @@ e.g:
 
     make pkg-firefox
 
-More Info
----------
+
+## More Info
 
 [yslow.org](http://yslow.org)
 
-Licensing
----------
 
-Copyright (c) 2012, Yahoo! Inc. All rights reserved.  
-Copyright (c) 2013, Marcel Duran and other contributors. All rights reserved.  
-Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+## Licensing
+
+Copyright (c) 2012, Yahoo! Inc. All rights reserved.
+Copyright (c) 2013, Marcel Duran and other contributors. All rights reserved.
+Copyrights licensed under the New BSD License. See the accompanying [LICENSE](LICENSE.txt) file for terms.
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/marcelduran/yslow/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-

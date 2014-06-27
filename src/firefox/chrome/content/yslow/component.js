@@ -10,7 +10,7 @@
  */
 YSLOW.Component.prototype.setComponentDetails = function () {
     var comp = this,
-        
+
         parseResponse = function (response) {
             var headerName;
 

@@ -93,7 +93,7 @@ YSLOW.FBYSlow = {
                     // for some really fast pages, the onload attachement occursi
                     // after the onload actually fires, hence force loading
                     if (context.window.document.readyState === 'complete') {
-                        this.yslowOnDOMContentLoaded({currentTarget: win});   
+                        this.yslowOnDOMContentLoaded({currentTarget: win});
                         this.yslowOnload({currentTarget: win});
                     } else {
                         context.window.addEventListener("load", this.yslowOnload, false);

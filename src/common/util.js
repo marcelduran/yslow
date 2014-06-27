@@ -251,7 +251,7 @@ YSLOW.util = {
 
     /**
      * Returns the hostname (domain) for a given URL
-     * 
+     *
      * @param {String} url The absolute URL to get hostname from
      * @return {String} The hostname
      */
@@ -1905,7 +1905,7 @@ YSLOW.util = {
 
     /**
      * identifies injected elements (js, css, iframe, flash, image)
-     * @param doc the document to create/manipulate dom elements 
+     * @param doc the document to create/manipulate dom elements
      * @param comps the component set components
      * @param body the root (raw) document body (html)
      * @return the same components with injected info

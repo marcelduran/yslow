@@ -1,7 +1,6 @@
-.svn/
-_site/
-build/
-pkg/
 *.swp
 .DS_Store
+_site/
+build/
 node_modules/
+pkg/

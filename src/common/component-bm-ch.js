@@ -11,7 +11,7 @@
  */
 YSLOW.Component.prototype.setComponentDetails = function (o) {
     var comp = this,
-        
+
         parseComponent = function (component) {
             var headerName, h, i, len, m,
                 reHeader = /^([^:]+):\s*([\s\S]+)$/,

@@ -28,7 +28,7 @@ Copyrights licensed under the New BSD License. See the accompanying LICENSE file
     <script type="application/x-javascript" src="chrome://yslow/content/yslow/componentSet.js"></script>
     <script type="application/x-javascript" src="chrome://yslow/content/yslow/peeler.js"></script>
     <script type="application/x-javascript" src="chrome://yslow/content/yslow/net.js"></script>
-    <script type="application/x-javascript" src="chrome://yslow/content/yslow/rules.js"></script> 
+    <script type="application/x-javascript" src="chrome://yslow/content/yslow/rules.js"></script>
     <script type="application/x-javascript" src="chrome://yslow/content/yslow/renderers.js"></script>
     <script type="application/x-javascript" src="chrome://yslow/content/yslow/tools.js"></script>
     <script type="application/x-javascript" src="chrome://yslow/content/yslow/jslintwrapper.js"></script>
@@ -60,11 +60,11 @@ Copyrights licensed under the New BSD License. See the accompanying LICENSE file
         </statusbarpanel>
 
         <menupopup id="yslowStatusContextMenu" onpopupshowing="YSLOW.firefox.onOptionsShowing(this)">
-        	<menuitem label="YSlow Home" oncommand="YSLOW.firefox.gotoYSlowHome()"/>
-        	<menuseparator/>
-        	<menuitem label="Autorun" type="checkbox"
+            <menuitem label="YSlow Home" oncommand="YSLOW.firefox.gotoYSlowHome()"/>
+            <menuseparator/>
+            <menuitem label="Autorun" type="checkbox"
                       oncommand="YSLOW.firefox.onToggleOption(this)" option="yslow.autorun"/>
-        	<menuitem label="Hide Statusbar Info" type="checkbox"
+            <menuitem label="Hide Statusbar Info" type="checkbox"
                       oncommand="YSLOW.firefox.onToggleOption(this)" option="yslow.hidestatusbar"/>
             <menuseparator/>
             <menuitem label="Run Once" oncommand="YSLOW.firefox.run(false)" />
@@ -73,7 +73,7 @@ Copyrights licensed under the New BSD License. See the accompanying LICENSE file
     </statusbar>
 
     <!-- firefox standalone version yslow panel -->
-    <vbox id="appcontent"> 
+    <vbox id="appcontent">
         <splitter id="yslow-content-splitter" collapsed="true" />
         <vbox id="yslow-content-box" collapsed="true"
         persist="height" >

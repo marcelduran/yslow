@@ -177,7 +177,7 @@ YSLOW.JSLint = {
         if (!aScriptsInfo.length) {
             return jslintContext;
         }
-        
+
         // So we can track if JSLint bailed early.
         if (!YSLOW.JSLINT(aJSCode, jslintOptions)) {
             jslintContext.jslintUrl = ""; // keep track of the current script URL we're evaluating
