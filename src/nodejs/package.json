@@ -1,16 +1,32 @@
 {
-    "name": "yslow",
-    "version": "{{YSLOW_VERSION}}",
-    "description": "Commnad line version of YSlow web performance analysis tool from HAR files",
-    "keywords": ["yslow", "performance", "har", "yahoo", "wpo", "command", "line", "automation"],
-    "homepage": "http://yslow.org",
-    "author": "Marcel Duran <yslow@marcelduran.com> (http://yslow.org)",
-    "main": "./lib/yslow",
-    "bin": {"yslow": "./bin/yslow"},
-    "repository": {"type": "", "url": ""},
-    "dependencies": {
-        "jsdom": ">=0.2.10",
-        "commander": ">=0.2.0"
-    },
-    "engines": { "node": ">= 0.4.1" }
+  "name": "yslow",
+  "version": "{{YSLOW_VERSION}}",
+  "description": "Command line version of YSlow web performance analysis tool from HAR files",
+  "homepage": "http://yslow.org",
+  "author": "Marcel Duran <yslow@marcelduran.com> (http://yslow.org)",
+  "keywords": [
+    "yslow",
+    "performance",
+    "har",
+    "yahoo",
+    "wpo",
+    "command",
+    "line",
+    "automation"
+  ],
+  "main": "./lib/yslow",
+  "bin": {
+    "yslow": "./bin/yslow"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marcelduran/yslow.git"
+  },
+  "dependencies": {
+    "jsdom": ">=0.2.10",
+    "commander": ">=0.2.0"
+  },
+  "engines": {
+    "node": ">= 0.4.1"
+  }
 }
