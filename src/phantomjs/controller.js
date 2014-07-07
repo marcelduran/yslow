@@ -77,11 +77,11 @@ for (i = 0; i < len; i += 1) {
         // yslow argument alias
         i += 1;
         yslowArgs[argsAlias[arg]] = args[i];
-    } else if (arg == 'l' || arg == 'loadruleset') {
+    } else if (arg === 'l' || arg === 'loadruleset') {
         // Custom ruleset from file
         i += 1;
         customRuleset = JSON.parse(fs.open(args[i], 'r').read());
-        yslowArgs['ruleset'] = customRuleset.id;
+        yslowArgs.ruleset = customRuleset.id;
     } else if (unaryArgs.hasOwnProperty(arg)) {
         // unary argument
         unaryArgs[arg] = true;
