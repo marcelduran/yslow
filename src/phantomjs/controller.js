@@ -17,8 +17,10 @@
 
 // parse args
 var i, arg, page, urlCount, viewport,
+    fs = require('fs'),
     webpage = require('webpage'),
     args = phantom.args,
+    customRuleset,
     len = args.length,
     urls = [],
     yslowArgs = {
@@ -43,6 +45,7 @@ var i, arg, page, urlCount, viewport,
         i: 'info',
         f: 'format',
         r: 'ruleset',
+        l: 'loadruleset',
         h: 'help',
         V: 'version',
         d: 'dict',
@@ -74,6 +77,11 @@ for (i = 0; i < len; i += 1) {
         // yslow argument alias
         i += 1;
         yslowArgs[argsAlias[arg]] = args[i];
+    } else if (arg == 'l' || arg == 'loadruleset') {
+        // Custom ruleset from file
+        i += 1;
+        customRuleset = JSON.parse(fs.open(args[i], 'r').read());
+        yslowArgs['ruleset'] = customRuleset.id;
     } else if (unaryArgs.hasOwnProperty(arg)) {
         // unary argument
         unaryArgs[arg] = true;
@@ -82,6 +90,7 @@ for (i = 0; i < len; i += 1) {
         unaryArgs[argsAlias[arg]] = true;
     }
 }
+
 urlCount = urls.length;
 
 // check for version
@@ -107,6 +116,7 @@ if (len === 0 || urlCount === 0 || unaryArgs.help) {
         '    -i, --info <info>        specify the information to display/log (basic|grade|stats|comps|all) [all]',
         '    -f, --format <format>    specify the output results format (json|xml|plain|tap|junit) [json]',
         '    -r, --ruleset <ruleset>  specify the YSlow performance ruleset to be used (ydefault|yslow1|yblog) [ydefault]',
+        '    -l, --loadruleset <file> specify a file containing a custom YSlow performance ruleset to be used',
         '    -b, --beacon <url>       specify an URL to log the results',
         '    -d, --dict               include dictionary of results fields',
         '    -v, --verbose            output beacon response information',
@@ -259,10 +269,14 @@ urls.forEach(function (url) {
             ysphantomjs = 'YSLOW.phantomjs = {' +
                 'resources: ' + JSON.stringify(resources) + ',' +
                 'args: ' + JSON.stringify(yslowArgs) + ',' +
-                'loadTime: ' + JSON.stringify(loadTime) + '};';
+                'loadTime: ' + JSON.stringify(loadTime) + ',' +
+                'customRuleset: ' + JSON.stringify(customRuleset) + '};';
 
             // YSlow phantomjs controller
             controller = function () {
+                if (YSLOW.phantomjs.customRuleset) {
+                    YSLOW.registerRuleset(YSLOW.phantomjs.customRuleset);
+                }
                 YSLOW.phantomjs.run = function () {
                     try {
                         var results, xhr, output, threshold,
