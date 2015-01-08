@@ -137,8 +137,8 @@ YSLOW.doc.rulesettings_desc = 'Choose which ruleset (YSlow V2, Classic V1, or Sm
 //
 // Components table legend
 //
-YSLOW.doc.components_legend.beacon = 'type column indicates the component is loaded after window onload event';
-YSLOW.doc.components_legend.after_onload = 'denotes 1x1 pixels image that may be image beacon';
+YSLOW.doc.components_legend.beacon = 'denotes 1x1 pixels image that may be image beacon';
+YSLOW.doc.components_legend.after_onload = 'type column indicates the component is loaded after window onload event';
 
 //
 // View names
