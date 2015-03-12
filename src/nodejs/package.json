@@ -9,7 +9,7 @@
     "bin": {"yslow": "./bin/yslow"},
     "repository": {"type": "", "url": ""},
     "dependencies": {
-        "jsdom": ">=0.2.10",
+        "jsdom": "3.x.x",
         "commander": ">=0.2.0"
     },
     "engines": { "node": ">= 0.4.1" }
