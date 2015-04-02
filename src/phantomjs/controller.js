@@ -18,7 +18,8 @@
 // parse args
 var i, arg, page, urlCount, viewport,
     webpage = require('webpage'),
-    args = phantom.args,
+    system = require('system'),
+    args = system.args,
     len = args.length,
     urls = [],
     yslowArgs = {
@@ -55,8 +56,8 @@ var i, arg, page, urlCount, viewport,
         ch: 'headers'
     };
 
-// loop args
-for (i = 0; i < len; i += 1) {
+// loop args, skip the first arg "scripr name"
+for (i = 1; i < len; i += 1) {
     arg = args[i];
     if (arg[0] !== '-') {
         // url, normalize if needed
