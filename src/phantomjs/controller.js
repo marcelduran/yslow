@@ -17,8 +17,9 @@
 
 // parse args
 var i, arg, page, urlCount, viewport,
+    system=require('system'),
     webpage = require('webpage'),
-    args = phantom.args,
+    args = system.args,
     len = args.length,
     urls = [],
     yslowArgs = {
@@ -56,7 +57,7 @@ var i, arg, page, urlCount, viewport,
     };
 
 // loop args
-for (i = 0; i < len; i += 1) {
+for (i = 1; i < len; i += 1) {
     arg = args[i];
     if (arg[0] !== '-') {
         // url, normalize if needed
