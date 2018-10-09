@@ -4,6 +4,8 @@
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
 
+var jsdom = require('jsdom');
+const { JSDOM } = jsdom;
 var files, dict,
     prefix = '',
     harContent = '',
@@ -12,7 +14,8 @@ var files, dict,
     http = require('http'),
     url = require('url'),
     YSLOW = require('yslow').YSLOW,
-    doc = require('jsdom').jsdom(),
+    dom = new JSDOM(),
+    doc = dom.window.document,
     program = require('commander'),
     util = YSLOW.util,
 
