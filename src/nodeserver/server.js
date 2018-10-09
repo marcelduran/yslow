@@ -6,9 +6,12 @@
 
 'use strict';
 
+var jsdom = require('jsdom');
+const { JSDOM } = jsdom;
 var express = require('express'),
     YSLOW = require('yslow').YSLOW,
-    doc = require('jsdom').jsdom(),
+    dom = new JSDOM(),
+    doc = dom.window.document,
     http = require('http'),
     url = require('url'),
     fs = require('fs'),
