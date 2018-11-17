@@ -1,6 +1,7 @@
 {
     "name": "YSlow",
     "version": "{{YSLOW_VERSION}}",
+    "manifest_version": 2,
     "description": "YSlow analyzes web pages and suggests ways to improve their performance based on a set of rules for high performance web pages.",
     "icons": {
         "128": "128.png",
