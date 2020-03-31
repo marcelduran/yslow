@@ -1,3 +1,7 @@
+Version 3.1.9
+-------------
+* Add support for Brotli compression
+
 Version 3.1.8
 -------------
 * Custom CDNs list entry for PhantomJS. Issue #79
