@@ -129,7 +129,7 @@ YSLOW.registerRule({
         ],
         // array of regexps that match CDN Server HTTP headers
         servers: [
-            'cloudflare-nginx' // not using ^ and $ due to invisible
+            'cloudflare-nginx', // not using ^ and $ due to invisible
             '^gocache'
         ],
         // which component types should be on CDN
