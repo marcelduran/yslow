@@ -119,7 +119,8 @@ YSLOW.registerRule({
             'cdn.api.twitter.com', //Twitter API calls, served via Akamai
             'apis.google.com', //Google's API Hosting
             '.akamaihd.net', //Akamai - Facebook uses this for SSL assets
-            '.rackcdn.com' //Generic RackSpace CloudFiles CDN
+            '.rackcdn.com', //Generic RackSpace CloudFiles CDN
+            '.imgeng.in' // ImageEngine by ScientiaMobile
         ],
         // array of regexps that will be treated as exception.
         exceptions: [
@@ -129,7 +130,8 @@ YSLOW.registerRule({
         ],
         // array of regexps that match CDN Server HTTP headers
         servers: [
-            'cloudflare-nginx' // not using ^ and $ due to invisible
+            'cloudflare-nginx', // not using ^ and $ due to invisible
+            'ImageEngine$' // ImageEngine by ScientiaMobile
         ],
         // which component types should be on CDN
         types: ['js', 'css', 'image', 'cssimage', 'flash', 'favicon']
