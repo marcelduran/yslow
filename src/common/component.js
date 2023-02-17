@@ -105,9 +105,9 @@ YSLOW.Component.prototype.populateProperties = function (resolveRedirect, ignore
 
     content_length = that.headers['content-length'];
 
-    // gzip, deflate
+    // gzip, deflate, brotli
     encoding = YSLOW.util.trim(that.headers['content-encoding']);
-    if (encoding === 'gzip' || encoding === 'deflate') {
+    if (encoding === 'gzip' || encoding === 'deflate' || encoding === 'br') {
         that.compressed = encoding;
         that.size = (that.body.length) ? that.body.length : NULL;
         if (content_length) {
